@@ -1,0 +1,21 @@
+#sub {
+    vertical-align: sub;
+    font-size: small;
+}
+
+
+.spacer {
+    flex: 1;
+}
+
+.nav-link {
+    color: #333333
+}
+
+.active {
+    color: #3068EF;
+}
+
+.nav-link:hover {
+    color: #3068EF
+}
