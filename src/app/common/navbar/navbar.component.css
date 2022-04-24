@@ -8,14 +8,32 @@
     flex: 1;
 }
 
-.nav-link {
-    color: #333333
-}
 
-.active {
-    color: #3068EF;
-}
+
 
 .nav-link:hover {
-    color: #3068EF
+    color: black
+}
+.navbar-brand{
+    color:whitesmoke;
+}
+
+.nav {
+    width: 100vw;
+
+  
+}
+.btn-orange{
+    background-color: orangered;
+    color: white;
+}
+
+.navbar-inverse{
+    background-color: white;
+   
+    
+}
+
+.nav-link, .navbar-brand{
+    color: rgb(255, 187, 60);
 }

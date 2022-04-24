@@ -1,11 +1,9 @@
 
 
 
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light  fixed-top scrolling-navbar">
   <a class="navbar-brand" href="#" ngbTooltip="{{tooltip}}" [openDelay]="1000">
-    OSAP<span id="sub">(system)</span>
+    OSAP 
   </a>
 
   <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
@@ -17,50 +15,50 @@
   <!-- Step 2: Add the ngbCollapse directive to the element below. -->
 
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
-  
-    
-        <a class="nav-link" routerLink="#" routerLinkActive="active">Home</a>
-    
-      <div class="spacer"></div>
-      <div class="nav-item dropdown" ngbDropdown *ngIf="isAdminLogged">
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-          Admin User
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
-          <a class="dropdown-item" href="#" ngbDropdownItem>Action</a>
-          <a class="dropdown-item" href="#" ngbDropdownItem>Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" ngbDropdownItem>log out</a>
-        </div>
-      </div>
-      <div class="nav-item dropdown btn-outline-primary" ngbDropdown  *ngIf="isResearcherLogged">
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-          researcher User
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
-          <a class="dropdown-item" href="#" ngbDropdownItem>Action</a>
-          <a class="dropdown-item" href="#" ngbDropdownItem>Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" ngbDropdownItem>log out</a>
-        </div>
-      </div>
-      <div class="nav-item dropdown" ngbDropdown *ngIf="isRespondantLogged">
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-          Respondant User
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
-          <a class="dropdown-item" href="#" ngbDropdownItem>Action</a>
-          <a class="dropdown-item" href="#" ngbDropdownItem>Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" ngbDropdownItem>log out</a>
-        </div>
-      </div>
-     
-        <a class="nav-link" routerLink="#" *ngIf="isNoneLogged" routerLinkActive="active">Log In </a>
 
-     
-        <a class="nav-link" routerLink="#" class="btn btn-primary" style="" *ngIf="isNoneLogged">Get Started</a>
-   
+
+    <a class="nav-link" routerLink="#" routerLinkActive="active">Home</a>
+
+    <div class="spacer"></div>
+    <div class="nav-item dropdown" ngbDropdown *ngIf="isAdminLogged">
+      <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+        Admin User
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+        <a class="dropdown-item" href="#" ngbDropdownItem>Action</a>
+        <a class="dropdown-item" href="#" ngbDropdownItem>Another action</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" ngbDropdownItem>log out</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown btn-outline-primary" ngbDropdown *ngIf="isResearcherLogged">
+      <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+        researcher User
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+        <a class="dropdown-item" href="#" ngbDropdownItem>Action</a>
+        <a class="dropdown-item" href="#" ngbDropdownItem>Another action</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" routerLink="login" ngbDropdownItem>log out</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown" ngbDropdown *ngIf="isRespondantLogged">
+      <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+        Respondant User
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+        <a class="dropdown-item" href="#" ngbDropdownItem>Action</a>
+        <a class="dropdown-item" href="#" ngbDropdownItem>Another action</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" ngbDropdownItem>log out</a>
+      </div>
+    </div>
+
+    <a class="nav-link" routerLink="login" *ngIf="isNoneLogged" routerLinkActive="active">Log In </a>
+
+
+    <a class="nav-link" routerLink="#" class="btn btn-orange" *ngIf="isNoneLogged">Get Started</a>
+
 
 
 
@@ -68,4 +66,4 @@
   </div>
 </nav>
 
-
+<ng-content selector=".contents"></ng-content>

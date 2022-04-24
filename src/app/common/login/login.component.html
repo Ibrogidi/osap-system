@@ -1,1 +1,53 @@
-<p>login works!</p>
+
+
+
+<a class="arrow-back" routerLink="">
+    <mat-icon >arrow_back</mat-icon>
+    <em class="text">Back</em>
+</a>
+<div class="container">
+
+
+    <h1 class="title">Log In</h1>
+    <div class="content">
+    
+            <form class="form" [formGroup]="forms" (ngSubmit)="onSubmit()" apperance="fill">
+                <mat-form-field class="form-control">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" type="text" required />
+                    <mat-error *ngIf="email?.hasError('required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="email?.hasError('email')">
+                        Email isn't valid. Please enter a valid email.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-control">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" type="password" required />
+                    <mat-error *ngIf="password?.hasError('required')">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+                <div class="alert alert-danger" *ngIf="invalidLogin">
+                    <mat-icon class="pr-5">error</mat-icon>
+                    {{'200:Invalid username or password. '}}
+                </div>
+
+                <div class="form-footer pb-4">
+                    <button class="btn btn-primary card card-small" mat-raised-button type="submit">
+                        Log In
+                    </button>
+                </div>
+
+            </form>
+
+
+            <a class="forgot"routerLink="/reset-password">forgot Password?</a>
+            <p >Don't have account yet?<a class="pt-2" routerLink="register">Register</a></p>
+
+
+        
+
+
+    </div>

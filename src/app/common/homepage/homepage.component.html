@@ -1,4 +1,31 @@
-<app-navbar></app-navbar>
-<div class="container">
-    <p>this is home page</p>
-</div>
+<app-navbar (scroll)="onWindowScroll();">
+    <div class="contents">
+        <div class="hero">
+            <div class="container">
+                <div class="left display-2">Create, Conduct & Analyze <br> your Survey</div>
+   
+            </div>
+
+        </div>
+        <div class="hero2">
+            <div class="container">
+                <div class="left display-2">Get Quality Data with the help of trusted respondants</div>
+       
+            </div>
+
+        </div>
+        <div class="hero3">
+            <div class="container">
+                <div class="left display-2">Explore Free Survey Templates</div>
+        
+            </div>
+            <h1>
+                Don’t want to build your survey from scratch? Choose one of our survey templates and customize it
+            </h1>
+            
+            
+        </div>
+
+    </div>
+
+</app-navbar>
