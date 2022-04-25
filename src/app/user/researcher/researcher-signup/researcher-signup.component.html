@@ -29,11 +29,11 @@
 
             <mat-form-field class="form-control">
                 <mat-label>First name</mat-label>
-                <input matInput formControlName="firstname" type="text" required  maxlength="150"/>
-                <mat-error *ngIf="firstname?.hasError('required')">
+                <input matInput formControlName="first_name" type="text" required  maxlength="150"/>
+                <mat-error *ngIf="first_name?.hasError('required')">
                     First name is required
                 </mat-error>
-                <mat-error *ngIf="firstname?.hasError('maxlength')">
+                <mat-error *ngIf="first_name?.hasError('maxlength')">
                     Required. 150 characters or fewer.
                 </mat-error>
                 <!-- <mat-error *ngIf="email?.hasError('email')">
@@ -43,8 +43,8 @@
 
             <mat-form-field class="form-control">
                 <mat-label>Last name</mat-label>
-                <input matInput formControlName="lastname" type="text" required />
-                <mat-error *ngIf="lastname?.hasError('required')">
+                <input matInput formControlName="last_name" type="text" required />
+                <mat-error *ngIf="last_name?.hasError('required')">
                     Last name is required
                 </mat-error>
                 <!-- <mat-error *ngIf="email?.hasError('email')">
@@ -78,10 +78,10 @@
             </mat-form-field>
    -->
 
-            <div class="alert alert-danger" *ngIf="invalidLogin">
+            <!-- <div class="alert alert-danger" *ngIf="invalidLogin">
                 <mat-icon class="pr-5">error</mat-icon>
                 {{'200:Invalid username or password. '}}
-            </div>
+            </div> -->
 
             <div class="form-footer pb-4">
                 <button [disabled]="this.forms.invalid" class="btn btn-primary card card-small" mat-raised-button type="submit">

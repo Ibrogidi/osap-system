@@ -31,6 +31,7 @@ import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { ResearcherSignupComponent } from './user/researcher/researcher-signup/researcher-signup.component';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { PageNotFoundComponent } from './common/page-not-found/page-not-found.co
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     MatFormFieldModule,
     LayoutModule,
     MatToolbarModule,

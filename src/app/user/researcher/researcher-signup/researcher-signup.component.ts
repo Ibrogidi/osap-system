@@ -1,41 +1,33 @@
+import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-
-
-
-
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-
-
 @Component({
   selector: 'researcher-signup',
   templateUrl: './researcher-signup.component.html',
   styleUrls: ['./researcher-signup.component.css']
 })
+
 export class ResearcherSignupComponent implements OnInit {
 
   forms: FormGroup;
-  invalidLogin: boolean = false;
-  checked: boolean = false;
-  // passVal: string;
+
   constructor(
-    private fb: FormBuilder,
+    private fb: FormBuilder, private authService: AuthService
   ) {
-   
-   }
+
+  }
 
   ngOnInit(): void {
     this.forms = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required]],
-      firstname: ['', [Validators.required,Validators.maxLength]],
-      lastname: ['', [Validators.required]],
-      password: ['', [Validators.required,Validators.maxLength]],
+      first_name: ['', [Validators.required, Validators.maxLength]],
+      last_name: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.maxLength]],
       // confirmpassword: ['', [Validators.required,Validators.pattern]],
     });
-   
-    
   }
+
   get email() {
     return this.forms.get('email');
   }
@@ -47,21 +39,23 @@ export class ResearcherSignupComponent implements OnInit {
   get username() {
     return this.forms.get('username');
   }
-  get firstname() {
-    return this.forms.get('firstname');
+
+  get first_name() {
+    return this.forms.get('first_name');
   }
-  get lastname() {
-    return this.forms.get('lastname');
+
+  get last_name() {
+    return this.forms.get('last_name');
   }
   // get confirmpassword() {
   //   return this.forms.get('confirmpassword');
   // }
 
   onSubmit() {
-    console.log(this.forms.value,this.forms.valid);
-    
+    // console.log(this.forms.value,this.forms.valid);
+    this.authService.register(this.forms.value)
+      .subscribe(result => console.log(result))
 
-    
   }
 
 }
