@@ -1,0 +1,105 @@
+<div class="container">
+
+
+    <h1 class="title">Researcher-Sign Up</h1>
+    <div class="content">
+
+        <form class="form" [formGroup]="forms" (ngSubmit)="onSubmit()" apperance="fill">
+            <mat-form-field class="form-control">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="text" required />
+                <mat-error *ngIf="email?.hasError('required')">
+                    Email is required
+                </mat-error>
+                <mat-error *ngIf="email?.hasError('email')">
+                    Email isn't valid. Please enter a valid email.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-control">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" type="text" required />
+                <mat-error *ngIf="username?.hasError('required')">
+                    Username is required
+                </mat-error>
+                <!-- <mat-error *ngIf="email?.hasError('email')">
+                        Email isn't valid. Please enter a valid email.
+                    </mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="form-control">
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="firstname" type="text" required  maxlength="150"/>
+                <mat-error *ngIf="firstname?.hasError('required')">
+                    First name is required
+                </mat-error>
+                <mat-error *ngIf="firstname?.hasError('maxlength')">
+                    Required. 150 characters or fewer.
+                </mat-error>
+                <!-- <mat-error *ngIf="email?.hasError('email')">
+                        Email isn't valid. Please enter a valid email.
+                    </mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="form-control">
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="lastname" type="text" required />
+                <mat-error *ngIf="lastname?.hasError('required')">
+                    Last name is required
+                </mat-error>
+                <!-- <mat-error *ngIf="email?.hasError('email')">
+                        Email isn't valid. Please enter a valid email.
+                    </mat-error> -->
+            </mat-form-field>
+
+
+            <mat-form-field class="form-control">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" required  minlength="8"/>
+                <mat-error *ngIf="password?.hasError('required')">
+                    Password is required
+                </mat-error>
+                <mat-error *ngIf="password?.hasError('minlength')">
+                    This password is too short. It must contain at least 8 characters.
+                </mat-error>
+            </mat-form-field>
+
+<!-- 
+            <mat-form-field class="form-control">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput formControlName="confirmpassword" type="password" required  pattern="{{passVal}}"/>
+                <mat-error *ngIf="confirmpassword?.hasError('required')">
+                   please confirm your password
+                </mat-error>
+                <mat-error *ngIf="confirmpassword?.hasError('pattern')">
+                    password doesn't match
+                </mat-error>
+    
+            </mat-form-field>
+   -->
+
+            <div class="alert alert-danger" *ngIf="invalidLogin">
+                <mat-icon class="pr-5">error</mat-icon>
+                {{'200:Invalid username or password. '}}
+            </div>
+
+            <div class="form-footer pb-4">
+                <button [disabled]="this.forms.invalid" class="btn btn-primary card card-small" mat-raised-button type="submit">
+                    Sign Up
+                </button>
+            </div>
+
+        </form>
+
+        <p>Already have account?<a class="pt-2" routerLink="login">Login</a></p>
+
+
+
+        <div class="form-footer pb-4">
+            <button class="btn bg-dark card card-small" mat-raised-button type="submit">
+                Sign Up As Respondent
+            </button>
+        </div>
+
+
+    </div>
