@@ -1,6 +1,7 @@
 
 
 
+
 <nav class="navbar navbar-expand-lg navbar-light  fixed-top scrolling-navbar">
   <a class="navbar-brand" href="#" ngbTooltip="{{tooltip}}" [openDelay]="1000">
     OSAP 
@@ -17,7 +18,7 @@
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
 
 
-    <a class="nav-link" routerLink="#" routerLinkActive="active">Home</a>
+    <!-- <a class="nav-link" routerLink="#" routerLinkActive="active">Home</a> -->
 
     <div class="spacer"></div>
     <div class="nav-item dropdown" ngbDropdown *ngIf="isAdminLogged">
@@ -57,7 +58,7 @@
     <a class="nav-link" routerLink="login" *ngIf="isNoneLogged" routerLinkActive="active">Log In </a>
 
 
-    <a class="nav-link" routerLink="register" class="btn btn-orange" *ngIf="isNoneLogged">Get Started</a>
+    <a class="nav-link" routerLink="register" class="btn btn-orange" *ngIf="isNoneLogged" matRipple>Get Started</a>
 
 
 

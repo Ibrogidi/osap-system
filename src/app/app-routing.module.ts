@@ -6,8 +6,7 @@
 
 
 
-
-
+import { RespondentSignupComponent } from './user/respondent/respondent-signup/respondent-signup.component';
 import { ResetPasswordComponent } from './common/reset-password/reset-password.component';
 import { LoginComponent } from './common/login/login.component';
 import { HomepageComponent } from './common/homepage/homepage.component';
@@ -20,6 +19,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {path:'register', component: ResearcherSignupComponent},
+  {path:'register/respondent', component: RespondentSignupComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

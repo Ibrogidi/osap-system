@@ -25,13 +25,13 @@ import {MatDividerModule} from '@angular/material/divider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
-import { VgCoreModule } from '@videogular/ngx-videogular/core';
-import { VgControlsModule } from '@videogular/ngx-videogular/controls';
-import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
-import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { ResearcherSignupComponent } from './user/researcher/researcher-signup/researcher-signup.component';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RespondentSignupComponent } from './user/respondent/respondent-signup/respondent-signup.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatRippleModule} from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     ResearcherSignupComponent,
     ResetPasswordComponent,
     PageNotFoundComponent,
+    RespondentSignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,11 +65,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    VgCoreModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    // MatDatepicker,
+    MatNativeDateModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

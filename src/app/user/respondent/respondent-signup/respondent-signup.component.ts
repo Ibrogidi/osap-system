@@ -1,21 +1,31 @@
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+interface Animal {
+  name: string;
+}
+
 @Component({
-  selector: 'researcher-signup',
-  templateUrl: './researcher-signup.component.html',
-  styleUrls: ['./researcher-signup.component.css']
+  selector: 'app-respondent-signup',
+  templateUrl: './respondent-signup.component.html',
+  styleUrls: ['./respondent-signup.component.css']
 })
+export class RespondentSignupComponent implements OnInit {
 
-export class ResearcherSignupComponent implements OnInit {
+forms: FormGroup;
+genderVal: string;
+animals: Animal[] = [
+  {name: 'Male'},
+  {name: 'Female'},
 
-  forms: FormGroup;
-
+];
   constructor(
     private fb: FormBuilder, private authService: AuthService
   ) {
 
   }
+
 
   ngOnInit(): void {
     this.forms = this.fb.group({
@@ -24,6 +34,8 @@ export class ResearcherSignupComponent implements OnInit {
       first_name: ['', [Validators.required, Validators.maxLength]],
       last_name: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.maxLength]],
+      gender_opt: ['',[Validators.required]],
+      datepicker: ['',[Validators.required]],
       // confirmpassword: ['', [Validators.required,Validators.pattern]],
     });
   }
@@ -46,6 +58,12 @@ export class ResearcherSignupComponent implements OnInit {
 
   get last_name() {
     return this.forms.get('last_name');
+  }
+  get gender_opt() {
+    return this.forms.get('gender_opt');
+  }
+  get datepicker() {
+    return this.forms.get('datepicker');
   }
   // get confirmpassword() {
   //   return this.forms.get('confirmpassword');

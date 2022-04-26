@@ -8,11 +8,11 @@
     "profile": {
         "name": "typicode"
     },
-    "users": {
+    "users": [{
         "email": "",
         "username": "",
         "first_name": "",
         "last_name": "",
         "password": ""
-    }
+    }]
 }
