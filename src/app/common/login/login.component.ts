@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginComponent implements OnInit {
   forms: FormGroup;
   invalidLogin: boolean = false;
+  tokenValue:String;
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -33,7 +34,21 @@ export class LoginComponent implements OnInit {
   onSubmit() {
 console.log(this.forms.value, this.forms.valid);
 if(this.forms.valid){
-this.auth.login(this.forms.value)
+this.auth.login(this.forms.value).subscribe(
+  (tokenObj:any)=>{
+    //storing token on local storage
+    localStorage.setItem('Token', tokenObj.auth_token);
+    this.tokenValue= "Token "+tokenObj.auth_token;
+    console.log(this.tokenValue);
+   
+    this.auth.getUser(this.tokenValue).subscribe(
+      response => {
+        console.log(response)
+      }
+    )
+
+  }
+)
 }
     
   }
