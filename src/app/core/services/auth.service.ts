@@ -58,10 +58,19 @@ export class AuthService {
 
   getUser(myToken:any){
     httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
-    
     return this.http.get(this.usersUrl,httpOptions);
   }
   
+
+  get isRLoggedIn():boolean{
+    const user =(localStorage.getItem('Researcher')!);
+    // console.log(user);
+    if(user){
+      return true
+    }
+    else return false;
+  }
+
 
   // getData(myToken:string) : Observable<ResearcherData[]>  {
   //   httpOptions.headers = httpOptions.headers.set('Authorization', myToken);

@@ -19,6 +19,9 @@ export type HandleError =
 })
 export class HttpErrorHandler {
 
+ myError:Object;
+
+
   constructor(private messageService: MessageService) { }
 
   /** Create curried handleError function that already knows the service name */
@@ -39,6 +42,7 @@ export class HttpErrorHandler {
     return (error: HttpErrorResponse): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
+      this.myError = error;
 
       const message = (error.error instanceof ErrorEvent) ?
         error.error.message :

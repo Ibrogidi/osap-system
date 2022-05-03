@@ -1,3 +1,5 @@
+import { AuthGuard } from './core/services/auth.guard';
+import { AuthService } from './core/services/auth.service';
 import { ResetPasswordComponent } from './common/reset-password/reset-password.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,6 +34,7 @@ import { RespondentSignupComponent } from './user/respondent/respondent-signup/r
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatRippleModule} from '@angular/material/core';
+import { ResearcherDashboardComponent } from './user/researcher/researcher-dashboard/researcher-dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +45,8 @@ import {MatRippleModule} from '@angular/material/core';
     ResetPasswordComponent,
     PageNotFoundComponent,
     RespondentSignupComponent,
+    ResearcherDashboardComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -71,7 +76,10 @@ import {MatRippleModule} from '@angular/material/core';
     MatNativeDateModule,
     MatRippleModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

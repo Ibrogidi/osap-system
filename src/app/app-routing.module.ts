@@ -1,3 +1,4 @@
+import { AuthGuard } from './core/services/auth.guard';
 
 
 
@@ -14,12 +15,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ResearcherSignupComponent } from './user/researcher/researcher-signup/researcher-signup.component';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { ResearcherDashboardComponent } from './user/researcher/researcher-dashboard/researcher-dashboard.component';
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'login', component: LoginComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {path:'register', component: ResearcherSignupComponent},
   {path:'register/respondent', component: RespondentSignupComponent},
+  {path: 'researcher/dashboard', component: ResearcherDashboardComponent, canActivate: [AuthGuard]},
   {path: '**', component: PageNotFoundComponent}
 ];
 

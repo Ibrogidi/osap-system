@@ -1,6 +1,6 @@
 <a class="arrow-back" routerLink="">
     <mat-icon>arrow_back</mat-icon>
-    <em class="text">Back</em>
+    <!-- <em class="text">Back</em> -->
 </a>
 
 <div class="container">
@@ -29,7 +29,7 @@
             </mat-form-field>
             <div class="alert alert-danger" *ngIf="invalidLogin">
                 <mat-icon class="pr-5">error</mat-icon>
-                {{'200:Invalid username or password. '}}
+                {{errorMessage}}
             </div>
 
             <div class="form-footer pb-4">

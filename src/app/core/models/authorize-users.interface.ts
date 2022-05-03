@@ -1,10 +1,11 @@
 
 export interface AuthorizeUsers {
-    id: '',
-    email: "",
-    username: "",
-    first_name: "",
-    last_name: "",
-    roll: null
+    id: any,
+    email: any,
+    username: any,
+    first_name: any,
+    last_name: any,
+    roll: any,
+    prototype: any,
 }
 
