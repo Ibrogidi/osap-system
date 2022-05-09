@@ -4,17 +4,17 @@
 
 export interface RespondentData{
     
-    username: "",
-    first_name: "",
-    last_name: "",
-    email: "",
-    gender: null,
-    birth_date: null,
-    region: null,
-    city: "",
-    phone_number: "",
-    education_level: null,
-    occupation: null,
-    password: ""
+    username: string,
+    first_name: string,
+    last_name: string,
+    email: string,
+    gender: string,
+    birth_date: string,
+    region: string,
+    city: string,
+    phone_number: string,
+    education_level: string,
+    occupation: string,
+    password: string,
 
 }

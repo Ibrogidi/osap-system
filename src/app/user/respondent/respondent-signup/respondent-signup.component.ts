@@ -7,8 +7,9 @@ import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-interface Animal {
+interface Gender {
   name: string;
+  value: string;
 }
 interface Region {
   name: string;
@@ -22,9 +23,9 @@ export class RespondentSignupComponent implements OnInit {
 
 forms: FormGroup;
 genderVal: string;
-animals: Animal[] = [
-  {name: 'Male'},
-  {name: 'Female'},
+genders: Gender[] = [
+  {name: 'Male', value: 'M'},
+  {name: 'Female', value: 'F'},
 
 ];
 occupations: Occupations[];
@@ -53,7 +54,7 @@ regions: Region[] = [
   constructor(
     private fb: FormBuilder, 
     private authService: AuthService,
-    private router: Router,
+    // private router: Router,
   ) {
  
 
@@ -62,17 +63,19 @@ regions: Region[] = [
 
   ngOnInit(): void {
     this.forms = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required]],
       first_name: ['', [Validators.required, Validators.maxLength]],
       last_name: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.maxLength]],
-      gender_opt: ['',[Validators.required]],
-      region: ['',[Validators.required]],
-      education_levels: ['',[Validators.required]],
-      occupation: ['',[Validators.required]],
-      datepicker: ['',[Validators.required]],
-      phonenumber: ['',[Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      gender_opt: ['',[Validators.required]],   
+      datepicker: ['',[Validators.required]],   
+      // password: ['', [Validators.required, Validators.maxLength]],
+  
+      // region: ['',[Validators.required]],
+      // education_levels: ['',[Validators.required]],
+      // occupation: ['',[Validators.required]],
+  
+      // phonenumber: ['',[Validators.required]],
       // confirmpassword: ['', [Validators.required,Validators.pattern]],
     });
     // this.authService.getOccupation().subscribe( 
@@ -94,14 +97,8 @@ regions: Region[] = [
         console.log(this.educationLevels)
       }
     )
-  }
 
-  get email() {
-    return this.forms.get('email');
-  }
 
-  get password() {
-    return this.forms.get('password');
   }
 
   get username() {
@@ -115,39 +112,51 @@ regions: Region[] = [
   get last_name() {
     return this.forms.get('last_name');
   }
-  get gender_opt() {
+
+  get email() {
+    return this.forms.get('email');
+  }
+
+    get gender_opt() {
     return this.forms.get('gender_opt');
   }
-  get region() {
-    return this.forms.get('region');
-  }
-  get education_levels() {
-    return this.forms.get('education_levels');
-  }
+
+  // get password() {
+  //   return this.forms.get('password');
+  // }
+
+
+
+  // get region() {
+  //   return this.forms.get('region');
+  // }
+  // get education_levels() {
+  //   return this.forms.get('education_levels');
+  // }
   get occupation() {
     return this.forms.get('occupation');
   }
-  get datepicker() {
-    return this.forms.get('datepicker');
-  }
-  get city() {
-    return this.forms.get('city');
-  }
-  get phonenumber() {
-    return this.forms.get('phonenumber');
-  }
+  // get datepicker() {
+  //   return this.forms.get('datepicker');
+  // }
+  // get city() {
+  //   return this.forms.get('city');
+  // }
+  // get phonenumber() {
+  //   return this.forms.get('phonenumber');
+  // }
   // get confirmpassword() {
   //   return this.forms.get('confirmpassword');
   // }
 
   onSubmit() {
     console.log(this.forms.value,this.forms.valid);
-    this.authService.register2(this.forms.value)
-      .subscribe(
-        (result) => {
-          console.log(result)
-          this.router.navigate(['login']);          
-        })
+    // this.authService.register2(this.forms.value)
+    //   .subscribe(
+    //     (result) => {
+    //       console.log(result)
+    //       this.router.navigate(['login']);          
+    //     })
 
   }
 
