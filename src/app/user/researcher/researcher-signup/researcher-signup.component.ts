@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,10 +10,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class ResearcherSignupComponent implements OnInit {
 
-  forms: FormGroup;
 
+  confirmPasswordClass: string = 'form-control';
+  forms: FormGroup;
+  passVal: string;
+  invalidLogin: boolean = false;
+  errorMessage: string;
   constructor(
-    private fb: FormBuilder, private authService: AuthService
+    private fb: FormBuilder,
+     private authService: AuthService,
+     private router:Router,
   ) {
 
   }
@@ -24,7 +31,7 @@ export class ResearcherSignupComponent implements OnInit {
       first_name: ['', [Validators.required, Validators.maxLength]],
       last_name: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.maxLength]],
-      // confirmpassword: ['', [Validators.required,Validators.pattern]],
+      confirmpassword: ['', [Validators.required, Validators.pattern]],
     });
   }
 
@@ -47,14 +54,37 @@ export class ResearcherSignupComponent implements OnInit {
   get last_name() {
     return this.forms.get('last_name');
   }
-  // get confirmpassword() {
-  //   return this.forms.get('confirmpassword');
-  // }
+  get confirmpassword() {
+    return this.forms.get('confirmpassword');
+  }
 
+
+  
   onSubmit() {
-    // console.log(this.forms.value,this.forms.valid);
-    this.authService.register(this.forms.value)
-      .subscribe(result => console.log(result))
+    console.log(this.forms.value, this.forms.valid);
+    console.log(this.password?.value, " ", this.confirmpassword?.value);
+    if (this.password?.value === this.confirmpassword?.value) {
+
+    
+      this.authService.register(this.forms.value)
+        .subscribe(
+          (result) => {
+            console.log(result)
+            this.router.navigate(['/login']);
+
+          
+          }
+          
+          )
+
+
+
+    }
+    else {
+      this.errorMessage = "password and confirm password didn't match";
+      this.invalidLogin = true;
+    }
+
 
   }
 

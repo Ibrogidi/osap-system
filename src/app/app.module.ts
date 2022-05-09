@@ -35,6 +35,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatRippleModule} from '@angular/material/core';
 import { ResearcherDashboardComponent } from './user/researcher/researcher-dashboard/researcher-dashboard.component';
+import { RespondentDashboardComponent } from './user/respondent/respondent-dashboard/respondent-dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +48,7 @@ import { ResearcherDashboardComponent } from './user/researcher/researcher-dashb
     PageNotFoundComponent,
     RespondentSignupComponent,
     ResearcherDashboardComponent,
+    RespondentDashboardComponent,
 
   ],
   imports: [

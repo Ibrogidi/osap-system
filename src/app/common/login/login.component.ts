@@ -56,12 +56,14 @@ export class LoginComponent implements OnInit {
               if (this.userObj.roll === "Researcher") {
                 //storing token on local storage
                 localStorage.setItem('Researcher', tokenObj.auth_token);
-                this.router.navigate(['/researcher/dashboard'])
+                this.router.navigate(['/researcher/dashboard']);
               }
 
-              // if(this.userObj.roll ==="Respondent"){
+              if(this.userObj.roll ==="Respondent"){
+                localStorage.setItem('Respondent', tokenObj.auth_token);
+                this.router.navigate(['/respondent/dashboard']);          
 
-              // }
+              }
               // if(this.userObj.roll === "Admin"){
 
               // }

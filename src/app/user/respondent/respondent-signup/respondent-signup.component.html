@@ -1,7 +1,13 @@
+<a class="arrow-back" routerLink="">
+    <mat-icon>arrow_back</mat-icon>
+    <!-- <em class="text">Back</em> -->
+</a>
 <div class="container">
 
 
     <h1 class="title">Respondent-Sign Up</h1>
+
+    
     <div class="content">
 
         <form class="form" [formGroup]="forms" (ngSubmit)="onSubmit()" apperance="fill">
@@ -54,7 +60,7 @@
 
             <mat-form-field class="form-control">
                 <mat-label>Gender</mat-label>
-                <mat-select required formControlName="gender_opt">
+                <mat-select required formControlName="gender_opt.name">
                     <mat-option>--</mat-option>
                     <mat-option *ngFor="let animal of animals" [value]="animal">
                         {{animal.name}}
@@ -85,61 +91,57 @@
 
             <mat-form-field class="form-control">
                 <mat-label>Region</mat-label>
-                <mat-select required formControlName="gender_opt">
+                <mat-select required formControlName="region">
                     <mat-option>--</mat-option>
-                    <mat-option *ngFor="let animal of animals" [value]="animal">
-                        {{animal.name}}
+                    <mat-option *ngFor="let region of regions" [value]="region.name">
+                        {{region.name}}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="gender_opt?.hasError('required')">Please choose your gender</mat-error>
+                <mat-error *ngIf="region?.hasError('required')">Please choose your region</mat-error>
 
             </mat-form-field>
 
             <mat-form-field class="form-control">
                 <mat-label>Education Level</mat-label>
-                <mat-select required formControlName="gender_opt">
+                <mat-select required formControlName="education_levels">
                     <mat-option>--</mat-option>
-                    <mat-option *ngFor="let animal of animals" [value]="animal">
-                        {{animal.name}}
+                    <mat-option *ngFor="let educationLevel of educationLevels" [value]="educationLevel.level_name">
+                        {{educationLevel.level_name}}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="gender_opt?.hasError('required')">Please choose your gender</mat-error>
+                <mat-error *ngIf="education_levels?.hasError('required')">Please select your education level</mat-error>
 
             </mat-form-field>
 
             <mat-form-field class="form-control">
                 <mat-label>Occupation</mat-label>
-                <mat-select required formControlName="gender_opt">
+                <mat-select required formControlName="occupation">
                     <mat-option>--</mat-option>
-                    <mat-option *ngFor="let animal of animals" [value]="animal">
-                        {{animal.name}}
+                    <mat-option *ngFor="let occupation of occupations" [value]="occupation.work_type">
+                        {{occupation.work_type}}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="gender_opt?.hasError('required')">Please choose your gender</mat-error>
+                <mat-error *ngIf="occupation?.hasError('required')">Please choose your profession</mat-error>
 
             </mat-form-field>
 
-            <mat-form-field class="form-control">
+            <!-- <mat-form-field class="form-control">
                 <mat-label>phone number</mat-label>
-                <input matInput formControlName="password" type="tel" required minlength="8" />
-                <mat-error *ngIf="password?.hasError('required')">
-                    Password is required
+                <input matInput formControlName="phonenumber" type="tel" required />
+                <mat-error *ngIf="phonenumber?.hasError('required')">
+                    Phonenumber is required
                 </mat-error>
-                <mat-error *ngIf="password?.hasError('minlength')">
-                    This password is too short. It must contain at least 8 characters.
-                </mat-error>
-            </mat-form-field>
+
+            </mat-form-field> -->
             
-            <mat-form-field class="form-control">
+            <!-- <mat-form-field class="form-control">
                 <mat-label>city</mat-label>
-                <input matInput formControlName="password" type="text" required minlength="8" />
-                <mat-error *ngIf="password?.hasError('required')">
-                    Password is required
+                <input matInput formControlName="city" type="text" required />
+                <mat-error *ngIf="city?.hasError('required')">
+                    city is required
                 </mat-error>
-                <mat-error *ngIf="password?.hasError('minlength')">
-                    This password is too short. It must contain at least 8 characters.
-                </mat-error>
-            </mat-form-field>
+  
+            </mat-form-field> -->
 
             <!-- 
             <mat-form-field class="form-control">
@@ -161,10 +163,15 @@
             </div> -->
 
             <div class="form-footer pb-4">
-                <button [disabled]="this.forms.invalid" class="btn btn-primary card card-small" mat-raised-button
+                <!-- <button [disabled]="this.forms.invalid" class="btn btn-primary card card-small" mat-raised-button
                     type="submit">
                     Sign Up
-                </button>
+                </button> -->
+                <button  class="btn btn-primary card card-small" mat-raised-button
+                    type="submit">
+                    Sign Up
+                </button> 
+
             </div>
 
         </form>
