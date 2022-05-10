@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   register2(respondentdata: RespondentData): Observable<RespondentData> {
-    return this.http.post<RespondentData>(this.respondentRegistrationUrl, respondentdata, httpOptions)
+    return this.http.post<RespondentData>(this.respondentRegistrationUrl, respondentdata)
       .pipe(
         catchError(this.handleError('register2', respondentdata))
       )

@@ -1,3 +1,4 @@
+import { ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EducationLevels } from './../../../core/models/education-levels.interface';
 import { Observable } from 'rxjs';
@@ -5,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Occupations } from './../../../core/models/occupations.interface';
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 interface Gender {
   name: string;
@@ -14,6 +15,8 @@ interface Gender {
 interface Region {
   name: string;
 }
+
+
 @Component({
   selector: 'app-respondent-signup',
   templateUrl: './respondent-signup.component.html',
@@ -22,15 +25,20 @@ interface Region {
 export class RespondentSignupComponent implements OnInit {
 
 forms: FormGroup;
+passVal :string;
 genderVal: string;
+//birth_date: string;
+dateVal: Date;
 genders: Gender[] = [
   {name: 'Male', value: 'M'},
   {name: 'Female', value: 'F'},
-
 ];
+maxDate: Date;
 occupations: Occupations[];
 
 educationLevels: EducationLevels[];
+invalidLogin: boolean = false;
+errorMessage: String;
 
 regions: Region[] = [
   {name: 'None'},
@@ -56,7 +64,12 @@ regions: Region[] = [
     private authService: AuthService,
     // private router: Router,
   ) {
- 
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const currentDay = new Date().getDay();
+    
+    console.log()
+     this.maxDate = new Date(currentYear - 10, currentMonth, currentDay);//should be at least 10 year older
 
   }
 
@@ -67,24 +80,21 @@ regions: Region[] = [
       first_name: ['', [Validators.required, Validators.maxLength]],
       last_name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      gender_opt: ['',[Validators.required]],   
-      datepicker: ['',[Validators.required]],   
-      // password: ['', [Validators.required, Validators.maxLength]],
+      gender: ['',[Validators.required]],   
+      // birth_date: ['',[Validators.required]], 
+      password: ['', [Validators.required, Validators.maxLength]],
+    confirmpassword: ['', [Validators.required,Validators.pattern]],
+      region: ['',[Validators.required]],
+      education_level: ['',[Validators.required]],
+      occupation: ['',[Validators.required]],
+      city: ['',[]],
+      phone_number: ['',[]],
+      
   
-      // region: ['',[Validators.required]],
-      // education_levels: ['',[Validators.required]],
-      // occupation: ['',[Validators.required]],
-  
-      // phonenumber: ['',[Validators.required]],
-      // confirmpassword: ['', [Validators.required,Validators.pattern]],
+
+      
     });
-    // this.authService.getOccupation().subscribe( 
-    //  ( result:any) =>{
-    //     for(let r of result){
-    //       console.log(r.work_type)
-    //     }
-    //   }
-    // )
+
     this.authService.getOccupation().subscribe(
       (result:any) =>{
         this.occupations = result;
@@ -117,40 +127,82 @@ regions: Region[] = [
     return this.forms.get('email');
   }
 
-    get gender_opt() {
-    return this.forms.get('gender_opt');
+    get gender() {
+    return this.forms.get('gender');
   }
 
-  // get password() {
-  //   return this.forms.get('password');
+  // get birth_date() {
+  //   return this.forms.get('birth_date')?.value.toGMTString();
   // }
 
+  get password() {
+    return this.forms.get('password');
+  }
+
+get confirmpassword() {
+    return this.forms.get('confirmpassword');
+  }
 
 
-  // get region() {
-  //   return this.forms.get('region');
-  // }
-  // get education_levels() {
-  //   return this.forms.get('education_levels');
-  // }
+  get region() {
+    return this.forms.get('region');
+  }
+
+  get education_level() {
+    return this.forms.get('education_level');
+  }
+ 
   get occupation() {
     return this.forms.get('occupation');
   }
-  // get datepicker() {
-  //   return this.forms.get('datepicker');
-  // }
-  // get city() {
-  //   return this.forms.get('city');
-  // }
-  // get phonenumber() {
-  //   return this.forms.get('phonenumber');
-  // }
-  // get confirmpassword() {
-  //   return this.forms.get('confirmpassword');
-  // }
+  
+  get city() {
+    return this.forms.get('city');
+  }
+  get phone_number() {
+    return this.forms.get('phone_number');
+  }
+  
+
 
   onSubmit() {
     console.log(this.forms.value,this.forms.valid);
+    // this.dateVal = this.datepicker?.value;
+    // console.log(this.dateVal.getFullYear())
+    // console.log(this.datepicker?.value.toDateString()) //7/5/1990
+    // console.log(this.datepicker?.value.toGMTString()) //7/5/1990
+    // console.log(this.datepicker?.value.toISOString()) //7/5/1990
+    // console.log(this.datepicker?.value.toJSON()) //7/5/1990
+    // console.log(this.datepicker?.value.toLocaleDateString()) //7/5/1990
+    // console.log(this.datepicker?.value.toLocaleString()) //7/5/1990
+    // console.log(this.datepicker?.value.toLocaleTimeString())
+    // console.log(this.datepicker?.value.toString()) //7/5/1990
+    // console.log(this.datepicker?.value.toTimeString()) //7/5/1990
+    // console.log(this.datepicker?.value.toUTCString())
+    // console.log(this.datepicker.getDate())
+    // console.log(this.datepicker?.value.getDay())
+    // console.log(this.datepicker.value.getFullYear())
+    // console.log(this.datepicker?.value.getMonth())
+    // console.log(this.datepicker?.value.getUTCDate())
+    // console.log(this.datepicker?.value.getUTCDay())
+    // console.log(this.datepicker?.value.getUTCFullYear())
+    // console.log(this.datepicker?.value.getYear())
+    if(this.password?.value !== this.confirmpassword?.value){
+      this.errorMessage = "password don't match";
+      this.invalidLogin = true;
+
+    }
+    else{
+          this.authService.register2(this.forms.value)
+      .subscribe(
+        (result) => {
+          console.log(result)
+        //  this.router.navigate(['login']);          
+        })
+
+    }
+    // console.log(this.datepicker?.value.toDateString())
+    
     // this.authService.register2(this.forms.value)
     //   .subscribe(
     //     (result) => {

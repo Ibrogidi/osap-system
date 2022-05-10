@@ -13,9 +13,10 @@ import { error } from '@angular/compiler/src/util';
 export class LoginComponent implements OnInit {
   forms: FormGroup;
   invalidLogin: boolean = false;
+  errorMessage: String;
   tokenValue: String;
   userObj: any;
-  errorMessage: String;
+  
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,

@@ -9,7 +9,7 @@ export interface RespondentData{
     last_name: string,
     email: string,
     gender: string,
-    birth_date: string,
+    birth_date: string | null,
     region: string,
     city: string,
     phone_number: string,
