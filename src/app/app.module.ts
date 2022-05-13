@@ -36,6 +36,16 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatRippleModule} from '@angular/material/core';
 import { ResearcherDashboardComponent } from './user/researcher/researcher-dashboard/researcher-dashboard.component';
 import { RespondentDashboardComponent } from './user/respondent/respondent-dashboard/respondent-dashboard.component';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+
+// Note we need a separate function as it's required
+// by the AOT compiler.
+export function playerFactory() {
+  return player;
+}
+
+
 
 @NgModule({
   declarations: [
@@ -49,6 +59,7 @@ import { RespondentDashboardComponent } from './user/respondent/respondent-dashb
     RespondentSignupComponent,
     ResearcherDashboardComponent,
     RespondentDashboardComponent,
+  
 
   ],
   imports: [
@@ -77,7 +88,8 @@ import { RespondentDashboardComponent } from './user/respondent/respondent-dashb
     MatDatepickerModule,
     // MatDatepicker,
     MatNativeDateModule,
-    MatRippleModule
+    MatRippleModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [
     AuthService,

@@ -4,3 +4,5 @@ import { HttpHeaders } from '@angular/common/http';
 
 
 export const researchObj : any = {};
+
+export const modeValue:string = "over"

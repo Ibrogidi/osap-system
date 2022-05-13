@@ -25,13 +25,14 @@ const httpOptions = {
 
 export class AuthService {
   private tokenValue:string;
-  private resercherRegistrationUrl = 'http://127.0.0.1:2000/auth/users/';
-  private respondentRegistrationUrl = 'http://127.0.0.1:2000/auth/users/respondents/';
-  private loginUrl = 'http://127.0.0.1:2000/auth/token/login';
-  private usersUrl = 'http://127.0.0.1:2000/auth/users/me';
-  private occupationUrl = 'http://127.0.0.1:2000/requirements/occupations/';
-  private educationUrl ='http://127.0.0.1:2000/requirements/education-levels/';
-
+  private surverUrl = 'http://127.0.0.1:2000'
+  private resercherRegistrationUrl = this.surverUrl+'/auth/users/';
+  private respondentRegistrationUrl = this.surverUrl+'/auth/users/respondents/';
+  private loginUrl = this.surverUrl+'/auth/token/login';
+  private usersUrl = this.surverUrl+'/auth/users/me';
+  private occupationUrl = this.surverUrl+'/requirements/occupations/';
+  private educationUrl =this.surverUrl+'/requirements/education-levels/';
+private logoutUrl =this.surverUrl+ '/auth/token/logout/'
   // private url2 = "http://my-json-server.typicode.com/Ibrogidi/osap-system/users/"
   private handleError: HandleError;
 
@@ -112,6 +113,12 @@ export class AuthService {
       return true
     }
     else return false;
+  }
+
+
+  logOut(token:string){
+    localStorage.removeItem("Researcher");
+    return this.http.post(this.logoutUrl,token)
   }
 
   // getData(myToken:string) : Observable<ResearcherData[]>  {

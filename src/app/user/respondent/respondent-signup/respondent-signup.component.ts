@@ -24,86 +24,91 @@ interface Region {
 })
 export class RespondentSignupComponent implements OnInit {
 
-forms: FormGroup;
-passVal :string;
-genderVal: string;
-//birth_date: string;
-dateVal: Date;
-genders: Gender[] = [
-  {name: 'Male', value: 'M'},
-  {name: 'Female', value: 'F'},
-];
-maxDate: Date;
-occupations: Occupations[];
+  forms: FormGroup;
+  passVal: string;
+  genderVal: string;
+  //birth_date: string;
 
-educationLevels: EducationLevels[];
-invalidLogin: boolean = false;
-errorMessage: String;
+  genders: Gender[] = [
+    { name: 'Male', value: 'M' },
+    { name: 'Female', value: 'F' },
+  ];
+  maxDate: Date;
+  minDate: Date;
+  birthYear: Date;
+  birthMonth: Date;
+  birthDay: Date;
+  birthDate: string;
+  occupations: Occupations[];
 
-regions: Region[] = [
-  {name: 'None'},
-  {name: 'Addis Ababa'},
-  {name: 'Afar'},
-  {name: 'Oromia'},
-  {name: 'Amhara'},
-  {name: 'Tigray'},
-  {name: 'Somali'},
-  {name: 'Sidama'},
-  {name: 'Harari'},
-  {name: 'Gambela'},
-  {name: 'Benishangul-Gumuz'},
-  {name: 'Dire Dawa'},
-  {name: 'South West Ethiopia Peoples'},
-  {name: 'Southern Nations Nationalities and Peoples'},
+  educationLevels: EducationLevels[];
+  invalidLogin: boolean = false;
+  errorMessage: String;
+
+  regions: Region[] = [
+    { name: 'None' },
+    { name: 'Addis Ababa' },
+    { name: 'Afar' },
+    { name: 'Oromia' },
+    { name: 'Amhara' },
+    { name: 'Tigray' },
+    { name: 'Somali' },
+    { name: 'Sidama' },
+    { name: 'Harari' },
+    { name: 'Gambela' },
+    { name: 'Benishangul-Gumuz' },
+    { name: 'Dire Dawa' },
+    { name: 'South West Ethiopia Peoples' },
+    { name: 'Southern Nations Nationalities and Peoples' },
 
 
-];
+  ];
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private authService: AuthService,
-    // private router: Router,
+     private router: Router,
   ) {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
     const currentDay = new Date().getDay();
-    
-    console.log()
-     this.maxDate = new Date(currentYear - 10, currentMonth, currentDay);//should be at least 10 year older
 
+
+    this.maxDate = new Date(currentYear - 10, currentMonth, currentDay);//should be at least 10 year older
+    this.minDate = new Date(currentYear - 100, currentMonth, currentDay);
   }
 
 
   ngOnInit(): void {
     this.forms = this.fb.group({
       username: ['', [Validators.required]],
-      first_name: ['', [Validators.required, Validators.maxLength]],
-      last_name: ['', [Validators.required]],
+      first_name: ['', [Validators.required, Validators.maxLength, Validators.pattern("[A-Z][a-z]{2,50}")]],
+      last_name: ['', [Validators.required, Validators.pattern("[A-Z][a-z]{2,50}")]],
       email: ['', [Validators.required, Validators.email]],
-      gender: ['',[Validators.required]],   
-      // birth_date: ['',[Validators.required]], 
+      gender: ['', [Validators.required]],
+      datePicker: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.maxLength]],
-    confirmpassword: ['', [Validators.required,Validators.pattern]],
-      region: ['',[Validators.required]],
-      education_level: ['',[Validators.required]],
-      occupation: ['',[Validators.required]],
-      city: ['',[]],
-      phone_number: ['',[]],
-      
-  
+      confirmpassword: ['', [Validators.required]],
+      region: ['', [Validators.required]],
+      education_level: ['', [Validators.required]],
+      occupation: ['', [Validators.required]],
+      city: ['', []],
+      phone_number: ['', [Validators.pattern("[0-9]{9,16}")]],
 
-      
+
+
+
     });
 
     this.authService.getOccupation().subscribe(
-      (result:any) =>{
+      (result: any) => {
         this.occupations = result;
         console.log(this.occupations)
       }
     );
     this.authService.getEducationLevels().subscribe(
-      (result:any)=>{
-        this.educationLevels= result;
+      (result: any) => {
+        this.educationLevels = result;
         console.log(this.educationLevels)
       }
     )
@@ -127,19 +132,19 @@ regions: Region[] = [
     return this.forms.get('email');
   }
 
-    get gender() {
+  get gender() {
     return this.forms.get('gender');
   }
 
-  // get birth_date() {
-  //   return this.forms.get('birth_date')?.value.toGMTString();
-  // }
+  get datePicker() {
+    return this.forms.get('datePicker');
+  }
 
   get password() {
     return this.forms.get('password');
   }
 
-get confirmpassword() {
+  get confirmpassword() {
     return this.forms.get('confirmpassword');
   }
 
@@ -151,65 +156,70 @@ get confirmpassword() {
   get education_level() {
     return this.forms.get('education_level');
   }
- 
+
   get occupation() {
     return this.forms.get('occupation');
   }
-  
+
   get city() {
     return this.forms.get('city');
   }
   get phone_number() {
     return this.forms.get('phone_number');
   }
-  
+
 
 
   onSubmit() {
-    console.log(this.forms.value,this.forms.valid);
-    // this.dateVal = this.datepicker?.value;
-    // console.log(this.dateVal.getFullYear())
-    // console.log(this.datepicker?.value.toDateString()) //7/5/1990
-    // console.log(this.datepicker?.value.toGMTString()) //7/5/1990
-    // console.log(this.datepicker?.value.toISOString()) //7/5/1990
-    // console.log(this.datepicker?.value.toJSON()) //7/5/1990
-    // console.log(this.datepicker?.value.toLocaleDateString()) //7/5/1990
-    // console.log(this.datepicker?.value.toLocaleString()) //7/5/1990
-    // console.log(this.datepicker?.value.toLocaleTimeString())
-    // console.log(this.datepicker?.value.toString()) //7/5/1990
-    // console.log(this.datepicker?.value.toTimeString()) //7/5/1990
-    // console.log(this.datepicker?.value.toUTCString())
-    // console.log(this.datepicker.getDate())
-    // console.log(this.datepicker?.value.getDay())
-    // console.log(this.datepicker.value.getFullYear())
-    // console.log(this.datepicker?.value.getMonth())
-    // console.log(this.datepicker?.value.getUTCDate())
-    // console.log(this.datepicker?.value.getUTCDay())
-    // console.log(this.datepicker?.value.getUTCFullYear())
-    // console.log(this.datepicker?.value.getYear())
-    if(this.password?.value !== this.confirmpassword?.value){
+
+    this.birthYear = this.datePicker?.value.getFullYear();
+    // console.log(this.birthYear)
+    this.birthMonth = this.datePicker?.value.getMonth() + 1;
+    // console.log(this.birthMonth)
+    this.birthDay = this.datePicker?.value.getDate()
+    // console.log(this.birthDay)
+
+    this.birthDate = this.birthYear.toString() + '-' + this.birthMonth.toString() + '-' + this.birthDay.toString();
+    // console.log(this.birthDate)
+
+    this.forms.value.birth_date = this.birthDate;
+    // console.log(this.forms.value,this.forms.valid);
+
+
+    if (this.password?.value !== this.confirmpassword?.value) {
       this.errorMessage = "password don't match";
       this.invalidLogin = true;
 
     }
-    else{
-          this.authService.register2(this.forms.value)
-      .subscribe(
-        (result) => {
-          console.log(result)
-        //  this.router.navigate(['login']);          
-        })
+    else {
+      
+      this.authService.register2(this.forms.value)
+        .subscribe(
+          (result) => {
+            // console.log(result)
+             this.router.navigate(['login']);          
+          },(error)=>{
+            if (error.status === 400) {
+
+              this.errorMessage = "username or email already exists."
+              this.invalidLogin = true;
+  
+  
+            }
+            else {
+              this.errorMessage = "Unknown error occured. Please check your internet connection and try again."
+              this.invalidLogin = true;
+            }
+  
+          }
+          )
+          }
+
+          
 
     }
-    // console.log(this.datepicker?.value.toDateString())
-    
-    // this.authService.register2(this.forms.value)
-    //   .subscribe(
-    //     (result) => {
-    //       console.log(result)
-    //       this.router.navigate(['login']);          
-    //     })
 
   }
 
-}
+
+

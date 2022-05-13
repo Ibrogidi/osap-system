@@ -28,9 +28,7 @@
                 <mat-error *ngIf="username?.hasError('required')">
                     Username is required
                 </mat-error>
-                <!-- <mat-error *ngIf="email?.hasError('email')">
-                        Email isn't valid. Please enter a valid email.
-                    </mat-error> -->
+     
             </mat-form-field>
 
             <mat-form-field class="form-control">
@@ -42,9 +40,7 @@
                 <mat-error *ngIf="first_name?.hasError('maxlength')">
                     Required. 150 characters or fewer.
                 </mat-error>
-                <!-- <mat-error *ngIf="email?.hasError('email')">
-                        Email isn't valid. Please enter a valid email.
-                    </mat-error> -->
+                <mat-error *ngIf="first_name?.hasError('pattern')">enter valid name</mat-error>
             </mat-form-field>
 
             <mat-form-field class="form-control">
@@ -53,9 +49,7 @@
                 <mat-error *ngIf="last_name?.hasError('required')">
                     Last name is required
                 </mat-error>
-                <!-- <mat-error *ngIf="email?.hasError('email')">
-                        Email isn't valid. Please enter a valid email.
-                    </mat-error> -->
+                <mat-error *ngIf="last_name?.hasError('pattern')">enter valid name</mat-error>
             </mat-form-field>
 
             <mat-form-field class="form-control">
@@ -70,15 +64,15 @@
 
             </mat-form-field>
 <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-            <!-- <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill">
                 <mat-label>Birth date</mat-label>
-                <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="birth_date" required>
+                <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" formControlName="datePicker" required>
                 <mat-hint>
-                    MM/DD/YYYY, must be at least 10 years old
+                    MM/DD/YYYY, Range is b/n (10-100) years.
                 </mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field> -->
+            </mat-form-field>
 
            
                 <mat-form-field class="form-control">
@@ -150,8 +144,10 @@
 
             <mat-form-field class="form-control">
                 <mat-label>phone number</mat-label>
+                <span matPrefix>+ &nbsp;</span>
                 <input matInput formControlName="phone_number" type="tel" />
                 <mat-hint>optional</mat-hint>
+                <mat-error *ngIf="phone_number?.hasError('pattern')">enter valid phone number</mat-error>
 
 
             </mat-form-field>

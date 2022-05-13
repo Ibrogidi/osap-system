@@ -59,6 +59,21 @@
     z-index: -1;
     padding: 20px;
 }
+#time{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#research{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#data{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .hero::before {
     content: '';

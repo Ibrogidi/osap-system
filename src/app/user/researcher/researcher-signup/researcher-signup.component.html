@@ -82,11 +82,10 @@
     
             </mat-form-field>
   
-
-            <!-- <div class="alert alert-danger" *ngIf="invalidLogin">
+            <div class="alert alert-danger" *ngIf="invalidLogin">
                 <mat-icon class="pr-5">error</mat-icon>
-                {{'200:Invalid username or password. '}}
-            </div> -->
+                {{errorMessage}}
+            </div>
 
             <div class="form-footer pb-4">
                 <button [disabled]="this.forms.invalid" class="btn btn-primary card card-small" mat-raised-button type="submit">
