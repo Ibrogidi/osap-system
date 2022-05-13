@@ -120,7 +120,10 @@ private logoutUrl =this.surverUrl+ '/auth/token/logout/'
     localStorage.removeItem("Researcher");
     return this.http.post(this.logoutUrl,token)
   }
-
+  logOut2(token:string){
+    localStorage.removeItem("Respondent");
+    return this.http.post(this.logoutUrl,token)
+  }
   // getData(myToken:string) : Observable<ResearcherData[]>  {
   //   httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
   //   return this.http.get<ResearcherData[]>(this.usersUrl)
