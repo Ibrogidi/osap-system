@@ -6,10 +6,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 80vh;
-    max-width: 840px;
+    /* justify-content: center; */
+    width: auto;
+    height: auto;
+    max-width: 740px;
     
 }
 
@@ -36,3 +36,11 @@
 
 
 }
+
+@media screen and (max-width: 640px) {
+  
+    .hidden{
+        display: none;
+    }
+  }
+  

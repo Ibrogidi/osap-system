@@ -26,10 +26,10 @@ export class RespondentSignupComponent implements OnInit {
 
   forms: FormGroup;
   passVal: string;
-  genderVal: string;
+  
   hide2:boolean= true;
   //birth_date: string;
-
+  genderVal: string;
   genders: Gender[] = [
     { name: 'Male', value: 'M' },
     { name: 'Female', value: 'F' },
