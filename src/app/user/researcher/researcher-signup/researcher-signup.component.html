@@ -27,23 +27,19 @@
                 <mat-error *ngIf="username?.hasError('required')">
                     Username is required
                 </mat-error>
-                <!-- <mat-error *ngIf="email?.hasError('email')">
-                        Email isn't valid. Please enter a valid email.
-                    </mat-error> -->
+           
             </mat-form-field>
 
             <mat-form-field class="form-control">
                 <mat-label>First name</mat-label>
-                <input matInput formControlName="first_name" type="text" required  maxlength="150"/>
+                <input matInput formControlName="first_name" type="text" required />
                 <mat-error *ngIf="first_name?.hasError('required')">
                     First name is required
                 </mat-error>
-                <mat-error *ngIf="first_name?.hasError('maxlength')">
-                    Required. 150 characters or fewer.
+                <mat-error *ngIf="first_name?.hasError('pattern')">
+                    enter valid name
                 </mat-error>
-                <!-- <mat-error *ngIf="email?.hasError('email')">
-                        Email isn't valid. Please enter a valid email.
-                    </mat-error> -->
+    
             </mat-form-field>
 
             <mat-form-field class="form-control">
@@ -52,15 +48,18 @@
                 <mat-error *ngIf="last_name?.hasError('required')">
                     Last name is required
                 </mat-error>
-                <!-- <mat-error *ngIf="email?.hasError('email')">
-                        Email isn't valid. Please enter a valid email.
-                    </mat-error> -->
+                <mat-error *ngIf="last_name?.hasError('pattern')">
+                    enter valid name
+                </mat-error>
+    
             </mat-form-field>
 
 
             <mat-form-field class="form-control">
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" type="password" required  minlength="8"/>
+                <input [(ngModel)]="passVal" matInput formControlName="password" type="password" required  minlength="8" [type]="hide ? 'password' : 'text'"/>
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                
                 <mat-error *ngIf="password?.hasError('required')">
                     Password is required
                 </mat-error>
@@ -72,7 +71,8 @@
 
             <mat-form-field class="form-control">
                 <mat-label>Confirm Password</mat-label>
-                <input matInput formControlName="confirmpassword" type="password" required  pattern="{{passVal}}"/>
+                <input matInput formControlName="confirmpassword" type="password" required  pattern="{{passVal}}" [type]="hide2 ? 'password' : 'text'"/>
+                <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                 <mat-error *ngIf="confirmpassword?.hasError('required')">
                    please confirm your password
                 </mat-error>

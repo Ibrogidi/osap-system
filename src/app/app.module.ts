@@ -3,6 +3,7 @@ import { AuthService } from './core/services/auth.service';
 import { ResetPasswordComponent } from './common/reset-password/reset-password.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {MatStepperModule} from '@angular/material/stepper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,9 @@ import { ResearcherDashboardComponent } from './user/researcher/researcher-dashb
 import { RespondentDashboardComponent } from './user/respondent/respondent-dashboard/respondent-dashboard.component';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import { RequirmentsComponent } from './surveys/requirments/requirments.component';
+import { CreateSurveyComponent } from './surveys/create-survey/create-survey.component';
+
 
 // Note we need a separate function as it's required
 // by the AOT compiler.
@@ -59,6 +63,9 @@ export function playerFactory() {
     RespondentSignupComponent,
     ResearcherDashboardComponent,
     RespondentDashboardComponent,
+    RequirmentsComponent,
+    CreateSurveyComponent,
+
   
 
   ],
@@ -89,6 +96,7 @@ export function playerFactory() {
     // MatDatepicker,
     MatNativeDateModule,
     MatRippleModule,
+  MatStepperModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [

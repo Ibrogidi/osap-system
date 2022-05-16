@@ -1,0 +1,159 @@
+<!-- <p>requirments works!</p> -->
+<!-- <button (click)="submit()">click me</button> -->
+
+
+<mat-stepper linear #stepper>
+
+  <div class="container">
+
+
+    <mat-step [stepControl]="firstFormGroup" [editable]="true">
+
+      <h1 class="title"> Welcome, Create your Survey Now</h1>
+
+      <!-- <h1 class="title">Survey Title and Description</h1>
+      <div>
+        The Survey title and description are shown to participants who are invited to the project, and should contain
+        essential project information and instructions.
+
+      </div>
+       -->
+      <form class="form" [formGroup]="firstFormGroup" apperance="fill">
+        <ng-template matStepLabel>Project Type </ng-template>
+        <mat-form-field class="form-control">
+          <mat-label>Survey Title</mat-label>
+          <input matInput formControlName="survey_title" placeholder="Example: Customer Satisfaction Survey" required>
+        </mat-form-field>
+
+
+        <mat-form-field class="form-control" appearance="fill">
+          <mat-label>Title Description</mat-label>
+          <textarea matInput formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5" cols="30" rows="10"></textarea>
+          <mat-hint>Optional</mat-hint>
+        </mat-form-field>
+
+
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Survey DeadLine</mat-label>
+          <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="datePicker" required>
+          <mat-hint>
+
+          </mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      
+        <mat-form-field class="form-control">
+          <mat-label>Required No. of Respondent
+          </mat-label>
+          <input matInput [(ngModel)]="respondentNumber" formControlName="respondent_number" type="number" [min]="1" required>
+
+        </mat-form-field>
+        
+        <mat-form-field class="form-control">
+          <mat-label>Survey Type</mat-label>
+          <mat-select [(ngModel)]="isPaid" required formControlName="survey_type">
+
+            <mat-option *ngFor="let survey of surveys" [value]="survey.value">
+              {{survey.name}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="form-control" [class.has.error]="this.firstFormGroup.get('survey_budget')?.invalid&&this.firstFormGroup.get('survey_budget')?.touched" *ngIf="isPaid">
+          <mat-label>Survey Budget
+          </mat-label>
+          <input matInput formControlName="survey_budget" type="number" [min]='respondentNumber' placeholder="minimum budget is 1 birr per respondent" [required]="isPaid"  >
+          <span matSuffix>Birr &nbsp;</span>
+
+          <mat-error *ngIf="this.firstFormGroup.get('survey_budget')?.invalid&&this.firstFormGroup.get('survey_budget')?.touched">
+            Survey Budget is required
+        </mat-error>
+
+          <mat-error *ngIf="this.firstFormGroup.get('survey_budget')?.hasError('min')">
+            Minimum budget is {{respondentNumber}} birr
+        </mat-error>
+        </mat-form-field>
+
+
+
+
+
+        <div class="form-footer pb-4">
+          <button mat-button matStepperNext mat-raised-button [disabled]="this.firstFormGroup.invalid"
+            class="btn btn-primary card card-small" mat-raised-button type="submit">
+            Next
+
+          </button>
+        </div>
+
+      </form>
+
+
+
+
+
+    </mat-step>
+
+  </div>
+
+
+
+
+
+  <div class="container">
+
+    <mat-step [stepControl]="secondFormGroup" [editable]="true">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel> Recruitment</ng-template>
+
+        <h1 class="title"> Welcome, Create your Survey Now</h1>
+
+        <!-- </ng-template> -->
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+
+  </div>
+
+
+
+  <mat-step [stepControl]="thirdFormGroup" [editable]="true">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>User Agreement</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+
+
+
+
+
+    <ng-template matStepLabel>Project Summary</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>

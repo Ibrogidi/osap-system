@@ -18,6 +18,10 @@
     <mat-divider></mat-divider>
 
     <mat-nav-list>
+      <a class="list" mat-list-item routerLink="/surveys/requirments">
+        <mat-icon>create</mat-icon>create survey
+      </a>
+
       <!-- <a class="list" mat-list-item href="#">Home</a>
       <a class="list" mat-list-item href="#">Respondant</a>
       <a class="list" mat-list-item href="#">Researcher</a>
@@ -31,8 +35,8 @@
 
 </mat-sidenav-container>
 
-<div class="navbar">
-  <mat-icon aria-label="Side nav toggle icon " (click)="drawer.toggle()" >menu</mat-icon>
+<!-- <div class="navbar">
+  
 
   <div class="spacer"></div>
 
@@ -55,8 +59,39 @@
         <a class="dropdown-item" (click)="logout()" ngbDropdownItem>log out</a>
       </div>
     </div>
-</div>
+</div> -->
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    
+    <mat-icon aria-label="Side nav toggle icon " (click)="drawer.toggle()" >menu</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
 
+
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>question_mark</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>notifications</mat-icon>
+  </button>
+  
+
+  <div class="nav-item dropdown" ngbDropdown>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" ngbDropdownToggle>
+      <mat-icon>person</mat-icon>
+    </button>
+   
+ 
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+      <mat-icon class ="person_inside">person</mat-icon>
+   <span> {{username}}</span>
+  
+ <a class="dropdown-item">edit profile</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="logout()" ngbDropdownItem>log out</a>
+    </div>
+  </div>
+</mat-toolbar>
 
 
 <ng-content selector=".content"></ng-content>

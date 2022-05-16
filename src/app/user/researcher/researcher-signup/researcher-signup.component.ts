@@ -10,8 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class ResearcherSignupComponent implements OnInit {
 
-
-  confirmPasswordClass: string = 'form-control';
+  hide: boolean=true;
+  hide2: boolean= true;
   forms: FormGroup;
   passVal: string;
   invalidLogin: boolean = false;
@@ -28,8 +28,8 @@ export class ResearcherSignupComponent implements OnInit {
     this.forms = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required]],
-      first_name: ['', [Validators.required, Validators.maxLength, Validators.pattern('[A-Z][a-z]{2,50}')]],
-      last_name: ['', [Validators.required],  Validators.pattern('[A-Z][a-z]{2,50}')],
+      first_name: ['', [Validators.required, Validators.maxLength, Validators.pattern('[A-Za-z]{2,50}')]],
+      last_name: ['', [Validators.required, Validators.pattern('[A-Za-z]{2,50}')]],
       password: ['', [Validators.required, Validators.maxLength]],
       confirmpassword: ['', [Validators.required]],
     });
@@ -63,33 +63,29 @@ export class ResearcherSignupComponent implements OnInit {
   onSubmit() {
     console.log(this.forms.value, this.forms.valid);
     console.log(this.password?.value, " ", this.confirmpassword?.value);
-    if (this.password?.value === this.confirmpassword?.value) {
-this.invalidLogin = false;
-
-      this.authService.register(this.forms.value)
-        .subscribe(
-          (result) => {
-            console.log(result)
-            this.router.navigate(['/login']);
 
 
-          }, (error: any) => {
-
-console.log('myerrror',error)
-
-          }
-
-        )
+    this.authService.register(this.forms.value)
+      .subscribe(
+        (result) => {
+          console.log(result)
+          this.router.navigate(['/login']);
 
 
+        }, (error: any) => {
 
-    }
-    else {
-      this.errorMessage = "password and confirm password didn't match";
-      this.invalidLogin = true;
-    }
+          // console.log('myerrror',error)
+
+        }
+
+      )
+
 
 
   }
+
+
+
+
 
 }

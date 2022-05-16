@@ -1,3 +1,4 @@
+import { RequirmentsComponent } from './surveys/requirments/requirments.component';
 
 import { Auth2Guard } from './core/services/auth2.guard';
 import { RespondentDashboardComponent } from './user/respondent/respondent-dashboard/respondent-dashboard.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'register/respondent', component: RespondentSignupComponent},
   {path: 'researcher/dashboard', component: ResearcherDashboardComponent, canActivate: [AuthGuard]},
   {path: 'respondent/dashboard', component: RespondentDashboardComponent, canActivate: [Auth2Guard]},
+  {path: 'surveys/requirments', component: RequirmentsComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

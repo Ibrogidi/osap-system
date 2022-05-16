@@ -27,6 +27,7 @@ export class RespondentSignupComponent implements OnInit {
   forms: FormGroup;
   passVal: string;
   genderVal: string;
+  hide2:boolean= true;
   //birth_date: string;
 
   genders: Gender[] = [
@@ -82,13 +83,13 @@ export class RespondentSignupComponent implements OnInit {
   ngOnInit(): void {
     this.forms = this.fb.group({
       username: ['', [Validators.required]],
-      first_name: ['', [Validators.required, Validators.maxLength, Validators.pattern("[A-Z][a-z]{2,50}")]],
-      last_name: ['', [Validators.required, Validators.pattern("[A-Z][a-z]{2,50}")]],
+      first_name: ['', [Validators.required, Validators.maxLength, Validators.pattern("[A-Za-z]{2,50}")]],
+      last_name: ['', [Validators.required, Validators.pattern("[A-Za-z]{2,50}")]],
       email: ['', [Validators.required, Validators.email]],
       gender: ['', [Validators.required]],
       datePicker: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.maxLength]],
-      confirmpassword: ['', [Validators.required]],
+      confirmpassword: ['', [Validators.required,Validators.pattern]],
       region: ['', [Validators.required]],
       education_level: ['', [Validators.required]],
       occupation: ['', [Validators.required]],
@@ -186,12 +187,6 @@ export class RespondentSignupComponent implements OnInit {
     // console.log(this.forms.value,this.forms.valid);
 
 
-    if (this.password?.value !== this.confirmpassword?.value) {
-      this.errorMessage = "password don't match";
-      this.invalidLogin = true;
-
-    }
-    else {
       
       this.authService.register2(this.forms.value)
         .subscribe(
@@ -213,7 +208,7 @@ export class RespondentSignupComponent implements OnInit {
   
           }
           )
-          }
+          
 
           
 
