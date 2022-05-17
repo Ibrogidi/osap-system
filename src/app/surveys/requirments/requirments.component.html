@@ -1,0 +1,246 @@
+<!-- <p>requirments works!</p> -->
+<!-- <button (click)="submit()">click me</button> -->
+
+
+<mat-stepper linear #stepper>
+
+
+
+
+  <mat-step [stepControl]="firstFormGroup" [editable]="true" >
+
+
+    <!-- <h1 class="title">Survey Title and Description</h1>
+      <div>
+        The Survey title and description are shown to participants who are invited to the project, and should contain
+        essential project information and instructions.
+
+      </div>
+       -->
+    <div class="container">
+      <h1 class="title"> Welcome, Create your Survey Now</h1>
+
+      <form class="form" [formGroup]="firstFormGroup" apperance="fill">
+        <ng-template matStepLabel class="matStepLabel" [ngbCollapse]="true">
+          <div class="hidden">
+            Project Type
+          </div>
+        </ng-template>
+        <mat-form-field class="form-control">
+          <mat-label>Survey Title</mat-label>
+          <input matInput formControlName="survey_title" placeholder="Example: Customer Satisfaction Survey" required>
+        </mat-form-field>
+
+
+        <mat-form-field class="form-control" appearance="fill">
+          <mat-label>Title Description</mat-label>
+          <textarea matInput formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5" cols="30" rows="10"></textarea>
+          <mat-hint>Optional</mat-hint>
+        </mat-form-field>
+
+
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Survey DeadLine</mat-label>
+          <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="datePicker" required>
+          <mat-hint>
+
+          </mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="form-control">
+          <mat-label>Required No. of Respondent
+          </mat-label>
+          <input matInput [(ngModel)]="respondentNumber" formControlName="respondent_number" type="number" [min]="1"
+            required>
+
+        </mat-form-field>
+
+        <mat-form-field class="form-control">
+          <mat-label>Survey Type</mat-label>
+          <mat-select [(ngModel)]="isPaid" required formControlName="survey_type">
+
+            <mat-option *ngFor="let survey of surveys" [value]="survey.value">
+              {{survey.name}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="form-control"
+          [class.has.error]="this.firstFormGroup.get('survey_budget')?.invalid&&this.firstFormGroup.get('survey_budget')?.touched"
+          *ngIf="isPaid">
+          <mat-label>Survey Budget
+          </mat-label>
+          <input matInput formControlName="survey_budget" type="number" [min]='respondentNumber'
+            placeholder="minimum budget is 1 birr per respondent" [required]="isPaid">
+          <span matSuffix>Birr &nbsp;</span>
+
+          <mat-error
+            *ngIf="this.firstFormGroup.get('survey_budget')?.invalid&&this.firstFormGroup.get('survey_budget')?.touched">
+            Survey Budget is required
+          </mat-error>
+
+          <mat-error *ngIf="this.firstFormGroup.get('survey_budget')?.hasError('min')">
+            Minimum budget is {{respondentNumber}} birr
+          </mat-error>
+        </mat-form-field>
+
+
+
+
+
+        <div class="form-footer pb-4">
+          <button mat-button matStepperNext mat-raised-button class="btn btn-primary card card-small" mat-raised-button
+            type="submit">
+            Next
+
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+
+
+
+  </mat-step>
+
+
+
+
+
+
+
+  <div class="container">
+
+    <mat-step [stepControl]="secondFormGroup" [editable]="true">
+      <div class="container">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel class="matStepLabel">
+            <div class="hidden">
+              Recruitment
+            </div>
+          </ng-template>
+
+          <h1 class="title"> Screening Respondents</h1>
+          <p>
+            Set up recruitment criteria for respondents.
+            Participant Type can't be changed after the survey is created.
+          </p>
+
+          <mat-form-field class="form-control">
+            <mat-label>Minimum Age of Respondent</mat-label>
+            <input matInput formControlName="minAge" type="number" min="10" max="100" [(ngModel)]="minimumAge">
+            <span matSuffix>years &nbsp;</span>
+            <mat-error *ngIf="(minAge?.hasError('min') )|| minAge?.hasError('max')">Age gap must be between 10 to 100
+              years old</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="form-control">
+            <mat-label>Maximum Age of Respondent</mat-label>
+            <input matInput formControlName="maxAge" type="number" min="{{minimumAge}}" max="100">
+            <span matSuffix>years &nbsp;</span>
+            <mat-error *ngIf="maxAge?.hasError('min') ">Maximum age must be greater or equal to {{minimumAge}}
+            </mat-error>
+            <mat-error *ngIf="maxAge?.hasError('max') ">Maximum age cannot exceed more than 100 years</mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field class="form-control">
+            <mat-label>Education Level</mat-label>
+            <mat-select required formControlName="education_level">
+
+              <mat-option *ngFor="let educationLevel of educationLevels" [value]="educationLevel.id">
+                {{educationLevel.level_name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="education_level?.hasError('required')">Please select participant education level</mat-error>
+
+          </mat-form-field>
+
+          <mat-form-field class="form-control">
+            <mat-label>Occupation</mat-label>
+            <mat-select required formControlName="occupation">
+      
+                <mat-option *ngFor="let occupation of occupations" [value]="occupation.id">
+                    {{occupation.work_type}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="occupation?.hasError('required')">Please choose participant profession</mat-error>
+
+        </mat-form-field>
+        
+
+          <mat-form-field class="form-control">
+            <mat-label>Gender</mat-label>
+            <mat-select required formControlName="gender">
+
+              <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                {{gender.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="gender?.hasError('required')">Please choose participant gender</mat-error>
+
+          </mat-form-field>
+          
+            <mat-slide-toggle color="primary" formControlName="allow_unverified_respondents">
+              Allow Unverified Respondents
+            </mat-slide-toggle>
+  
+          
+
+          <div class="form-footer pb-4">
+            <button mat-button matStepperPrevious class="btn btn-primary card card-small">Back</button>
+            <button mat-button matStepperNext mat-raised-button class="btn btn-primary card card-small" type="submit">
+              Next
+
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </mat-step>
+
+
+  </div>
+
+
+
+  <mat-step [stepControl]="thirdFormGroup" [editable]="true">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel class="matStepLabel">
+        <div class="hidden">
+          User Agreement
+        </div>
+        </ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step>
+    <ng-template matStepLabel class="matStepLabel">
+      <div class="hidden">
+        Project Summary
+      </div>
+      </ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
