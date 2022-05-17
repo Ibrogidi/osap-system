@@ -1,3 +1,4 @@
+import { Occupations } from './../../core/models/occupations.interface';
 import { EducationLevels } from './../../core/models/education-levels.interface';
 import { AuthService } from './../../core/services/auth.service';
 import { Component,
@@ -31,6 +32,7 @@ budget: number;
 firstFormGroup: FormGroup;
 secondFormGroup: FormGroup;
 thirdFormGroup: FormGroup;
+occupations: Occupations[];
 surveys: Survey[] = [
   { name: 'payment free', value: false },
   { name: 'with payment', value: true },
@@ -70,7 +72,9 @@ ngOnInit() {
     gender: ['', Validators.required],
     maxAge: ['', [Validators.required, Validators.min, Validators.max]],
     education_level: ['', Validators.required],
-    minAge: ['',[Validators.required,Validators.min,Validators.max]]
+    minAge: ['',[Validators.required,Validators.min,Validators.max]],
+    occupation: ['', [Validators.required]],
+    allow_unverified_respondents: ['',Validators.required],
   });
   this.thirdFormGroup = this._formBuilder.group({
     thirdCtrl:['', Validators.required],
@@ -81,7 +85,14 @@ ngOnInit() {
       this.educationLevels = result;
       console.log(this.educationLevels)
     }
-  )
+  );
+  
+  this.authService.getOccupation().subscribe(
+    (result: any) => {
+      this.occupations = result;
+      console.log(this.occupations)
+    }
+  );
 
 }
 
@@ -97,5 +108,8 @@ get minAge(){
 }
 get maxAge(){
   return this.secondFormGroup.get('maxAge')
+}
+get occupation() {
+  return this.secondFormGroup.get('occupation');
 }
 }
