@@ -39,7 +39,6 @@ import { ResearcherDashboardComponent } from './user/researcher/researcher-dashb
 import { RespondentDashboardComponent } from './user/respondent/respondent-dashboard/respondent-dashboard.component';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
-import { RequirmentsComponent } from './surveys/requirments/requirments.component';
 import { CreateSurveyComponent } from './surveys/create-survey/create-survey.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
@@ -64,7 +63,6 @@ export function playerFactory() {
     RespondentSignupComponent,
     ResearcherDashboardComponent,
     RespondentDashboardComponent,
-    RequirmentsComponent,
     CreateSurveyComponent,
 
   
