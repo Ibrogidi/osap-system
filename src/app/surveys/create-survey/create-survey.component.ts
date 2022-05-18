@@ -15,7 +15,7 @@ import { Component,
   styleUrls: ['./create-survey.component.css']
 })
 export class CreateSurveyComponent implements OnInit {
-
+modeValue:any = "side"
   isPaid: boolean= false;
 x:string = "test 1";
 respondentNumber:number;
@@ -67,10 +67,10 @@ ngOnInit() {
     education_level: ['', Validators.required],
     minAge: ['',[Validators.required,Validators.min,Validators.max]],
     occupation: ['', [Validators.required]],
-    allow_unverified_respondents: ['',Validators.required],
+    allow_unverified_respondents: ['',[]],
   });
   this.thirdFormGroup = this._formBuilder.group({
-    thirdCtrl:['', Validators.required],
+    thirdCtrl:['',[]],
   });
 
   this.authService.getEducationLevels().subscribe(

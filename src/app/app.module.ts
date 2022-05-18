@@ -4,7 +4,7 @@ import { ResetPasswordComponent } from './common/reset-password/reset-password.c
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatStepperModule} from '@angular/material/stepper';
-
+import {MatTabsModule} from '@angular/material/tabs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
@@ -97,6 +97,7 @@ export function playerFactory() {
     MatRippleModule,
   MatStepperModule,
   MatSlideToggleModule,
+  MatTabsModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [
