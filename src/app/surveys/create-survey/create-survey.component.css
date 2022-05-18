@@ -41,11 +41,29 @@
 
 }
 .example-container {
-    width: 100vw;
+    width: 100%;
     height: 90vh;
     margin: 12px;
    
   }
+
+ .example-card {
+    max-width: 400px;
+    margin-top: 5%;
+  }
+
+   .survey-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+   }
+
+.toggle-drawer{
+    margin-top: 0;
+    margin-left: 0;
+    
+}
   
   mat-drawer-content {
     padding: 12px;
