@@ -41,6 +41,7 @@ import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { CreateSurveyComponent } from './surveys/create-survey/create-survey.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 // Note we need a separate function as it's required
@@ -98,6 +99,7 @@ export function playerFactory() {
   MatStepperModule,
   MatSlideToggleModule,
   MatTabsModule,
+  MatExpansionModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [
