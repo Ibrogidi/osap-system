@@ -14,21 +14,34 @@ import { Gender } from 'src/app/core/models/gender.interface';
 import { Survey } from 'src/app/core/models/survey.interface';
 import { Sections } from 'src/app/core/models/sections.interface';
 
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'create-survey',
   templateUrl: './create-survey.component.html',
   styleUrls: ['./create-survey.component.css']
 })
 export class CreateSurveyComponent implements OnInit {
-choices:Choices[]=[
-  { name: 'Option '},
-  { name: 'Option '},
-  { name: 'Option '},
-  { name: 'Option '},
-]
-matIconArray: String[] = ['radio_button_unchecked','arrow_drop_down','check_box_outline_blank','tag','fiber_manual_record','calendar_today','timer','short_text','subject']
+  choices: Choices[] = [
+    { name: 'Option ' },
+  ];
+
+  choices2: Choices[] = [
+    { name: 'Option' }
+  ];
+
+  choices3: Choices[] = [
+    { name: 'Option' }
+  ];
+  choices4: Choices[] = [
+    { name: 'Option' }
+  ];
+  choices5: Choices[] = [
+    { name: 'Option' }
+  ];
+
+  matIconArray: String[] = ['radio_button_unchecked', 'arrow_drop_down', 'check_box_outline_blank', 'tag', 'fiber_manual_record', 'calendar_today', 'timer', 'short_text', 'subject']
   panelOpenState = false;
-choiceMode: string;
+  choiceMode: string;
   modeValue: any = "side"
   isPaid: boolean = false;
   x: string = "test 1";
@@ -51,10 +64,13 @@ choiceMode: string;
     { name: 'Female(only)', value: 'F' },
     { name: 'Both', value: 'both' },
   ];
-checkQuestionType: any;
+  checkQuestionType: any;
   questionType: QuestionType[];
   isEditable = false;
   educationLevels: EducationLevels[];
+
+
+
   constructor(private _formBuilder: FormBuilder,
     private authService: AuthService
   ) {
@@ -63,7 +79,7 @@ checkQuestionType: any;
     const currentDay = new Date().getDay();
 
 
-  this.minDate = new Date(currentYear, currentMonth, currentDay + 8);
+    this.minDate = new Date(currentYear, currentMonth, currentDay + 8);
 
   }
 
@@ -88,12 +104,12 @@ checkQuestionType: any;
     });
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['', []],
-      section_title:['',[Validators.required]],
-      section_description:['',[]],
-      question_title:['',[]],
-      question_type:['',[]],
-      choices: ['',[]],
-      maxChoice:['',[]],
+      section_title: ['', [Validators.required]],
+      section_description: ['', []],
+      question_title: ['', []],
+      question_type: ['', []],
+      choices: ['', []],
+      maxChoice: ['', []],
     });
 
     this.authService.getEducationLevels().subscribe(
@@ -102,24 +118,24 @@ checkQuestionType: any;
         console.log(this.educationLevels)
       }
     );
-this.authService.getOccupation().subscribe(
-  (result:any)=>{
-    this.occupations = result;
-    console.log(this.occupations)
-  }
-)
+    this.authService.getOccupation().subscribe(
+      (result: any) => {
+        this.occupations = result;
+        console.log(this.occupations)
+      }
+    )
 
 
     this.authService.getQuestionType().subscribe(
-      (result:any)=>{
+      (result: any) => {
         this.questionType = result;
         console.log(this.questionType);
       }
     )
-    
+
   }
 
-  
+
 
   get education_level() {
     return this.secondFormGroup.get('education_level')
@@ -136,8 +152,76 @@ this.authService.getOccupation().subscribe(
   get occupation() {
     return this.secondFormGroup.get('occupation');
   }
-get questionnaireType(){
-  return this.thirdFormGroup.get('question_type')
-}
+  get questionnaireType() {
+    return this.thirdFormGroup.get('question_type')
+  }
+
+  drop(event: CdkDragDrop<Choices[]>) {
+    moveItemInArray(this.choices, event.previousIndex, event.currentIndex);
+  }
+
+  drop2(event: CdkDragDrop<Choices[]>) {
+    moveItemInArray(this.choices2, event.previousIndex, event.currentIndex);
+  }
+
+  drop3(event: CdkDragDrop<Choices[]>) {
+    moveItemInArray(this.choices3, event.previousIndex, event.currentIndex);
+  }
+  drop4(event: CdkDragDrop<Choices[]>) {
+    moveItemInArray(this.choices4, event.previousIndex, event.currentIndex);
+  }
+  drop5(event: CdkDragDrop<Choices[]>) {
+    moveItemInArray(this.choices5, event.previousIndex, event.currentIndex);
+  }
+  addOption() {
+    this.choices.push(
+      {
+        name: 'Option'
+      }
+    )
+  }
+  addOption2() {
+    this.choices2.push(
+      {
+        name: 'Option'
+      }
+    )
+  }
+  addOption3() {
+    this.choices3.push(
+      {
+        name: 'Option'
+      }
+    )
+  }
+  addOption4() {
+    this.choices4.push(
+      {
+        name: 'Option'
+      }
+    )
+  }
+  addOption5() {
+    this.choices5.push(
+      {
+        name: 'Option'
+      }
+    )
+  }
+  deleteTask(i: number) {
+    this.choices.splice(i, 1);
+  }
+  deleteTask2(i: number) {
+    this.choices2.splice(i, 1);
+  }
+  deleteTask3(i: number) {
+    this.choices3.splice(i, 1);
+  }
+  deleteTask4(i: number) {
+    this.choices4.splice(i, 1);
+  }
+  deleteTask5(i: number) {
+    this.choices5.splice(i, 1);
+  }
 
 }

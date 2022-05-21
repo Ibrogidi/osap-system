@@ -291,8 +291,8 @@
                       <mat-label>choices</mat-label>
                       <mat-select formControlName="question_type">
                         <div *ngFor="let question of questionType;let i=index " class="choice-box icons">
-                          
-                        <mat-icon class="icons" matSuffix>{{matIconArray[i]}}</mat-icon>    
+
+                          <mat-icon class="icons" matSuffix>{{matIconArray[i]}}</mat-icon>
                           <mat-option [value]="question">
                             {{question.type_name}}
                           </mat-option>
@@ -323,29 +323,37 @@
                     *ngIf="(this.questionnaireType?.value.type_name)==='Multiple choice'||(this.questionnaireType?.value.type_name)== null ">
                     <mat-card-content>
 
-                      <div *ngFor="let choice of choices; let i=index">
-                        <mat-form-field class="form-control" class="choices">
+                      <div cdkDropList [cdkDropListData]="choices" class="example-list"
+                        (cdkDropListDropped)="drop($event)">
 
-                          <mat-label>{{choice.name ++i}}</mat-label>
-                          <span matPrefix>
-                            <mat-icon class="icons">
-                              radio_button_unchecked
-                            </mat-icon>
-                            &nbsp;
-                          </span>
 
-                          <input matInput formControlName="choices">
 
-                        </mat-form-field>
+                        <div *ngFor="let choice of choices; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
 
-                        <!-- <div class="box">
-                            <mat-icon color="warn" (click)="deleteTask(i,'todo')">delete</mat-icon>
-                            {{'index: '+ i}}
-                            <mat-icon color="primary" (click)="onEdit(item,i)">edit</mat-icon>
+                            <mat-label> {{ choice.name + i }}</mat-label>
+                            <span matPrefix>
+                              <mat-icon class="icons">
+                                radio_button_unchecked
+                              </mat-icon>
+                              &nbsp;
+                            </span>
+                            <span matSuffix>
 
-                        </div> -->
+                              <mat-icon color="warn" (click)="deleteTask(i)">delete</mat-icon>
+                            </span>
+
+                            <input matInput formControlName="choices">
+
+                          </mat-form-field>
+
+
+                        </div>
 
                       </div>
+
+
+
 
                       <!--                       
                       <mat-form-field class="form-control" class="choices">
@@ -365,9 +373,7 @@
                     </mat-card-content>
                     <mat-card-actions>
 
-                      <button mat-button>Add Option</button>
-
-                      <button mat-button>Delete Option</button>
+                      <button mat-button (click)="addOption()">Add Option</button>
 
                     </mat-card-actions>
                   </mat-card>
@@ -378,42 +384,42 @@
                     *ngIf="(this.questionnaireType?.value?.type_name)==='Check box'">
                     <mat-card-content>
 
-
-                      <mat-form-field class="form-control" class="choices">
-
-                        <mat-label>Option 1</mat-label>
+                      <div cdkDropList [cdkDropListData]="choices2" class="example-list"
+                        (cdkDropListDropped)="drop2($event)">
 
 
 
-                        <span matPrefix>
-                          <mat-icon class="icons"> check_box_outline_blank</mat-icon>
+                        <div *ngFor="let choice of choices2; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
 
-                        </span>
+                            <mat-label> {{ choice.name + i }}</mat-label>
+                            <span matPrefix>
+                              <mat-icon class="icons"> check_box_outline_blank</mat-icon>
+                              &nbsp;
+                            </span>
+                            <span matSuffix>
 
-                        <input matInput formControlName="choices">
+                              <mat-icon color="warn" (click)="deleteTask2(i)">delete</mat-icon>
+                            </span>
 
-                      </mat-form-field>
+                            <input matInput formControlName="choices">
 
-                      <mat-form-field class="form-control" class="choices">
+                          </mat-form-field>
 
 
-                        <span matPrefix>
-                          <mat-icon class="icons"> check_box_outline_blank</mat-icon>
-                        </span>
+                        </div>
 
-                        <mat-label>Option 2</mat-label>
+                      </div>
 
-                        <input matInput formControlName="choices">
 
-                      </mat-form-field>
+
 
                     </mat-card-content>
 
                     <mat-card-actions class="checkbox-action">
 
-                      <button mat-button>Add Option</button>
+                      <button mat-button (click)="addOption2()">Add Option</button>
 
-                      <button mat-button>Delete Option</button>
 
                       <!-- <mat-form-field class="form-control" class="max-choice">
                       
@@ -434,29 +440,50 @@
                     *ngIf="(this.questionnaireType?.value?.type_name)==='Integer'">
                     <mat-card-content>
 
-                      <mat-form-field class="form-control" class="choices">
 
-                        <mat-label>Option 1</mat-label>
 
-                        <input matInput formControlName="choices" type="number">
-
-                      </mat-form-field>
-
-                      <mat-form-field class="form-control" class="choices">
-                        <mat-label>Option 2</mat-label>
-
-                        <input matInput formControlName="choices" type="number">
+                      <div cdkDropList [cdkDropListData]="choices3" class="example-list"
+                        (cdkDropListDropped)="drop3($event)">
 
 
 
-                      </mat-form-field>
+                        <div *ngFor="let choice of choices3; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
+
+                            <mat-label> {{ choice.name + i }}</mat-label>
+
+                            <span matSuffix>
+
+                              <mat-icon color="warn" (click)="deleteTask3(i)">delete</mat-icon>
+                            </span>
+
+                            <input matInput formControlName="choices" type="number">
+
+                          </mat-form-field>
+
+
+                        </div>
+
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
                     </mat-card-content>
                     <mat-card-actions>
 
-                      <button mat-button>Add Option</button>
+                      <button mat-button (click)="addOption3()">Add Option</button>
 
-                      <button mat-button>Delete Option</button>
+
 
                       <!-- <mat-form-field class="form-control" class="max-Option">
                         <mat-label>Max Value</mat-label>
@@ -483,7 +510,32 @@
                     *ngIf="(this.questionnaireType?.value?.type_name)==='Decimal'">
                     <mat-card-content>
 
-                      <mat-form-field class="form-control" class="choices">
+
+                      <div cdkDropList [cdkDropListData]="choices4" class="example-list"
+                        (cdkDropListDropped)="drop4($event)">
+
+
+
+                        <div *ngFor="let choice of choices4; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
+
+                            <mat-label> {{ choice.name + i }}</mat-label>
+
+                            <span matSuffix>
+
+                              <mat-icon color="warn" (click)="deleteTask4(i)">delete</mat-icon>
+                            </span>
+
+                            <input matInput formControlName="choices" type="number">
+
+                          </mat-form-field>
+
+
+                        </div>
+
+                      </div>
+
+                      <!-- <mat-form-field class="form-control" class="choices">
 
                         <mat-label>Option 1</mat-label>
 
@@ -497,14 +549,14 @@
                         <input matInput formControlName="choices" type="number">
 
 
-                      </mat-form-field>
+                      </mat-form-field> -->
 
                     </mat-card-content>
                     <mat-card-actions>
 
-                      <button mat-button>Add Option</button>
+                      <button mat-button (click)="addOption4()">Add Option</button>
 
-                      <button mat-button>Delete Option</button>
+
 
                       <!-- <mat-form-field class="form-control" class="max-choice">
                         <mat-label>Max Option</mat-label>
@@ -517,35 +569,67 @@
 
                   <!-- ..................................................................................Dropdown............................................................... -->
 
-
                   <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value?.type_name)==='Drop down'">
+                    *ngIf="(this.questionnaireType?.value.type_name)==='Drop down'">
                     <mat-card-content>
 
-                      <mat-form-field class="form-control" class="choices">
 
-                        <mat-label>option 1</mat-label>
+                      <div cdkDropList [cdkDropListData]="choices5" class="example-list"
+                        (cdkDropListDropped)="drop5($event)">
 
-                        <input matInput formControlName="choices">
 
-                      </mat-form-field>
-                      <mat-form-field class="form-control" class="choices">
-                        <mat-label>option 2</mat-label>
 
-                        <input matInput formControlName="choices">
+                        <div *ngFor="let choice of choices5; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
 
-                      </mat-form-field>
+                            <mat-label> {{ choice.name + i }}</mat-label>
+
+                            <span matSuffix>
+
+                              <mat-icon color="warn" (click)="deleteTask5(i)">delete</mat-icon>
+                            </span>
+
+                            <input matInput formControlName="choices" type="number">
+
+                          </mat-form-field>
+
+
+                        </div>
+
+                      </div>
+
+                      <!-- <mat-form-field class="form-control" class="choices">
+
+                      <mat-label>Option 1</mat-label>
+
+                      <input matInput formControlName="choices" type="number">
+                    </mat-form-field>
+                    <mat-form-field class="form-control" class="choices">
+
+
+                      <mat-label>Option 2</mat-label>
+
+                      <input matInput formControlName="choices" type="number">
+
+
+                    </mat-form-field> -->
 
                     </mat-card-content>
                     <mat-card-actions>
 
-                      <button mat-button>Add Option</button>
-
-                      <button mat-button>Delete Option</button>
+                      <button mat-button (click)="addOption5()">Add Option</button>
 
 
+
+                      <!-- <mat-form-field class="form-control" class="max-choice">
+                      <mat-label>Max Option</mat-label>
+
+                      <input matInput formControlName="maxChoice" type="number" width="250px">
+                      <mat-hint>optional</mat-hint>
+                    </mat-form-field> -->
                     </mat-card-actions>
                   </mat-card>
+
 
                   <!-- .........................................................................Date............................................................................................... -->
 
