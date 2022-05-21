@@ -1,3 +1,4 @@
+import { QuestionType } from './../../core/models/question-type.interface';
 import { Occupations } from './../../core/models/occupations.interface';
 import { EducationLevels } from './../../core/models/education-levels.interface';
 import { AuthService } from './../../core/services/auth.service';
@@ -19,7 +20,7 @@ import { Sections } from 'src/app/core/models/sections.interface';
 })
 export class CreateSurveyComponent implements OnInit {
   panelOpenState = false;
-
+choiceMode: string;
   modeValue: any = "side"
   isPaid: boolean = false;
   x: string = "test 1";
@@ -42,7 +43,8 @@ export class CreateSurveyComponent implements OnInit {
     { name: 'Female(only)', value: 'F' },
     { name: 'Both', value: 'both' },
   ];
-  
+checkQuestionType: any;
+  questionType: QuestionType[];
   isEditable = false;
   educationLevels: EducationLevels[];
   constructor(private _formBuilder: FormBuilder,
@@ -53,7 +55,7 @@ export class CreateSurveyComponent implements OnInit {
     const currentDay = new Date().getDay();
 
 
-    this.minDate = new Date(currentYear, currentMonth, currentDay + 8);
+  this.minDate = new Date(currentYear, currentMonth, currentDay + 8);
 
   }
 
@@ -81,6 +83,9 @@ export class CreateSurveyComponent implements OnInit {
       section_title:['',[Validators.required]],
       section_description:['',[]],
       question_title:['',[]],
+      question_type:['',[]],
+      choices: ['',[]],
+      maxChoice:['',[]],
     });
 
     this.authService.getEducationLevels().subscribe(
@@ -89,16 +94,24 @@ export class CreateSurveyComponent implements OnInit {
         console.log(this.educationLevels)
       }
     );
+this.authService.getOccupation().subscribe(
+  (result:any)=>{
+    this.occupations = result;
+    console.log(this.occupations)
+  }
+)
 
-    this.authService.getOccupation().subscribe(
-      (result: any) => {
-        this.occupations = result;
-        console.log(this.occupations)
+
+    this.authService.getQuestionType().subscribe(
+      (result:any)=>{
+        this.questionType = result;
+        console.log(this.questionType);
       }
-    );
-
+    )
+    
   }
 
+  
 
   get education_level() {
     return this.secondFormGroup.get('education_level')
@@ -115,6 +128,8 @@ export class CreateSurveyComponent implements OnInit {
   get occupation() {
     return this.secondFormGroup.get('occupation');
   }
-
+get questionnaireType(){
+  return this.thirdFormGroup.get('question_type')
+}
 
 }

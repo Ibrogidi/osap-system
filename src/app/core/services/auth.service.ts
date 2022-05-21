@@ -1,3 +1,4 @@
+import { QuestionType } from './../models/question-type.interface';
 import { RespondentData } from './../models/respondent-data.interface';
 import { EducationLevels } from './../models/education-levels.interface';
 import { Injectable } from '@angular/core';
@@ -32,7 +33,8 @@ export class AuthService {
   private usersUrl = this.surverUrl+'/auth/users/me';
   private occupationUrl = this.surverUrl+'/requirements/occupations/';
   private educationUrl =this.surverUrl+'/requirements/education-levels/';
-private logoutUrl =this.surverUrl+ '/auth/token/logout/'
+private logoutUrl =this.surverUrl+ '/auth/token/logout/';
+private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
   // private url2 = "http://my-json-server.typicode.com/Ibrogidi/osap-system/users/"
   private handleError: HandleError;
 
@@ -97,6 +99,13 @@ private logoutUrl =this.surverUrl+ '/auth/token/logout/'
   }
 
   
+  getQuestionType() : Observable<QuestionType[]>  {
+  
+    return this.http.get<QuestionType[]>(this.questionTypeUrl)
+      .pipe(
+        catchError(this.handleError('getQuestionType', []))
+      );
+  }
 
   get isResearcherLoggedIn():boolean{
     const user =(localStorage.getItem('Researcher')!);
