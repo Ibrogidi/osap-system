@@ -25,6 +25,10 @@
 
 
 }
+.choice-box{
+    display: flex;
+    align-items: center;
+}
 
 .form-footer {
     display: flex;
@@ -59,6 +63,7 @@
 }
 .text-section{
     color: white;
+    padding: 5px;
 }
 
 .example-card {

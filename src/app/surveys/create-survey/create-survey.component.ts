@@ -1,3 +1,4 @@
+import { Choices } from './../../core/models/choices.interface';
 import { QuestionType } from './../../core/models/question-type.interface';
 import { Occupations } from './../../core/models/occupations.interface';
 import { EducationLevels } from './../../core/models/education-levels.interface';
@@ -19,6 +20,13 @@ import { Sections } from 'src/app/core/models/sections.interface';
   styleUrls: ['./create-survey.component.css']
 })
 export class CreateSurveyComponent implements OnInit {
+choices:Choices[]=[
+  { name: 'Option '},
+  { name: 'Option '},
+  { name: 'Option '},
+  { name: 'Option '},
+]
+matIconArray: String[] = ['radio_button_unchecked','arrow_drop_down','check_box_outline_blank','tag','fiber_manual_record','calendar_today','timer','short_text','subject']
   panelOpenState = false;
 choiceMode: string;
   modeValue: any = "side"
