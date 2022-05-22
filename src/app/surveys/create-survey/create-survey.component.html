@@ -272,7 +272,7 @@
 
               </mat-accordion>
               <!-- ///////////////////////////question card///////////////////////////////////////////// -->
-              <mat-card class="example-card-question">
+              <!-- <mat-card class="example-card-question">
                 <div class="question-card-container">
 
                   <div class="question-title">
@@ -284,6 +284,8 @@
                     </mat-form-field>
 
                   </div>
+
+                  
 
                   <div class="div2">
 
@@ -312,6 +314,460 @@
                 </div>
 
 
+                <mat-card-content> -->
+
+
+
+              <!-- ////////////////////////////////////////////////////////////////////choices//////////////////////////////////////////// -->
+              <!-- ///////////////////////////////////////////////////////////////////////////multiple choice///////////////////////////////////////// -->
+
+              <!-- <mat-card class="question-card-container2"
+                    *ngIf="(this.questionnaireType?.value.type_name)==='Multiple choice'||(this.questionnaireType?.value.type_name)== null ">
+                    <mat-card-content>
+
+                      <div cdkDropList [cdkDropListData]="choices" class="example-list"
+                        (cdkDropListDropped)="drop($event)">
+
+
+
+                        <div *ngFor="let choice of choices; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
+
+                            <mat-label> {{ choice.name + i }}</mat-label>
+                            <span matPrefix>
+                              <mat-icon class="icons">
+                                radio_button_unchecked
+                              </mat-icon>
+                              &nbsp;
+                            </span>
+                            <span matSuffix>
+
+                              <mat-icon color="warn" (click)="deleteTask(i)">delete</mat-icon>
+                            </span>
+
+                            <input matInput formControlName="choices">
+
+                          </mat-form-field>
+
+
+                        </div>
+
+                      </div>
+
+ -->
+
+
+              <!--                       
+                      <mat-form-field class="form-control" class="choices">
+                        <span matPrefix>
+                          <mat-icon class="icons">
+                            radio_button_unchecked
+                          </mat-icon>
+                          &nbsp;
+                        </span>
+
+                        <mat-label>Option 2</mat-label>
+
+                        <input matInput formControlName="choices">
+
+                      </mat-form-field> -->
+
+              <!-- </mat-card-content>
+                    <mat-card-actions>
+
+                      <button mat-button (click)="addOption()">Add Option</button>
+
+                    </mat-card-actions>
+                  </mat-card> -->
+
+              <!-- .....................................................checkbox................................................................ -->
+              <!-- 
+                  <mat-card class="question-card-container2"
+                    *ngIf="(this.questionnaireType?.value?.type_name)==='Check box'">
+                    <mat-card-content>
+
+                      <div cdkDropList [cdkDropListData]="choices2" class="example-list"
+                        (cdkDropListDropped)="drop2($event)">
+
+
+
+                        <div *ngFor="let choice of choices2; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
+
+                            <mat-label> {{ choice.name + i }}</mat-label>
+                            <span matPrefix>
+                              <mat-icon class="icons"> check_box_outline_blank</mat-icon>
+                              &nbsp;
+                            </span>
+                            <span matSuffix>
+
+                              <mat-icon color="warn" (click)="deleteTask2(i)">delete</mat-icon>
+                            </span>
+
+                            <input matInput formControlName="choices">
+
+                          </mat-form-field>
+
+
+                        </div>
+
+                      </div>
+
+
+
+
+                    </mat-card-content>
+
+                    <mat-card-actions class="checkbox-action">
+
+                      <button mat-button (click)="addOption2()">Add Option</button>
+ -->
+
+              <!-- <mat-form-field class="form-control" class="max-choice">
+                      
+                        <mat-label>Max Choice</mat-label>
+                        <input matInput formControlName="maxChoice" type="number" width="250px">
+                        <mat-hint>optional</mat-hint>
+                      </mat-form-field> -->
+
+              <!-- </mat-card-actions>
+                  </mat-card> -->
+
+
+
+
+              <!-- ........................................................integer..................................................................... -->
+
+              <!-- <mat-card class="question-card-container2"
+                    *ngIf="(this.questionnaireType?.value?.type_name)==='Integer'">
+                    <mat-card-content>
+
+
+
+                      <div cdkDropList [cdkDropListData]="choices3" class="example-list"
+                        (cdkDropListDropped)="drop3($event)">
+
+
+
+                        <div *ngFor="let choice of choices3; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
+
+                            <mat-label> {{ choice.name + i }}</mat-label>
+
+                            <span matSuffix>
+
+                              <mat-icon color="warn" (click)="deleteTask3(i)">delete</mat-icon>
+                            </span>
+
+                            <input matInput formControlName="choices" type="number">
+
+                          </mat-form-field>
+
+
+                        </div>
+
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </mat-card-content>
+                    <mat-card-actions>
+
+                      <button mat-button (click)="addOption3()">Add Option</button>
+
+ -->
+
+              <!-- <mat-form-field class="form-control" class="max-Option">
+                        <mat-label>Max Value</mat-label>
+
+                        <input matInput formControlName="maxChoice" type="number" width="250px">
+                        <mat-hint>optional</mat-hint>
+                      </mat-form-field> -->
+
+              <!-- <mat-form-field class="form-control" class="max-choice">
+                        <mat-label>Min Value</mat-label>
+
+                        <input matInput formControlName="maxChoice" type="number" width="250px">
+                        <mat-hint>optional</mat-hint>
+                      </mat-form-field> -->
+
+              <!-- 
+                    </mat-card-actions>
+                  </mat-card>
+ -->
+
+              <!-- .........................................................................Decimal........................................................................ -->
+              <!-- 
+                  <mat-card class="question-card-container2"
+                    *ngIf="(this.questionnaireType?.value?.type_name)==='Decimal'">
+                    <mat-card-content>
+
+
+                      <div cdkDropList [cdkDropListData]="choices4" class="example-list"
+                        (cdkDropListDropped)="drop4($event)">
+
+
+
+                        <div *ngFor="let choice of choices4; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
+
+                            <mat-label> {{ choice.name + i }}</mat-label>
+
+                            <span matSuffix>
+
+                              <mat-icon color="warn" (click)="deleteTask4(i)">delete</mat-icon>
+                            </span>
+
+                            <input matInput formControlName="choices" type="number">
+
+                          </mat-form-field>
+
+
+                        </div>
+
+                      </div> -->
+
+              <!-- <mat-form-field class="form-control" class="choices">
+
+                        <mat-label>Option 1</mat-label>
+
+                        <input matInput formControlName="choices" type="number">
+                      </mat-form-field>
+                      <mat-form-field class="form-control" class="choices">
+
+
+                        <mat-label>Option 2</mat-label>
+
+                        <input matInput formControlName="choices" type="number">
+
+
+                      </mat-form-field> -->
+
+              <!-- </mat-card-content>
+                    <mat-card-actions>
+
+                      <button mat-button (click)="addOption4()">Add Option</button>
+ -->
+
+
+              <!-- <mat-form-field class="form-control" class="max-choice">
+                        <mat-label>Max Option</mat-label>
+
+                        <input matInput formControlName="maxChoice" type="number" width="250px">
+                        <mat-hint>optional</mat-hint>
+                      </mat-form-field> -->
+              <!-- </mat-card-actions>
+                  </mat-card> -->
+
+              <!-- ..................................................................................Dropdown............................................................... -->
+              <!-- 
+                  <mat-card class="question-card-container2"
+                    *ngIf="(this.questionnaireType?.value.type_name)==='Drop down'">
+                    <mat-card-content>
+
+
+                      <div cdkDropList [cdkDropListData]="choices5" class="example-list"
+                        (cdkDropListDropped)="drop5($event)">
+
+
+
+                        <div *ngFor="let choice of choices5; let i=index" cdkDrag>
+                          <mat-form-field class="form-control choices example-box">
+
+                            <mat-label> {{ choice.name + i }}</mat-label>
+
+                            <span matSuffix>
+
+                              <mat-icon color="warn" (click)="deleteTask5(i)">delete</mat-icon>
+                            </span>
+
+                            <input matInput formControlName="choices" >
+
+                          </mat-form-field>
+
+
+                        </div>
+
+                      </div> -->
+
+              <!-- <mat-form-field class="form-control" class="choices">
+
+                      <mat-label>Option 1</mat-label>
+
+                      <input matInput formControlName="choices" type="number">
+                    </mat-form-field>
+                    <mat-form-field class="form-control" class="choices">
+
+
+                      <mat-label>Option 2</mat-label>
+
+                      <input matInput formControlName="choices" type="number">
+
+
+                    </mat-form-field> -->
+
+              <!-- </mat-card-content>
+                    <mat-card-actions>
+
+                      <button mat-button (click)="addOption5()">Add Option</button>
+
+ -->
+
+              <!-- <mat-form-field class="form-control" class="max-choice">
+                      <mat-label>Max Option</mat-label>
+
+                      <input matInput formControlName="maxChoice" type="number" width="250px">
+                      <mat-hint>optional</mat-hint>
+                    </mat-form-field> -->
+              <!-- </mat-card-actions>
+                  </mat-card> -->
+
+
+              <!-- .........................................................................Date............................................................................................... -->
+
+              <!-- <mat-card class="question-card-container2"
+                    *ngIf="(this.questionnaireType?.value?.type_name)==='Date'">
+                    <mat-card-content>
+
+
+                      <mat-form-field appearance="fill">
+                        <mat-label>02/27/2020</mat-label>
+                        <input matInput [matDatepicker]="dp3" disabled>
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                      </mat-form-field>
+
+
+                    </mat-card-content>
+
+                  </mat-card>
+
+ -->
+
+              <!-- ..........................................................................time.................................................................... -->
+
+
+              <!-- <mat-card class="question-card-container2"
+                    *ngIf="(this.questionnaireType?.value?.type_name)==='Time'">
+                    <mat-card-content>
+
+                      <mat-form-field class="form-control" class="choices">
+                        <input matInput disabled value="01:30">
+                        <span class="icons" matSuffix>
+                          <mat-icon>
+                            timer
+                          </mat-icon>
+                        </span>
+                      </mat-form-field>
+
+                    </mat-card-content>
+
+                  </mat-card> -->
+              <!-- ................................................................................................short answer................................................................... -->
+              <!-- <mat-card class="question-card-container2"
+                    *ngIf="(this.questionnaireType?.value?.type_name)==='Short answer'">
+                    <mat-card-content>
+                      <mat-form-field class="form-control" class="choices">
+
+                        <input matInput disabled value="Short-answer text">
+
+                      </mat-form-field>
+
+                    </mat-card-content>
+                  </mat-card> -->
+
+              <!-- .......................................................................................long paragraph............................................................................ -->
+              <!-- 
+                  <mat-card class="question-card-container2"
+                    *ngIf="(this.questionnaireType?.value?.type_name)==='Paragraph'">
+                    <mat-card-content>
+                      <mat-form-field class="form-control">
+                        <input matInput disabled value="long-answer text">
+
+                      </mat-form-field>
+
+                    </mat-card-content>
+
+                  </mat-card>
+ -->
+
+
+
+
+              <!-- ////////////////////////////////////////////////////////////////////choices//////////////////////////////////////////// -->
+
+              <!-- 
+
+
+
+                </mat-card-content>
+                <mat-divider inset></mat-divider>
+
+
+                <mat-card-footer>
+
+                  <button mat-button class="ml-3">add question</button>
+                  <button mat-button class="ml-3">delete question</button>
+                  <button mat-button class="ml-3">required</button>
+
+                </mat-card-footer>
+              </mat-card> -->
+              <!-- /////////////////////////////////////////////////////////////////////////final question/////////////////////////////////////////////////////// -->
+
+              <!-- ///////////////////////////////////////////////////////////////mock question//////////////////////////////////////////////////////// -->
+
+              <mat-card *ngFor="let question of questions" class="example-card-question">
+                <div class="question-card-container">
+
+                  <div class="question-title">
+                    <mat-form-field class="form-control">
+                      <mat-label>{{ question.title}}</mat-label>
+                      <input matInput formControlName="question_title" placeholder="click here to enter your question"
+                        required>
+                      <mat-icon matSuffix>question_mark</mat-icon>
+                    </mat-form-field>
+
+                  </div>
+
+
+
+                  <div class="div2">
+
+                    <mat-form-field class="form-control" class="question-type">
+                      <mat-label>choices</mat-label>
+                      <mat-select formControlName="question_type" #questionVal>
+                        <div *ngFor="let choice of question.choice_type;let i=index " class="choice-box icons">
+
+                          <mat-icon class="icons" matSuffix>{{matIconArray[i]}}</mat-icon>
+                          <mat-option [value]="choice">
+                            {{choice.type_name}}
+                          </mat-option>
+                        </div>
+
+                      </mat-select>
+
+                    </mat-form-field>
+                  </div>
+
+
+
+
+
+
+                </div>
+
+
                 <mat-card-content>
 
 
@@ -320,7 +776,7 @@
                   <!-- ///////////////////////////////////////////////////////////////////////////multiple choice///////////////////////////////////////// -->
 
                   <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value.type_name)==='Multiple choice'||(this.questionnaireType?.value.type_name)== null ">
+                    *ngIf="(questionVal.value.type_name)==='Multiple choice'||(this.questionnaireType?.value.type_name)== null ">
                     <mat-card-content>
 
                       <div cdkDropList [cdkDropListData]="choices" class="example-list"
@@ -380,8 +836,7 @@
 
                   <!-- .....................................................checkbox................................................................ -->
 
-                  <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value?.type_name)==='Check box'">
+                  <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Check box'">
                     <mat-card-content>
 
                       <div cdkDropList [cdkDropListData]="choices2" class="example-list"
@@ -436,8 +891,7 @@
 
                   <!-- ........................................................integer..................................................................... -->
 
-                  <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value?.type_name)==='Integer'">
+                  <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Integer'">
                     <mat-card-content>
 
 
@@ -449,7 +903,9 @@
 
                         <div *ngFor="let choice of choices3; let i=index" cdkDrag>
                           <mat-form-field class="form-control choices example-box">
-
+                            <span matPrefix>
+                              <mat-icon>tag</mat-icon>
+                            </span>
                             <mat-label> {{ choice.name + i }}</mat-label>
 
                             <span matSuffix>
@@ -506,8 +962,7 @@
 
                   <!-- .........................................................................Decimal........................................................................ -->
 
-                  <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value?.type_name)==='Decimal'">
+                  <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Decimal'">
                     <mat-card-content>
 
 
@@ -518,7 +973,9 @@
 
                         <div *ngFor="let choice of choices4; let i=index" cdkDrag>
                           <mat-form-field class="form-control choices example-box">
-
+                            <span matPrefix>
+                              <mat-icon>fiber_manual_record</mat-icon>
+                            </span>
                             <mat-label> {{ choice.name + i }}</mat-label>
 
                             <span matSuffix>
@@ -569,8 +1026,7 @@
 
                   <!-- ..................................................................................Dropdown............................................................... -->
 
-                  <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value.type_name)==='Drop down'">
+                  <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Drop down'">
                     <mat-card-content>
 
 
@@ -581,7 +1037,9 @@
 
                         <div *ngFor="let choice of choices5; let i=index" cdkDrag>
                           <mat-form-field class="form-control choices example-box">
-
+                            <span matPrefix>
+                              <mat-icon>arrow_drop_down</mat-icon>
+                            </span>
                             <mat-label> {{ choice.name + i }}</mat-label>
 
                             <span matSuffix>
@@ -589,7 +1047,7 @@
                               <mat-icon color="warn" (click)="deleteTask5(i)">delete</mat-icon>
                             </span>
 
-                            <input matInput formControlName="choices" type="number">
+                            <input matInput formControlName="choices">
 
                           </mat-form-field>
 
@@ -633,8 +1091,7 @@
 
                   <!-- .........................................................................Date............................................................................................... -->
 
-                  <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value?.type_name)==='Date'">
+                  <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Date'">
                     <mat-card-content>
 
 
@@ -656,8 +1113,7 @@
                   <!-- ..........................................................................time.................................................................... -->
 
 
-                  <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value?.type_name)==='Time'">
+                  <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Time'">
                     <mat-card-content>
 
                       <mat-form-field class="form-control" class="choices">
@@ -673,8 +1129,7 @@
 
                   </mat-card>
                   <!-- ................................................................................................short answer................................................................... -->
-                  <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value?.type_name)==='Short answer'">
+                  <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Short answer'">
                     <mat-card-content>
                       <mat-form-field class="form-control" class="choices">
 
@@ -687,8 +1142,7 @@
 
                   <!-- .......................................................................................long paragraph............................................................................ -->
 
-                  <mat-card class="question-card-container2"
-                    *ngIf="(this.questionnaireType?.value?.type_name)==='Paragraph'">
+                  <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Paragraph'">
                     <mat-card-content>
                       <mat-form-field class="form-control">
                         <input matInput disabled value="long-answer text">
@@ -715,12 +1169,20 @@
 
                 <mat-card-footer>
 
-                  <button mat-button class="ml-3">add question</button>
+                  <button mat-button class="ml-3" (click)="addQuestion()">add question</button>
                   <button mat-button class="ml-3">delete question</button>
                   <button mat-button class="ml-3">required</button>
 
                 </mat-card-footer>
               </mat-card>
+
+
+
+
+
+
+
+
 
             </mat-card-content>
             <mat-divider inset></mat-divider>
@@ -733,75 +1195,8 @@
 
             </mat-card-footer>
           </mat-card>
+          <!-- /////////////////////////////////////////////////////////////////////final mock question////////////////////////////////////////////////////// -->
 
-          <mat-card class="example-card bg-light">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Shiba Inu</mat-card-title>
-              <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-            </mat-card-header>
-
-            <mat-card-content>
-              <p>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>LIKE</button>
-              <button mat-button>SHARE</button>
-            </mat-card-actions>
-          </mat-card>
-
-
-          <mat-card class="example-card bg-light">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>title 3</mat-card-title>
-              <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, iure? Laboriosam obcaecati illum
-                distinctio ratione dolorem saepe nam consequatur quos dicta quam blanditiis, sequi quasi, quo
-                aspernatur odit? Rerum, quos.
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>LIKE</button>
-              <button mat-button>SHARE</button>
-            </mat-card-actions>
-          </mat-card>
-
-
-
-
-
-          <mat-card class="example-card bg-light">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>title 4</mat-card-title>
-              <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, iure? Laboriosam obcaecati illum
-                distinctio ratione dolorem saepe nam consequatur quos dicta quam blanditiis, sequi quasi, quo
-                aspernatur odit? Rerum, quos.
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>LIKE</button>
-              <button mat-button>SHARE</button>
-            </mat-card-actions>
-          </mat-card>
         </div>
       </form>
 

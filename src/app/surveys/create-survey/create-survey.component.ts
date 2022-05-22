@@ -1,3 +1,4 @@
+import { Questions } from './../../core/models/questions.interface';
 import { Choices } from './../../core/models/choices.interface';
 import { QuestionType } from './../../core/models/question-type.interface';
 import { Occupations } from './../../core/models/occupations.interface';
@@ -38,7 +39,47 @@ export class CreateSurveyComponent implements OnInit {
   choices5: Choices[] = [
     { name: 'Option' }
   ];
-
+questions: Questions[] = [
+{title: 'Untitled Question', choice_type: 
+[
+    {
+        id: 1,
+        type_name: "Multiple choice"
+    },
+    {
+        id: 2,
+        type_name: "Drop down"
+    },
+    {
+        id: 3,
+        type_name: "Check box"
+    },
+    {
+        id: 4,
+        type_name: "Integer"
+    },
+    {
+        id: 5,
+        type_name: "Decimal"
+    },
+    {
+        id: 6,
+        type_name: "Date"
+    },
+    {
+        id: 7,
+        type_name: "Time"
+    },
+    {
+        id: 8,
+        type_name: "Short answer"
+    },
+    {
+        id: 9,
+        type_name: "Paragraph"
+    }
+]}
+];
   matIconArray: String[] = ['radio_button_unchecked', 'arrow_drop_down', 'check_box_outline_blank', 'tag', 'fiber_manual_record', 'calendar_today', 'timer', 'short_text', 'subject']
   panelOpenState = false;
   choiceMode: string;
@@ -173,6 +214,7 @@ export class CreateSurveyComponent implements OnInit {
   drop5(event: CdkDragDrop<Choices[]>) {
     moveItemInArray(this.choices5, event.previousIndex, event.currentIndex);
   }
+  
   addOption() {
     this.choices.push(
       {
@@ -223,5 +265,49 @@ export class CreateSurveyComponent implements OnInit {
   deleteTask5(i: number) {
     this.choices5.splice(i, 1);
   }
+
+addQuestion(){
+  this.questions.push(
+    {title: 'Untitled Question', choice_type: 
+[
+    {
+        id: 1,
+        type_name: "Multiple choice"
+    },
+    {
+        id: 2,
+        type_name: "Drop down"
+    },
+    {
+        id: 3,
+        type_name: "Check box"
+    },
+    {
+        id: 4,
+        type_name: "Integer"
+    },
+    {
+        id: 5,
+        type_name: "Decimal"
+    },
+    {
+        id: 6,
+        type_name: "Date"
+    },
+    {
+        id: 7,
+        type_name: "Time"
+    },
+    {
+        id: 8,
+        type_name: "Short answer"
+    },
+    {
+        id: 9,
+        type_name: "Paragraph"
+    }
+]}
+  )
+}
 
 }
