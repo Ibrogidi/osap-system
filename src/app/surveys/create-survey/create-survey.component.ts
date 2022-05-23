@@ -214,6 +214,9 @@ questions: Questions[] = [
   drop5(event: CdkDragDrop<Choices[]>) {
     moveItemInArray(this.choices5, event.previousIndex, event.currentIndex);
   }
+  drop_questions(event: CdkDragDrop<Questions[]>) {
+    moveItemInArray(this.questions, event.previousIndex, event.currentIndex);
+  }
   
   addOption() {
     this.choices.push(
@@ -250,22 +253,7 @@ questions: Questions[] = [
       }
     )
   }
-  deleteTask(i: number) {
-    this.choices.splice(i, 1);
-  }
-  deleteTask2(i: number) {
-    this.choices2.splice(i, 1);
-  }
-  deleteTask3(i: number) {
-    this.choices3.splice(i, 1);
-  }
-  deleteTask4(i: number) {
-    this.choices4.splice(i, 1);
-  }
-  deleteTask5(i: number) {
-    this.choices5.splice(i, 1);
-  }
-
+  
 addQuestion(){
   this.questions.push(
     {title: 'Untitled Question', choice_type: 
@@ -309,5 +297,25 @@ addQuestion(){
 ]}
   )
 }
+
+  deleteTask(i: number) {
+    this.choices.splice(i, 1);
+  }
+  deleteTask2(i: number) {
+    this.choices2.splice(i, 1);
+  }
+  deleteTask3(i: number) {
+    this.choices3.splice(i, 1);
+  }
+  deleteTask4(i: number) {
+    this.choices4.splice(i, 1);
+  }
+  deleteTask5(i: number) {
+    this.choices5.splice(i, 1);
+  }
+
+  deleteQuestion(k: number){
+    this.questions.splice(k,1);
+  }
 
 }
