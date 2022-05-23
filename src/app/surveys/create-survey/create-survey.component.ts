@@ -39,7 +39,8 @@ export class CreateSurveyComponent implements OnInit {
   choices5: Choices[] = [
     { name: 'Option' }
   ];
-questions: Questions[] = [
+questions: Questions[] = 
+[
 {title: 'Untitled Question', choice_type: 
 [
     {
@@ -80,6 +81,51 @@ questions: Questions[] = [
     }
 ]}
 ];
+sections: Sections[]=[
+{section_title: 'Section Title', questions:
+[
+  {title: 'Untitled Question', choice_type: 
+  [
+      {
+          id: 1,
+          type_name: "Multiple choice"
+      },
+      {
+          id: 2,
+          type_name: "Drop down"
+      },
+      {
+          id: 3,
+          type_name: "Check box"
+      },
+      {
+          id: 4,
+          type_name: "Integer"
+      },
+      {
+          id: 5,
+          type_name: "Decimal"
+      },
+      {
+          id: 6,
+          type_name: "Date"
+      },
+      {
+          id: 7,
+          type_name: "Time"
+      },
+      {
+          id: 8,
+          type_name: "Short answer"
+      },
+      {
+          id: 9,
+          type_name: "Paragraph"
+      }
+  ]}
+  ]
+}
+];
   matIconArray: String[] = ['radio_button_unchecked', 'arrow_drop_down', 'check_box_outline_blank', 'tag', 'fiber_manual_record', 'calendar_today', 'timer', 'short_text', 'subject']
   panelOpenState = false;
   choiceMode: string;
@@ -93,7 +139,6 @@ questions: Questions[] = [
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
-  sections: Sections[] = [];
   occupations: Occupations[];
   surveys: Survey[] = [
     { name: 'payment free', value: false },
@@ -151,6 +196,7 @@ questions: Questions[] = [
       question_type: ['', []],
       choices: ['', []],
       maxChoice: ['', []],
+      question_description: ['',[]]
     });
 
     this.authService.getEducationLevels().subscribe(
@@ -214,8 +260,8 @@ questions: Questions[] = [
   drop5(event: CdkDragDrop<Choices[]>) {
     moveItemInArray(this.choices5, event.previousIndex, event.currentIndex);
   }
-  drop_questions(event: CdkDragDrop<Questions[]>) {
-    moveItemInArray(this.questions, event.previousIndex, event.currentIndex);
+  drop_questions(event: CdkDragDrop<Questions[]>,s:any) {
+    moveItemInArray(this.sections[s].questions, event.previousIndex, event.currentIndex);
   }
   
   addOption() {
@@ -254,50 +300,101 @@ questions: Questions[] = [
     )
   }
   
-addQuestion(){
-  this.questions.push(
-    {title: 'Untitled Question', choice_type: 
-[
-    {
-        id: 1,
-        type_name: "Multiple choice"
-    },
-    {
-        id: 2,
-        type_name: "Drop down"
-    },
-    {
-        id: 3,
-        type_name: "Check box"
-    },
-    {
-        id: 4,
-        type_name: "Integer"
-    },
-    {
-        id: 5,
-        type_name: "Decimal"
-    },
-    {
-        id: 6,
-        type_name: "Date"
-    },
-    {
-        id: 7,
-        type_name: "Time"
-    },
-    {
-        id: 8,
-        type_name: "Short answer"
-    },
-    {
-        id: 9,
-        type_name: "Paragraph"
+addQuestion(s:number){
+  this.sections[s].questions.push(
+    
+      {
+        title: 'Untitled Question', choice_type: 
+      [
+          {
+              id: 1,
+              type_name: "Multiple choice"
+          },
+          {
+              id: 2,
+              type_name: "Drop down"
+          },
+          {
+              id: 3,
+              type_name: "Check box"
+          },
+          {
+              id: 4,
+              type_name: "Integer"
+          },
+          {
+              id: 5,
+              type_name: "Decimal"
+          },
+          {
+              id: 6,
+              type_name: "Date"
+          },
+          {
+              id: 7,
+              type_name: "Time"
+          },
+          {
+              id: 8,
+              type_name: "Short answer"
+          },
+          {
+              id: 9,
+              type_name: "Paragraph"
+          }
+      ]
     }
-]}
+      
   )
 }
 
+addSection(){
+  this.sections.push({
+    section_title: 'Section Title', questions: 
+    [
+      {title: 'Untitled Question', choice_type: 
+      [
+          {
+              id: 1,
+              type_name: "Multiple choice"
+          },
+          {
+              id: 2,
+              type_name: "Drop down"
+          },
+          {
+              id: 3,
+              type_name: "Check box"
+          },
+          {
+              id: 4,
+              type_name: "Integer"
+          },
+          {
+              id: 5,
+              type_name: "Decimal"
+          },
+          {
+              id: 6,
+              type_name: "Date"
+          },
+          {
+              id: 7,
+              type_name: "Time"
+          },
+          {
+              id: 8,
+              type_name: "Short answer"
+          },
+          {
+              id: 9,
+              type_name: "Paragraph"
+          }
+      ]}
+      ]     
+
+})
+}
   deleteTask(i: number) {
     this.choices.splice(i, 1);
   }
@@ -314,8 +411,11 @@ addQuestion(){
     this.choices5.splice(i, 1);
   }
 
-  deleteQuestion(k: number){
-    this.questions.splice(k,1);
+  deleteQuestion(s:number,k: number){
+    this.sections[s].questions.splice(k,1);
+  }
+  deleteSection(s:number){
+    this.sections.splice(s,1)
   }
 
 }

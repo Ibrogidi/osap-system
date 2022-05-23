@@ -1,8 +1,7 @@
+import { Questions } from './questions.interface';
 export interface Sections{
     
-  title:string,
-  description: string,
-  order: number,
-  questionnaires: object;
+  section_title:string,
+  questions: Questions[]
 
 }
