@@ -43,7 +43,8 @@ import { CreateSurveyComponent } from './surveys/create-survey/create-survey.com
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatTableModule} from '@angular/material/table';
 
 // Note we need a separate function as it's required
 // by the AOT compiler.
@@ -102,6 +103,8 @@ export function playerFactory() {
   MatTabsModule,
   MatExpansionModule,
   DragDropModule,
+  MatBadgeModule,
+  MatTableModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [

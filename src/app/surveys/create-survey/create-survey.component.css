@@ -194,7 +194,9 @@
 padding: 10px;
 }
 
-
+.table {
+    width: 100%;
+  }
 
 
 
@@ -203,4 +205,5 @@ padding: 10px;
     .hidden {
         display: none;
     }
+   
 }

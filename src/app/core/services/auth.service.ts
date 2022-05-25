@@ -1,3 +1,4 @@
+import { SurveyList } from './../models/survey-list.interface';
 import { QuestionType } from './../models/question-type.interface';
 import { RespondentData } from './../models/respondent-data.interface';
 import { EducationLevels } from './../models/education-levels.interface';
@@ -34,6 +35,7 @@ export class AuthService {
   private occupationUrl = this.surverUrl+'/requirements/occupations/';
   private educationUrl =this.surverUrl+'/requirements/education-levels/';
 private logoutUrl =this.surverUrl+ '/auth/token/logout/';
+private surveyUrl = this.surverUrl + '/surveys/'
 private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
   // private url2 = "http://my-json-server.typicode.com/Ibrogidi/osap-system/users/"
   private handleError: HandleError;
@@ -75,6 +77,12 @@ private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
   getUser(myToken:any){
     httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
     return this.http.get(this.usersUrl,httpOptions);
+  }
+
+  getSurveyData(myToken:any) {
+    httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
+    return this.http.get(this.surveyUrl,httpOptions);
+   
   }
 
   
