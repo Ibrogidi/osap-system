@@ -26,6 +26,8 @@
 .btn-orange{
     background-color: orangered;
     color: white;
+    padding: 6px 12px;
+    margin-right: 5px;
 }
 
 .navbar-inverse{

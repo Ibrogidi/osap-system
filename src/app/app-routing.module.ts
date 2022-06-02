@@ -1,7 +1,8 @@
+import { FillSurveyComponent } from './surveys/fill-survey/fill-survey.component';
 import { CreateSurveyComponent } from './surveys/create-survey/create-survey.component';
 
 import { Auth2Guard } from './core/services/auth2.guard';
-import { RespondentDashboardComponent } from './user/respondent/respondent-dashboard/respondent-dashboard.component';
+import { RepondentHomeComponent } from './user/respondent/repondent-home/repondent-home.component';
 import { AuthGuard } from './core/services/auth.guard';
 import { RespondentSignupComponent } from './user/respondent/respondent-signup/respondent-signup.component';
 import { ResetPasswordComponent } from './common/reset-password/reset-password.component';
@@ -12,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ResearcherSignupComponent } from './user/researcher/researcher-signup/researcher-signup.component';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 import { ResearcherDashboardComponent } from './user/researcher/researcher-dashboard/researcher-dashboard.component';
+import { ExampleComponent } from './example/example.component';
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'login', component: LoginComponent},
@@ -19,8 +21,11 @@ const routes: Routes = [
   {path:'register', component: ResearcherSignupComponent},
   {path:'register/respondent', component: RespondentSignupComponent},
   {path: 'researcher/dashboard', component: ResearcherDashboardComponent, canActivate: [AuthGuard]},
-  {path: 'respondent/dashboard', component: RespondentDashboardComponent, canActivate: [Auth2Guard]},
+  {path: 'respondent/home', component: RepondentHomeComponent, canActivate: [Auth2Guard]},
   {path: 'surveys/new', component: CreateSurveyComponent},
+  {path: 'surveys/fill', component: FillSurveyComponent},
+  {path: 'example', component: ExampleComponent},
+
   {path: '**', component: PageNotFoundComponent}
 ];
 

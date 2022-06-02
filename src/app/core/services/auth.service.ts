@@ -55,11 +55,15 @@ private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
       )
   }
 
-  register2(respondentdata: RespondentData): Observable<RespondentData> {
-    return this.http.post<RespondentData>(this.respondentRegistrationUrl, respondentdata)
-      .pipe(
-        catchError(this.handleError('register2', respondentdata))
-      )
+  // register2(respondentdata: RespondentData): Observable<RespondentData> {
+  //   return this.http.post<RespondentData>(this.respondentRegistrationUrl, respondentdata)
+  //     .pipe(
+  //       catchError(this.handleError('register2', respondentdata))
+  //     )
+  // }
+  register2(respondentdata: RespondentData) {
+    return this.http.post(this.respondentRegistrationUrl, respondentdata)
+      
   }
   // register(researcherdata: ResearcherData){
   //   return this.http.post(this.url2, researcherdata);

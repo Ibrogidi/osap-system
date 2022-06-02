@@ -21,46 +21,23 @@
     <!-- <a class="nav-link" routerLink="#" routerLinkActive="active">Home</a> -->
 
     <div class="spacer"></div>
-    <div class="nav-item dropdown" ngbDropdown *ngIf="isAdminLogged">
-      <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-        Admin User
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
-        <a class="dropdown-item" href="#" ngbDropdownItem>Action</a>
-        <a class="dropdown-item" href="#" ngbDropdownItem>Another action</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#" ngbDropdownItem>log out</a>
-      </div>
-    </div>
-    <div class="nav-item dropdown btn-outline-primary" ngbDropdown *ngIf="isResearcherLogged">
-      <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-        researcher User
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
-        <a class="dropdown-item" href="#" ngbDropdownItem>Action</a>
-        <a class="dropdown-item" href="#" ngbDropdownItem>Another action</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" routerLink="login" ngbDropdownItem>log out</a>
-      </div>
-    </div>
-    <div class="nav-item dropdown" ngbDropdown *ngIf="isRespondantLogged">
-      <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-        Respondant User
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
-        <a class="dropdown-item" href="#" ngbDropdownItem>Action</a>
-        <a class="dropdown-item" href="#" ngbDropdownItem>Another action</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#" ngbDropdownItem>log out</a>
-      </div>
-    </div>
-
-    <a class="nav-link" routerLink="login" *ngIf="isNoneLogged" routerLinkActive="active">Log In </a>
+    
 
 
-    <a class="nav-link" routerLink="register" class="btn btn-orange" *ngIf="isNoneLogged" matRipple>Get Started</a>
+
+    <a class="nav-link" routerLink="login" *ngIf="!isLogged" routerLinkActive="active">Log In </a>
 
 
+    <a class="nav-link" routerLink="register" class="btn btn-orange" *ngIf="!isLogged" matRipple>Get Started</a>
+
+    <a class=" btn  btn-orange" routerLink="researcher/dashboard" *ngIf="isLogged&&isResearcher" matRipple>Researcher Dashboard</a>
+
+
+    <a class=" btn  btn-orange" routerLink="respondent/home"  *ngIf="isLogged&&isRespondent" matRipple>Respondent Dashboard</a>
+
+  
+    
+    
 
 
 

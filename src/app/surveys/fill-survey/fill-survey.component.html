@@ -1,0 +1,179 @@
+<respondent-dashboard>
+    <div class="content">
+        <div class="container">
+            <div class="card-container">
+
+
+                <mat-card class="card bg-light" *ngFor="let section of sortedArray;let s=index">
+                    <mat-card-title>{{section.title}}</mat-card-title>
+                    <mat-card-subtitle>{{section?.description}}</mat-card-subtitle>
+                    <mat-card-content>
+                        <div class="container">
+
+                            <mat-card class="card" *ngFor="let question of section.questionnaires;let i=index">
+                                <!-- <mat-card-title>Shiba Inu</mat-card-title>
+                                <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                                <mat-card-content>
+                                  <p>This card indeterminates progress bar.</p>
+                                  <p>afjdofl</p>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                  <button mat-button>LIKE</button>
+                                  <button mat-button>SHARE</button>
+                                </mat-card-actions> -->
+                                <div class="multiple-choice-form"
+                                    *ngIf="question.questionnaire_type.type_name==='Multiple choice'">
+                                    <mat-card-title> {{i+1}}) {{question.title}} ?</mat-card-title>
+                                    <mat-card-subtitle>{{question.description}} </mat-card-subtitle>
+                                    <mat-card-content>
+                                        <mat-radio-group aria-labelledby="example-radio-group-label"
+                                            class="example-radio-group" [(ngModel)]="response_choice" color="primary">
+                                            <mat-radio-button class="example-radio-button"
+                                                *ngFor="let  choice of question?.choices" [value]="choice">
+                                                {{choice.name}}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+
+                                        
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <!-- <button mat-button>LIKE</button>
+                                  <button mat-button>SHARE</button> -->
+                                    </mat-card-actions>
+                                </div>
+                                <div class="checkbox-form" *ngIf="question.questionnaire_type.type_name ==='Check box'">
+                                    <mat-card-title> {{i+1}}) {{question.title}} ?</mat-card-title>
+                                    <mat-card-subtitle>{{question.description}} </mat-card-subtitle>
+                                    <mat-card-content>
+                                        <mat-label>select choice</mat-label>
+                                        <mat-select multiple>
+                                        
+                                            <mat-option *ngFor="let  choice of question?.choices"
+                                                [value]="choice">
+                                                {{choice.name}}
+                                            </mat-option> 
+                                        </mat-select>
+                                        
+                                    </mat-card-content>
+
+
+                                </div>
+                                <div class="integer-form" *ngIf="question.questionnaire_type.type_name==='Integer'">
+                                    <mat-card-title> {{i+1}}) {{question.title}} ?</mat-card-title>
+                                    <mat-card-subtitle>{{question.description}} </mat-card-subtitle>
+                                    <mat-card-content>
+                                        <mat-form-field >
+                                        <mat-label>{{question.title}}</mat-label>
+                                        <input matInput  type="number" [min]='question?.min_integer_value' [max]="question?.max_integer_value">
+                              
+                                      </mat-form-field>
+                              
+                                        
+                                    </mat-card-content>
+
+  
+                                </div>
+                                <div class="decimal-form" *ngIf="question.questionnaire_type.type_name ==='Decimal'">
+                                    <mat-card-title> {{i+1}}) {{question.title}} ?</mat-card-title>
+                                    <mat-card-subtitle>{{question.description}} </mat-card-subtitle>
+                                    <mat-card-content>
+                                        <mat-form-field >
+                                        <mat-label>{{question.title}}</mat-label>
+                                        <input matInput  type="number" [min]='question?.min_decimal_value' [max]="question?.decimal_integer_value">
+                              
+                                      </mat-form-field>
+                              
+                                        
+                                    </mat-card-content>
+                                </div>
+                                <div class="decimal-form" *ngIf="question.questionnaire_type.type_name ==='Drop down'">
+                                    
+                                    <mat-card-title> {{i+1}}) {{question.title}} ?</mat-card-title>
+                                    <mat-card-subtitle>{{question.description}} </mat-card-subtitle>
+                                    <mat-card-content>
+                                        <mat-label>select choice</mat-label>
+                                        <mat-select>
+                                        
+                                            <mat-option *ngFor="let  choice of question?.choices"
+                                                [value]="choice">
+                                                {{choice.name}}
+                                            </mat-option> 
+                                        </mat-select>
+                                        
+                                    </mat-card-content>
+                                </div>
+                                <div class="decimal-form" *ngIf="question.questionnaire_type.type_name ==='Date'">
+                                    <mat-card-title> {{i+1}}) {{question.title}} ?</mat-card-title>
+                                    <mat-card-subtitle>{{question.description}} </mat-card-subtitle>
+                                    <mat-card-content>
+                           
+                                        <mat-form-field appearance="fill" >
+                                            <mat-label>{{question.title}} ?</mat-label>
+                                            <input matInput [matDatepicker]="picker" class="card">
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+                                        
+                                    </mat-card-content>
+                                </div>
+                                <div class="decimal-form" *ngIf="question.questionnaire_type.type_name ==='Time'">
+                                    <mat-card-title> {{i+1}}) {{question.title}} ?</mat-card-title>
+                                    <mat-card-subtitle>{{question.description}} </mat-card-subtitle>
+                                    <mat-card-content>
+                                        <mat-label>select choice</mat-label>
+                                        <mat-select>
+                                        
+                                            <mat-option *ngFor="let  choice of question?.choices"
+                                                [value]="choice">
+                                                {{choice.name}}
+                                            </mat-option> 
+                                        </mat-select>
+                                        
+                                    </mat-card-content>
+                                </div>
+                                <div class="decimal-form"
+                                    *ngIf="question.questionnaire_type.type_name ==='Short answer'">
+                                    <mat-card-title> {{i+1}}) {{question.title}} ?</mat-card-title>
+                                    <mat-card-subtitle>{{question.description}} </mat-card-subtitle>
+                                    <mat-card-content>
+                                        <mat-form-field class="form-control">
+                                            <mat-label>{{question.title}}</mat-label>
+                                            <input matInput  type="text"  />
+                                     
+                                 
+                                        </mat-form-field>
+                                        
+                                    </mat-card-content>
+                                </div>
+                                <div class="decimal-form" *ngIf="question.questionnaire_type.type_name ==='Paragraph'">
+                                    <mat-card-title> {{i+1}}) {{question.title}} ?</mat-card-title>
+                                    <mat-card-subtitle>{{question.description}} </mat-card-subtitle>
+                                    <mat-card-content>
+                                        <mat-form-field class="form-control" appearance="fill">
+                                            <mat-label> {{i+1}}){{question.title}}</mat-label>
+                                            <textarea matInput cdkTextareaAutosize
+                                              cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" cols="30" rows="10"></textarea>
+                                            <!-- <mat-hint>Optional</mat-hint> -->
+                                          </mat-form-field>
+                      
+                                    </mat-card-content>
+                                </div>
+                            </mat-card>
+
+                        </div>
+
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <!-- <div class="card-actions">
+                            <button mat-button class="btn-orange btn" mat-ripple (click)="fill(survey.sections)" routerLink="../../surveys/fill">Fill Survey</button>
+                        </div> -->
+
+
+
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+
+    </div>
+</respondent-dashboard>

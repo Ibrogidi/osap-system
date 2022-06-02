@@ -191,7 +191,7 @@ export class RespondentSignupComponent implements OnInit {
       this.authService.register2(this.forms.value)
         .subscribe(
           (result) => {
-            // console.log(result)
+            console.log(result)
              this.router.navigate(['login']);          
           },(error)=>{
             if (error.status === 400) {

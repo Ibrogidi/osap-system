@@ -1,0 +1,41 @@
+<respondent-dashboard>
+    <div class="content">
+
+
+        <div class="no-survey display-4" *ngIf="!(this.surveyLists?.length)">
+            No new survey has been created for you yet.
+        </div>
+
+        <div class="container" *ngIf="this.surveyLists?.length">
+            <div class="card-container">
+                <mat-card class="example-card bg-light" *ngFor="let survey of surveyLists;let s=index">
+                    <mat-card-title>{{survey.title}}</mat-card-title>
+                    <mat-card-subtitle>{{survey.description}}</mat-card-subtitle>
+                    <mat-card-content>
+                        <p class="survey-contents">created : {{ survey.created_at}}</p>
+                        <p class="survey-contents">expierd at : {{ survey.expired_date}}</p>
+                        <div class="survey-contents">
+                            <div class="paid" *ngIf="survey.is_paid">Survey Payment:
+                                {{survey.budget/survey.required_number_of_respondent}} birr</div>
+                            <div class="free" *ngIf="!survey.is_paid"> Survey Payment: free</div>
+                        </div>
+                        <p class="survey-contents">Status: {{ survey.number_of_response}}/{{
+                            survey.required_number_of_respondent}} </p>
+                        <p class="survey-contents">Created By: {{ survey.owner.username}} </p>
+
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <div class="card-actions">
+                            <button mat-button class="btn-orange btn" mat-ripple (click)="fill(s)" routerLink="../../surveys/fill">Fill Survey</button>
+                        </div>
+
+
+
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+
+
+        </div>
+    </div>
+</respondent-dashboard>

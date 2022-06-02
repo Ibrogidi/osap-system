@@ -45,6 +45,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatTableModule} from '@angular/material/table';
+import { RepondentHomeComponent } from './user/respondent/repondent-home/repondent-home.component';
+import { FillSurveyComponent } from './surveys/fill-survey/fill-survey.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { ExampleComponent } from './example/example.component';
 
 // Note we need a separate function as it's required
 // by the AOT compiler.
@@ -67,6 +71,9 @@ export function playerFactory() {
     ResearcherDashboardComponent,
     RespondentDashboardComponent,
     CreateSurveyComponent,
+    RepondentHomeComponent,
+    FillSurveyComponent,
+    ExampleComponent,
 
   
 
@@ -105,6 +112,7 @@ export function playerFactory() {
   DragDropModule,
   MatBadgeModule,
   MatTableModule,
+  MatRadioModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [

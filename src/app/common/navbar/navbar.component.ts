@@ -1,3 +1,4 @@
+import { NavbarService } from './../../core/services/mockservices/navbar.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,14 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 tooltip:string = "Online Survey Analyzer Platform";
-isAdminLogged:boolean = false;
-isRespondantLogged:boolean = false;
-isResearcherLogged:boolean = false;
-isNoneLogged: boolean = true;
+respondentRouter: string = '/respondent/dashboard';
+researcherRouter: string = '/researcher/dashboard'
+isResearcher: boolean;
+isRespondent: boolean;
+isRespondentDashboard: boolean;
+isResearcherDashboard: boolean;
+isLogged: boolean ;
+username:string;
+token:any;
+respondentToken: string;
+
 active = 1;
-  constructor() { }
+  constructor(
+    
+    private navbarService: NavbarService,
+    
+  ) { }
 
   ngOnInit(): void {
+    this.isLogged = this.navbarService.loginStatus;
+    this.isResearcher = this.navbarService.isResearcherLogged;
+    this.isRespondent = this.navbarService.isRespondentLogged;
+    this.isRespondentDashboard = this.navbarService.isRespondentDashboard;
+ 
+
+  
   }
 
    // Step 1:
@@ -22,5 +41,6 @@ active = 1;
   // Start with the menu collapsed so that it does not
   // appear initially when the page loads on a small screen!
   public isMenuCollapsed = true;
+
 
 }

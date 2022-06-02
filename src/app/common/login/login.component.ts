@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
 
               if(this.userObj.roll ==="Respondent"){
                 localStorage.setItem('Respondent', tokenObj.auth_token);
-                this.router.navigate(['/respondent/dashboard']);          
+                this.router.navigate(['/respondent/home']);          
 
               }
               // if(this.userObj.roll === "Admin"){

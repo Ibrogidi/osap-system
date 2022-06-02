@@ -3,22 +3,22 @@ import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-respondent-dashboard',
+  selector: 'respondent-dashboard',
   templateUrl: './respondent-dashboard.component.html',
   styleUrls: ['./respondent-dashboard.component.css']
 })
 export class RespondentDashboardComponent implements OnInit {
 
-  value: any = "over";
-  isHandset: boolean = false;
-  title: string = "OSAP";
-  // isAdminLogged: boolean = true;
+  
   token: any;
-  username:string;
+  username:any;
   respondentToken:any;
+  
+  
   constructor(
     private authService: AuthService,
     private router: Router,
+    
     ) {
    
    }
@@ -27,13 +27,17 @@ export class RespondentDashboardComponent implements OnInit {
     this.token = localStorage.getItem('Respondent');
     this.respondentToken = "Token "+this.token;
     this.authService.getUser(this.respondentToken).subscribe((respondent:any)=>{
-      this.username = respondent?.username;
+      this.username = respondent.username;
     })
+    
+
   }
   logout(){
 this.authService.logOut2(this.token);
 this.router.navigate(['/login'])
 
   }
+  
 
 }
+
