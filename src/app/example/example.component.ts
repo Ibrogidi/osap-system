@@ -1,13 +1,6 @@
+import { Component} from '@angular/core';
 
-
-
-
-
-
-
-import { Component, ViewChild, ElementRef } from '@angular/core';
-
-import { FormGroup, FormControl,FormArray, FormBuilder } from '@angular/forms'
+import { FormGroup,FormArray, FormBuilder } from '@angular/forms'
 
 
 @Component({
@@ -24,13 +17,10 @@ export class ExampleComponent  {
   // skillsForm: FormGroup;
 
   sectionsForm: FormGroup;
- sectionOrder: number=-1;
+ sectionOrder: number= 0;
   constructor(private fb:FormBuilder) {
  
-    // this.skillsForm = this.fb.group({
-    //   name: '',
-    //   skills: this.fb.array([]) ,
-    // });
+   
 
     this.sectionsForm = this.fb.group({
       sections : this.fb.array([])
@@ -38,9 +28,7 @@ export class ExampleComponent  {
   
   }
  
-setOrder(){
-console.log("hi")
-}
+
   get titles() {
     return this.sectionsForm.get('title');
   }
@@ -51,53 +39,47 @@ get order(){
   return this.sectionsForm.get('order');
 
 }
-  // get skills() : FormArray {
-  //   return this.skillsForm.get("skills") as FormArray
-  // }
+ 
 
   get sections(): FormArray{
     return this.sectionsForm.get('sections') as FormArray
   }
  
-  // newSkill(): FormGroup {
-  //   return this.fb.group({
-  //     skill: '',
-  //     exp: '',
-  //   })
-  // }
+ 
   newSection(): FormGroup{
+    return this.fb.group({
+      title : '',
+      description: '',
+      questionnaires: this.fb.array([]),
+      order: '',
+     
+    })
+  }
+  newQuestion(): FormGroup{
     return this.fb.group({
       title : '',
       description: '',
       questionaires: this.fb.array([]),
       order: '',
-      // order: '',
-      // questionnaires: this.fb.array([]),
+     
     })
   }
  
-  // addSkills() {
-  //   this.skills.push(this.newSkill());
-  // }
 
   addSection(){
-    // this.sectionOrder+= 1;
+    
     this.sections.push(this.newSection())
    
   }
-  // removeSkill(i:number) {
-  //   this.skills.removeAt(i);
-  // }
- 
+  
   removeSection(i:number) {
-    // this.sectionOrder-= 1;
+    
     this.sections.removeAt(i);
 
   }
 
 
   onSubmit() {
-    // console.log(this.skillsForm.value);
     console.log(this.sectionsForm.value);
   }
  
@@ -105,12 +87,3 @@ get order(){
 
 
  
-export class country {
-  id: string;
-  name: string;
- 
-  constructor(id: string, name: string) {
-    this.id = id;
-    this.name = name;
-  }
-}

@@ -41,8 +41,9 @@
     
     <div formArrayName="sections">
       <div *ngFor="let section of sections?.controls; let i=index">
-        <div [formGroupName]="i">
 
+        <div [formGroupName]="i">
+         
         <p>
             <label for="title1">Title </label>
             <input type="text" name="title1" formControlName='title'>
@@ -51,8 +52,11 @@
      
           description name :
           <input type="text" formControlName="description">
-   
-         
+
+
+
+          <input type="hidden" [ngModel]="i"  formControlName="order">
+        
    <button (click)="removeSection(i)">Remove</button>
       
         </div>
@@ -76,4 +80,4 @@
   </p>
    
   <!-- {{this.skillsForm.value | json}} -->
-  {{this.sectionsForm.value | json}}
+  <!-- {{this.sectionsForm.value | json}} -->
