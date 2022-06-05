@@ -9,6 +9,8 @@
         <div class="container" *ngIf="this.surveyLists?.length">
             <div class="card-container">
                 <mat-card class="example-card bg-light" *ngFor="let survey of surveyLists;let s=index">
+                   
+                   <!-- {{logs(survey.id) }} -->
                     <mat-card-title>{{survey.title}}</mat-card-title>
                     <mat-card-subtitle>{{survey.description}}</mat-card-subtitle>
                     <mat-card-content>
@@ -26,7 +28,9 @@
                     </mat-card-content>
                     <mat-card-actions>
                         <div class="card-actions">
-                            <button mat-button class="btn-orange btn" mat-ripple (click)="fill(s)" routerLink="../../surveys/fill">Fill Survey</button>
+                            <button mat-button class="btn-orange btn" mat-ripple (click)="fill(survey.id)" 
+                            [routerLink]="['../../surveys',survey.id]"
+                            >Fill Survey</button>
                         </div>
 
 

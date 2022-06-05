@@ -1,83 +1,150 @@
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<!-- <form [formGroup]="sectionsForm" (ngSubmit)="onSubmit()">
 
 
 
 
-<!-- 
-<form [formGroup]="skillsForm" (ngSubmit)="onSubmit()">
- 
-    <p>
-      <label for="name">Name </label>
-      <input type="text" id="name" name="name" formControlName="name">
-    </p>
-   
-   
-    Skills:
-    <div formArrayName="skills">
-      <div *ngFor="let skill of skills.controls; let i=index">
-        <div [formGroupName]="i">
-          {{i}}
-          skill name :
-          <input type="text" formControlName="skill">
-          exp:
-          <input type="text" formControlName="exp">
-   
-          <button (click)="removeSkill(i)">Remove</button>
-        </div>
-      </div>
-    </div>
-   
-    <p>
-      <button type="submit">Submit</button>
-    </p>
-   
-  </form> -->
-   
-  <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-  <form [formGroup]="sectionsForm" (ngSubmit)="onSubmit()">
- 
-   
-   
-    
     <div formArrayName="sections">
-      <div *ngFor="let section of sections?.controls; let i=index">
+        <div *ngFor="let section of sections?.controls; let i=index">
 
-        <div [formGroupName]="i">
-         
-        <p>
-            <label for="title1">Title </label>
-            <input type="text" name="title1" formControlName='title'>
-          </p>
-         
-     
-          description name :
-          <input type="text" formControlName="description">
+            <div [formGroupName]="i">
+
+                <p>
+                    <label for="title1">Title </label>
+                    <input type="text" name="title1" formControlName='title'>
+                </p>
 
 
+                description name :
+                <input type="text" formControlName="description">
 
-          <input type="hidden" [ngModel]="i"  formControlName="order">
-        
-   <button (click)="removeSection(i)">Remove</button>
-      
+                <input type="hidden" [ngModel]="i" formControlName="order">
+
+                {{log(section)}}
+                <div formArrayName="questionnaires">
+                </div>
+
+               
+                <button (click)="removeSection(i)">Remove</button>
+                <button (click)="addQuestion(section)">Add Questions</button>
+            </div>
         </div>
+
+    </div>
+
+    <p>
+        <button type="submit">Submit</button>
+    </p>
+
+</form>
+ -->
+
+
+
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<!-- <button type="button" (click)="addSkills()">Add</button> -->
+<!-- <button type="button" (click)="addSection()">Add Section</button> -->
+
+
+<!-- {{this.skillsForm.value | json}} -->
+<!-- {{this.sectionsForm.value | json}} -->
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<h1>Angular Nested FormArray / Dynamic FormArray</h1>
+<!-- //////////////////create a form group name//////////////////////////////////////////// -->
+<form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+  <!-- ////////////////////////////////////create a formArrayName ///////////////////////////////// -->
+  <div formArrayName="employees">
+    <div *ngFor="let employee of employees().controls; let empIndex=index">
+      <div [formGroupName]="empIndex" style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
+        {{empIndex}} First Name :
+        <input type="text" formControlName="firstName" />
+        Last Name:
+        <input type="text" formControlName="lastName" />
+
+        <button (click)="removeEmployee(empIndex)">Remove</button>
+
+        <div formArrayName="skills">
+          <div *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index">
+            <div [formGroupName]="skillIndex">
+              {{skillIndex}} Skill :
+              <input type="text" formControlName="skill" />
+              Exp:
+              <input type="text" formControlName="exp" />
+
+              <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" (click)="addEmployeeSkill(empIndex)">
+          Add Skill
+        </button>
       </div>
     </div>
-   
-    <p>
-      <button type="submit">Submit</button>
-    </p>
-   
-  </form>
-  
+    <button type="button" (click)="addEmployee()">Add Employee</button>
+  </div>
+</form>
 
+{{this.empForm.value | json}}
 
+<!-- ///////////////////////////////////////////////////////sections////////////////////////////////////////////////// -->
+<form [formGroup]="sectionForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="sections">
+    <div *ngFor="let section of sections().controls; let secIndex=index">
+      <div [formGroupName]="secIndex" style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
+        {{secIndex}} Title :
+        <input type="text" formControlName="title" />
+        description:
+        <input type="text" formControlName="description" />
 
+        <button (click)="removeSection(secIndex)">Remove Section</button>
 
-  <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-  <p>
-    <!-- <button type="button" (click)="addSkills()">Add</button> -->
+        <div formArrayName="questionnaires">
+          <div *ngFor="let question of questionnaires(secIndex).controls; let questionIndex=index">
+            <div [formGroupName]="questionIndex">
+              {{questionIndex}} Title :
+              <input type="text" formControlName="title" />
+              description:
+              <input type="text" formControlName="description" />
+
+              <div formArrayName="choices">
+
+                <div *ngFor="let choice of choices(secIndex,questionIndex).controls; let choiceIndex= index">
+                  <div [formGroupName]="choiceIndex">
+                    choices:
+                    <input type="text" formControlName="name" />
+                    <button (click)="removeChoice(secIndex,questionIndex)">
+                      Remove Choice
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+              <button type="button" (click)="addChoice(secIndex,questionIndex)">
+                Add choice
+              </button>
+
+              <button (click)="removeQuestion(secIndex,questionIndex)">
+                Remove Question
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" (click)="addQuestion(secIndex)">
+          Add Question
+        </button>
+      </div>
+    </div>
     <button type="button" (click)="addSection()">Add Section</button>
-  </p>
-   
-  <!-- {{this.skillsForm.value | json}} -->
-  <!-- {{this.sectionsForm.value | json}} -->
+  </div>
+  <button type="submit" (click)="onSubmit()">submit</button>
+</form>
+
+{{this.sectionForm.value | json}}

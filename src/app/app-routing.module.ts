@@ -22,9 +22,9 @@ const routes: Routes = [
   {path:'register/respondent', component: RespondentSignupComponent},
   {path: 'researcher/dashboard', component: ResearcherDashboardComponent, canActivate: [AuthGuard]},
   {path: 'respondent/home', component: RepondentHomeComponent, canActivate: [Auth2Guard]},
-  {path: 'surveys/new', component: CreateSurveyComponent},
-  {path: 'surveys/fill', component: FillSurveyComponent},
-  {path: 'example', component: ExampleComponent},
+  {path: 'surveys/:id', component: FillSurveyComponent,canActivate: [Auth2Guard]},
+  {path: 'surveys/new', component: CreateSurveyComponent,canActivate: [AuthGuard] },
+    {path: 'example', component: ExampleComponent},
 
   {path: '**', component: PageNotFoundComponent}
 ];
