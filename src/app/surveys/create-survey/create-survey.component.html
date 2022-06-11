@@ -28,7 +28,7 @@
         </ng-template>
         <mat-form-field class="form-control">
           <mat-label>Survey Title</mat-label>
-          <input matInput formControlName="survey_title" placeholder="Example: Customer Satisfaction Survey" required>
+          <input matInput formControlName="title" placeholder="Example: Customer Satisfaction Survey" required>
         </mat-form-field>
 
 
@@ -44,7 +44,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Survey DeadLine</mat-label>
-          <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="datePicker" required>
+          <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="expired_date" required>
           <mat-hint>
 
           </mat-hint>
@@ -55,14 +55,14 @@
         <mat-form-field class="form-control">
           <mat-label>Required No. of Respondent
           </mat-label>
-          <input matInput [(ngModel)]="respondentNumber" formControlName="respondent_number" type="number" [min]="1"
-            required>
+          <input matInput [(ngModel)]="respondentNumber" formControlName="required_number_of_respondent" type="number"
+            [min]="1" required>
 
         </mat-form-field>
 
         <mat-form-field class="form-control">
           <mat-label>Survey Type</mat-label>
-          <mat-select [(ngModel)]="isPaid" required formControlName="survey_type">
+          <mat-select [(ngModel)]="isPaid" required formControlName="is_paid">
 
             <mat-option *ngFor="let survey of surveys" [value]="survey.value">
               {{survey.name}}
@@ -72,20 +72,19 @@
         </mat-form-field>
 
         <mat-form-field class="form-control"
-          [class.has.error]="this.firstFormGroup.get('survey_budget')?.invalid&&this.firstFormGroup.get('survey_budget')?.touched"
+          [class.has.error]="this.firstFormGroup.get('budget')?.invalid&&this.firstFormGroup.get('budget')?.touched"
           *ngIf="isPaid">
           <mat-label>Survey Budget
           </mat-label>
-          <input matInput formControlName="survey_budget" type="number" [min]='respondentNumber'
+          <input matInput formControlName="budget" type="number" [min]='respondentNumber'
             placeholder="minimum budget is 1 birr per respondent" [required]="isPaid">
           <span matSuffix>Birr &nbsp;</span>
 
-          <mat-error
-            *ngIf="this.firstFormGroup.get('survey_budget')?.invalid&&this.firstFormGroup.get('survey_budget')?.touched">
+          <mat-error *ngIf="this.firstFormGroup.get('budget')?.invalid&&this.firstFormGroup.get('budget')?.touched">
             Survey Budget is required
           </mat-error>
 
-          <mat-error *ngIf="this.firstFormGroup.get('survey_budget')?.hasError('min')">
+          <mat-error *ngIf="this.firstFormGroup.get('budget')?.hasError('min')">
             Minimum budget is {{respondentNumber}} birr
           </mat-error>
         </mat-form-field>
@@ -103,6 +102,9 @@
         </div>
 
       </form>
+
+      {{this.firstFormGroup.value | json}}
+
     </div>
 
 
@@ -132,87 +134,93 @@
             Set up recruitment criteria for respondents.
             Participant Type can't be changed after the survey is created.
           </p>
+          <div formGroupName="requirements">
+            <mat-form-field class="form-control">
+              <mat-label>Minimum Age of Respondent</mat-label>
+              <input matInput formControlName="minimum_age" type="number" min="10" max="100" [(ngModel)]="minimumAge">
+              <span matSuffix>years &nbsp;</span>
+              <mat-error *ngIf="(minimum_age?.hasError('min') )|| minimum_age?.hasError('max')">Age gap must be between
+                10 to 100
+                years old</mat-error>
+            </mat-form-field>
 
-          <mat-form-field class="form-control">
-            <mat-label>Minimum Age of Respondent</mat-label>
-            <input matInput formControlName="minAge" type="number" min="10" max="100" [(ngModel)]="minimumAge">
-            <span matSuffix>years &nbsp;</span>
-            <mat-error *ngIf="(minAge?.hasError('min') )|| minAge?.hasError('max')">Age gap must be between 10 to 100
-              years old</mat-error>
-          </mat-form-field>
+            <mat-form-field class="form-control">
+              <mat-label>Maximum Age of Respondent</mat-label>
+              <input matInput formControlName="maximum_age" type="number" min="{{minimumAge}}" max="100">
+              <span matSuffix>years &nbsp;</span>
+              <mat-error *ngIf="maximum_age?.hasError('min') ">Maximum age must be greater or equal to {{minimumAge}}
+              </mat-error>
+              <mat-error *ngIf="maximum_age?.hasError('max') ">Maximum age cannot exceed more than 100 years</mat-error>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="fill">
+      <mat-label>Toppings</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        <mat-select-trigger>
+          {{toppings.value ? toppings.value[0] : ''}}
+          <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+            (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+      </mat-select>
+    </mat-form-field> -->
 
-          <mat-form-field class="form-control">
-            <mat-label>Maximum Age of Respondent</mat-label>
-            <input matInput formControlName="maxAge" type="number" min="{{minimumAge}}" max="100">
-            <span matSuffix>years &nbsp;</span>
-            <mat-error *ngIf="maxAge?.hasError('min') ">Maximum age must be greater or equal to {{minimumAge}}
-            </mat-error>
-            <mat-error *ngIf="maxAge?.hasError('max') ">Maximum age cannot exceed more than 100 years</mat-error>
-          </mat-form-field>
-          <!-- <mat-form-field appearance="fill">
-              <mat-label>Toppings</mat-label>
-              <mat-select [formControl]="toppings" multiple>
-                <mat-select-trigger>
-                  {{toppings.value ? toppings.value[0] : ''}}
-                  <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
-                    (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
-                  </span>
-                </mat-select-trigger>
-                <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+            <mat-form-field class="form-control">
+              <mat-label>Education Level</mat-label>
+              <mat-select required formControlName="education_levels" multiple>
+                <mat-option *ngFor="let educationLevel of educationLevels" [value]="educationLevel">
+                  {{educationLevel.level_name}}
+                </mat-option>
               </mat-select>
-            </mat-form-field> -->
+              <mat-error *ngIf="education_levels?.hasError('required')">Please select participant education level
+              </mat-error>
 
-          <mat-form-field class="form-control">
-            <mat-label>Education Level</mat-label>
-            <mat-select required formControlName="education_level" multiple>
-              <mat-option *ngFor="let educationLevel of educationLevels" [value]="educationLevel.id">
-                {{educationLevel.level_name}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="education_level?.hasError('required')">Please select participant education level
-            </mat-error>
+            </mat-form-field>
 
-          </mat-form-field>
+            <mat-form-field class="form-control">
+              <mat-label>Occupation</mat-label>
+              <mat-select required formControlName="occupations" multiple>
 
-          <mat-form-field class="form-control">
-            <mat-label>Occupation</mat-label>
-            <mat-select required formControlName="occupation" multiple>
+                <mat-option *ngFor="let occupation of occupations" [value]="occupation">
+                  {{occupation.work_type}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="occupation1?.hasError('required')">Please choose participant profession</mat-error>
 
-              <mat-option *ngFor="let occupation of occupations" [value]="occupation.id">
-                {{occupation.work_type}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="occupation?.hasError('required')">Please choose participant profession</mat-error>
-
-          </mat-form-field>
+            </mat-form-field>
 
 
-          <mat-form-field class="form-control">
-            <mat-label>Gender</mat-label>
-            <mat-select required formControlName="gender">
+            <mat-form-field class="form-control">
+              <mat-label>Gender</mat-label>
+              <mat-select required formControlName="gender">
 
-              <mat-option *ngFor="let gender of genders" [value]="gender.value">
-                {{gender.name}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="gender?.hasError('required')">Please choose participant gender</mat-error>
+                <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                  {{gender.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="gender?.hasError('required')">Please choose participant gender</mat-error>
 
-          </mat-form-field>
+            </mat-form-field>
 
-          <mat-slide-toggle color="primary" formControlName="allow_unverified_respondents">
-            Allow Unverified Respondents
-          </mat-slide-toggle>
+            <mat-slide-toggle color="primary" formControlName="allow_unverified_respondents">
+              Allow Unverified Respondents
+            </mat-slide-toggle>
 
 
+
+          </div>
 
           <div class="form-footer pb-4">
             <button mat-button matStepperPrevious class="btn btn-primary card card-small">Back</button>
-            <button mat-button matStepperNext mat-raised-button class="btn btn-primary card card-small" type="submit">
+            <button mat-button matStepperNext mat-raised-button class="btn btn-primary card card-small">
               Next
 
             </button>
+
           </div>
         </form>
+        {{this.secondFormGroup.value | json}}
+
       </div>
 
     </mat-step>
@@ -231,165 +239,172 @@
       </ng-template>
       <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
       <form class="form" [formGroup]="thirdFormGroup" apperance="fill" class="container">
-        
-
-   
-        <!-- //////////////////////////////////////////////////////////////////////////mock section////////////////////////////////////////////////////////////////////////////////// -->
-        <div class="survey-container" *ngFor="let section of sections; let s=index">
 
 
-          <mat-card class="example-card bg-light">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Section {{s+1}}</mat-card-title>
+        <div formArrayName="sections">
+          <!-- //////////////////////////////////////////////////////////////////////////mock section////////////////////////////////////////////////////////////////////////////////// -->
+          <div class="survey-container" *ngFor="let section of sections1().controls; let s=index">
 
+            <div [formGroupName]="s">
+              <mat-card class="example-card bg-light">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Section {{s+1}}</mat-card-title>
 
+                  
+                  
+                 
 
-            </mat-card-header>
+                </mat-card-header>
 
-            <mat-card-content>
-              <!-- //////////////////////////////section title////////////////////////////////////////////// -->
-              <mat-accordion>
-                <mat-expansion-panel hideToggle>
-                  <mat-expansion-panel-header class="section-title bg-primary">
-                    <mat-panel-title>
-                      <div class="text-section">
-                        Add Section Title/ Description
-                      </div>
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <mat-panel-description class="section-title">
-                    <mat-form-field class="form-control">
-                      <mat-label>Section Title</mat-label>
-                      <input matInput formControlName="section_title" required>
-                    </mat-form-field>
-
-
-                    <mat-form-field class="form-control" appearance="fill">
-                      <mat-label>Section Description</mat-label>
-                      <textarea matInput formControlName="section_description" cdkTextareaAutosize
-                        cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" cols="30" rows="10"></textarea>
-                      <mat-hint>Optional</mat-hint>
-                    </mat-form-field>
-                  </mat-panel-description>
-                </mat-expansion-panel>
-
-              </mat-accordion>
-  
-              <!-- ///////////////////////////////////////////////////////////////mock question//////////////////////////////////////////////////////// -->
-              <div cdkDropList [cdkDropListData]="section.questions" class="example-list"
-                (cdkDropListDropped)="drop_questions($event,s)">
-
-                <div class="question-card-div" *ngFor="let question of section.questions;let k=index" cdkDrag>
-                  <mat-card class="example-card-question">
-                    <div class="question-card-container">
-                      <span>{{k+1}}</span>
-                      <div class="question-title">
+                <mat-card-content>
+                  <!-- //////////////////////////////section title////////////////////////////////////////////// -->
+                  <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                      <mat-expansion-panel-header class="section-title bg-primary">
+                        <mat-panel-title>
+                          <div class="text-section">
+                            Add Section Title/ Description
+                          </div>
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <mat-panel-description class="section-title">
                         <mat-form-field class="form-control">
-                          <mat-label>{{ question.title}}</mat-label>
-
-                          <input matInput formControlName="question_title"
-                            placeholder="click here to enter your question" required>
-                          <mat-icon matSuffix>question_mark</mat-icon>
+                          <mat-label>Section Title</mat-label>
+                          <input matInput formControlName="title" required>
                         </mat-form-field>
 
-                      </div>
 
-                      <div class="div2">
-
-                        <mat-form-field class="form-control" class="question-type">
-                          <mat-label>choices</mat-label>
-                          <mat-select formControlName="question_type" #questionVal>
-                            <div *ngFor="let choice of question.choice_type;let i=index " class="choice-box icons">
-
-                              <mat-icon class="icons" matSuffix>{{matIconArray[i]}}</mat-icon>
-                              <mat-option [value]="choice">
-                                {{choice.type_name}}
-                              </mat-option>
-                            </div>
-
-                          </mat-select>
-
+                        <mat-form-field class="form-control" appearance="fill">
+                          <mat-label>Section Description</mat-label>
+                          <textarea matInput formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="5" cols="30" rows="10"></textarea>
+                          <mat-hint>Optional</mat-hint>
                         </mat-form-field>
-                      </div>
+                      </mat-panel-description>
+                    </mat-expansion-panel>
 
+                  </mat-accordion>
 
+                  <!-- ///////////////////////////////////////////////////////////////mock question//////////////////////////////////////////////////////// -->
 
+                  <!-- <div cdkDropList [cdkDropListData]="section.questions" class="example-list"
+                  (cdkDropListDropped)="drop_questions($event,s)"> -->
+                  <div formArrayName="questionnaires">
+                    <div class="question-card-div" *ngFor="let question of questionnaires(s).controls;let k=index">
+                      <div [formGroupName]="k">
+                        <mat-card class="example-card-question">
+                          <div class="question-card-container">
+                            <span>{{k+1}}</span>
+                
+                            <div class="question-title">
+                   
+                              <mat-form-field class="form-control">
+                                <mat-label>Question title</mat-label>
 
-
-
-                    </div>
-
-                                          
-<!-- ////////////////////////////////////////////////question description//////////////////////////////////////////////////////////////////////// -->
-<mat-accordion>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header class="question-description-title bg-primary">
-      <mat-panel-title>
-        <div class="text-section">
-          Add question Description(Optional)
-        </div>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-panel-description class="discription-panel">
-      <mat-form-field class="form-control" appearance="fill">
-        <mat-label>Question Description</mat-label>
-        <textarea matInput formControlName="question_description" cdkTextareaAutosize
-          cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" cols="30" rows="10"></textarea>
-        <mat-hint>Optional</mat-hint>
-      </mat-form-field>
-    </mat-panel-description>
-  </mat-expansion-panel>
-
-</mat-accordion>
-<!-- ///////////////////////////////////////////final question description///////////////////////////////////////////////////////////// -->
-
-
-
-                    <mat-card-content>
-
-
-
-                      <!-- ////////////////////////////////////////////////////////////////////choices//////////////////////////////////////////// -->
-                      <!-- ///////////////////////////////////////////////////////////////////////////multiple choice///////////////////////////////////////// -->
-
-                      <mat-card class="question-card-container2"
-                        *ngIf="(questionVal.value.type_name)==='Multiple choice'||(this.questionnaireType?.value.type_name)== null ">
-                        <mat-card-content>
-
-                          <div cdkDropList [cdkDropListData]="choices" class="example-list"
-                            (cdkDropListDropped)="drop($event)">
-
-
-
-                            <div *ngFor="let choice of choices; let i=index" cdkDrag>
-                              <mat-form-field class="form-control choices example-box">
-
-                                <mat-label> {{ choice.name + i }}</mat-label>
-                                <span matPrefix>
-                                  <mat-icon class="icons">
-                                    radio_button_unchecked
-                                  </mat-icon>
-                                  &nbsp;
-                                </span>
-                                <span matSuffix>
-
-                                  <mat-icon color="warn" (click)="deleteTask(i)">delete</mat-icon>
-                                </span>
-
-                                <input matInput formControlName="choices">
-
+                                <input matInput formControlName="title" placeholder="click here to enter your question"
+                                  required>
+                                <mat-icon matSuffix>question_mark</mat-icon>
                               </mat-form-field>
 
-
                             </div>
+
+                            <div class="div2">
+
+                              <mat-form-field class="form-control" class="question-type">
+                                <mat-label>choices</mat-label>
+                                <mat-select formControlName="questionnaire_type" #questionVal>
+                                  <div *ngFor="let choice of questionType;let i=index " class="choice-box icons">
+
+                                    <mat-icon class="icons" matSuffix>{{matIconArray[i]}}</mat-icon>
+                                    <mat-option [value]="choice">
+                                      {{choice.type_name}}
+                                    </mat-option>
+                                  </div>
+
+                                </mat-select>
+
+                              </mat-form-field>
+                            </div>
+
+
+
+
+
 
                           </div>
 
 
+                          <!-- ////////////////////////////////////////////////question description//////////////////////////////////////////////////////////////////////// -->
+                          <mat-accordion>
+                            <mat-expansion-panel hideToggle>
+                              <mat-expansion-panel-header class="question-description-title bg-primary">
+                                <mat-panel-title>
+                                  <div class="text-section">
+                                    Add question Description(Optional)
+                                  </div>
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <mat-panel-description class="discription-panel">
+                                <mat-form-field class="form-control" appearance="fill">
+                                  <mat-label>Question Description</mat-label>
+                                  <textarea matInput formControlName="description" cdkTextareaAutosize
+                                    cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" cols="30" rows="10"></textarea>
+                                  <mat-hint>Optional</mat-hint>
+                                </mat-form-field>
+                              </mat-panel-description>
+                            </mat-expansion-panel>
+
+                          </mat-accordion>
+                          <!-- ///////////////////////////////////////////final question description///////////////////////////////////////////////////////////// -->
 
 
-                          <!--                       
+
+                          <mat-card-content>
+                            <!-- {{log(question.value.questionnaire_type.type_name)}} -->
+
+                            <!-- ////////////////////////////////////////////////////////////////////choices//////////////////////////////////////////// -->
+                            <!-- ///////////////////////////////////////////////////////////////////////////multiple choice///////////////////////////////////////// -->
+                            <div formArrayName="choices">
+                              <mat-card class="question-card-container2"
+                                *ngIf="(question.value.questionnaire_type.type_name)==='Multiple choice'||(question.value.questionnaire_type.type_name)== null ">
+                                <mat-card-content>
+
+                                  <!-- <div cdkDropList [cdkDropListData]="choices" class="example-list"
+                                    (cdkDropListDropped)="drop($event)"> -->
+
+
+
+                                  <div *ngFor="let choice of choices1(s,k).controls; let i=index">
+                                    <div [formGroupName]="i">
+
+                                      <mat-form-field class="form-control choices example-box">
+
+                                        <mat-label> choice {{i}}</mat-label>
+                                        <span matPrefix>
+                                          <mat-icon class="icons">
+                                            radio_button_unchecked
+                                          </mat-icon>
+                                          &nbsp;
+                                        </span>
+                                        <span matSuffix>
+
+                                          <mat-icon color="warn" (click)="removeChoice(s,k)">delete</mat-icon>
+                                        </span>
+
+                                        <input matInput formControlName="name">
+
+                                      </mat-form-field>
+
+                                    </div>
+                                  </div>
+
+                                  <!-- </div> -->
+
+
+
+
+                                  <!--                       
         <mat-form-field class="form-control" class="choices">
           <span matPrefix>
             <mat-icon class="icons">
@@ -404,197 +419,112 @@
 
         </mat-form-field> -->
 
-                        </mat-card-content>
-                        <mat-card-actions>
+                                </mat-card-content>
+                                <mat-card-actions>
 
-                          <button mat-button (click)="addOption()">Add Option</button>
+                                  <button mat-button (click)="addChoice(s,k)">Add Option</button>
 
-                        </mat-card-actions>
-                      </mat-card>
+                                </mat-card-actions>
+                              </mat-card>
+                            </div>
+                            <!-- .....................................................checkbox................................................................ -->
 
-                      <!-- .....................................................checkbox................................................................ -->
+                            <div formArrayName="choices">
+                              <mat-card class="question-card-container2"
+                                *ngIf="(question.value.questionnaire_type.type_name)==='Check box'">
+                                <mat-card-content>
 
-                      <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Check box'">
-                        <mat-card-content>
-
-                          <div cdkDropList [cdkDropListData]="choices2" class="example-list"
-                            (cdkDropListDropped)="drop2($event)">
+                                  <!-- <div cdkDropList [cdkDropListData]="choices2" class="example-list"
+                                    (cdkDropListDropped)="drop2($event)"> -->
 
 
+                                  <div *ngFor="let choice of choices1(s,k).controls; let i=index">
 
-                            <div *ngFor="let choice of choices2; let i=index" cdkDrag>
-                              <mat-form-field class="form-control choices example-box">
+                                    <div [formGroupName]="i">
 
-                                <mat-label> {{ choice.name + i }}</mat-label>
-                                <span matPrefix>
-                                  <mat-icon class="icons"> check_box_outline_blank</mat-icon>
-                                  &nbsp;
-                                </span>
-                                <span matSuffix>
+                                      <mat-form-field class="form-control choices example-box">
 
-                                  <mat-icon color="warn" (click)="deleteTask2(i)">delete</mat-icon>
-                                </span>
+                                        <mat-label> check-box {{ i }}</mat-label>
+                                        <span matPrefix>
+                                          <mat-icon class="icons"> check_box_outline_blank</mat-icon>
+                                          &nbsp;
+                                        </span>
+                                        <span matSuffix>
+                                          <mat-icon color="warn" (click)="removeChoice(s,k)">delete</mat-icon>
 
-                                <input matInput formControlName="choices">
 
-                              </mat-form-field>
+                                        </span>
 
+                                        <input matInput formControlName="name">
+
+                                      </mat-form-field>
+                                    </div>
+
+                                  </div>
+                                  <!-- /////////////////////////put it here//////////////////// -->
+                                  <!-- </div> -->
+
+
+
+
+                                </mat-card-content>
+
+                                <mat-card-actions class="checkbox-action">
+                                  <button mat-button (click)="addChoice(s,k)">Add Option</button>
+                                  <!-- <mat-form-field class="form-control" class="max-choice">
+                                    <mat-label>Max Value</mat-label>
+  
+                                    <input matInput formControlName="maximum_choice" type="number" width="250px">
+                                    <mat-hint>optional</mat-hint>
+                                  </mat-form-field> -->
+
+
+
+
+
+
+                                </mat-card-actions>
+                              </mat-card>
 
                             </div>
 
-                          </div>
 
+                            <!-- ..................................................................................Dropdown............................................................... -->
+                            <div formArrayName="choices">
+                              <mat-card class="question-card-container2"
+                                *ngIf="(question.value.questionnaire_type.type_name)==='Drop down'">
+                                <mat-card-content>
 
+                                  <!-- 
+                                <div cdkDropList [cdkDropListData]="choices5" class="example-list"
+                                  (cdkDropListDropped)="drop5($event)"> -->
 
 
-                        </mat-card-content>
 
-                        <mat-card-actions class="checkbox-action">
+                                  <div *ngFor="let choice of choices1(s,k).controls; let i=index">
+                                    <div [formGroupName]="i">
 
-                          <button mat-button (click)="addOption2()">Add Option</button>
+                                      <mat-form-field class="form-control choices example-box">
+                                        <span matPrefix>
+                                          <mat-icon>arrow_drop_down</mat-icon>
+                                        </span>
+                                        <mat-label> dropdown {{ i }}</mat-label>
 
+                                        <span matSuffix>
 
-                          <mat-form-field class="form-control" class="max-choice">
-        
-          <mat-label>Max Choice</mat-label>
-          <input matInput formControlName="maxChoice" type="number" width="250px">
-          <mat-hint>optional</mat-hint>
-        </mat-form-field>
+                                          <mat-icon color="warn" (click)="removeChoice(s,k)">delete</mat-icon>
+                                        </span>
 
-                        </mat-card-actions>
-                      </mat-card>
+                                        <input matInput formControlName="name">
 
+                                      </mat-form-field>
+                                    </div>
 
+                                  </div>
 
+                                  <!-- </div> -->
 
-                      <!-- ........................................................integer..................................................................... -->
-
-                      <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Integer'">
-                        <mat-card-content>
-
-
-
-                          <div cdkDropList [cdkDropListData]="choices3" class="example-list"
-                            (cdkDropListDropped)="drop3($event)">
-
-
-
-                            <mat-form-field class="form-control" class="choices">
-
-                              <input type="number" matInput disabled value="123456789">
-  
-                            </mat-form-field>
-
-                          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        </mat-card-content>
-                        <mat-card-actions>
-
-                          <button mat-button (click)="addOption3()">Add Option</button>
-
-
-
-                          <mat-form-field class="form-control" class="max-Option">
-          <mat-label>Max Value</mat-label>
-
-          <input matInput formControlName="maxChoice" type="number" width="250px">
-          <mat-hint>optional</mat-hint>
-        </mat-form-field>
-
-                          <mat-form-field class="form-control" class="max-choice">
-          <mat-label>Min Value</mat-label>
-
-          <input matInput formControlName="maxChoice" type="number" width="250px">
-          <mat-hint>optional</mat-hint>
-        </mat-form-field>
-
-
-                        </mat-card-actions>
-                      </mat-card>
-
-
-                      <!-- .........................................................................Decimal........................................................................ -->
-
-                      <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Decimal'">
-                        <mat-card-content>
-
-
-                          <div cdkDropList [cdkDropListData]="choices4" class="example-list"
-                            (cdkDropListDropped)="drop4($event)">
-
-
-
-                            <mat-form-field class="form-control" class="choices">
-
-                              <input type="number" matInput disabled value="3.1415">
-  
-                            </mat-form-field>
-  
-
-                          </div>
-
-
-                        </mat-card-content>
-                        <mat-card-actions>
-
-                          <button mat-button (click)="addOption4()">Add Option</button>
-
-
-
-                          <mat-form-field class="form-control" class="max-choice">
-          <mat-label>Max Option</mat-label>
-
-          <input matInput formControlName="maxChoice" type="number" width="250px">
-          <mat-hint>optional</mat-hint>
-        </mat-form-field>
-                        </mat-card-actions>
-                      </mat-card>
-
-                      <!-- ..................................................................................Dropdown............................................................... -->
-
-                      <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Drop down'">
-                        <mat-card-content>
-
-
-                          <div cdkDropList [cdkDropListData]="choices5" class="example-list"
-                            (cdkDropListDropped)="drop5($event)">
-
-
-
-                            <div *ngFor="let choice of choices5; let i=index" cdkDrag>
-                              <mat-form-field class="form-control choices example-box">
-                                <span matPrefix>
-                                  <mat-icon>arrow_drop_down</mat-icon>
-                                </span>
-                                <mat-label> {{ choice.name + i }}</mat-label>
-
-                                <span matSuffix>
-
-                                  <mat-icon color="warn" (click)="deleteTask5(i)">delete</mat-icon>
-                                </span>
-
-                                <input matInput formControlName="choices">
-
-                              </mat-form-field>
-
-
-                            </div>
-
-                          </div>
-
-                          <!-- <mat-form-field class="form-control" class="choices">
+                                  <!-- <mat-form-field class="form-control" class="choices">
 
         <mat-label>Option 1</mat-label>
 
@@ -610,136 +540,254 @@
 
       </mat-form-field> -->
 
-                        </mat-card-content>
-                        <mat-card-actions>
+                                </mat-card-content>
+                                <mat-card-actions>
 
-                          <button mat-button (click)="addOption5()">Add Option</button>
-
-
-
-                      
-                        </mat-card-actions>
-                      </mat-card>
-
-
-                      <!-- .........................................................................Date............................................................................................... -->
-
-                      <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Date'">
-                        <mat-card-content>
-
-
-                          <mat-form-field appearance="fill">
-                            <mat-label>02/27/2020</mat-label>
-                            <input matInput [matDatepicker]="dp3" disabled>
-                            <mat-hint>MM/DD/YYYY</mat-hint>
-                            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-                            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-                          </mat-form-field>
-
-
-                        </mat-card-content>
-
-                      </mat-card>
-
-
-
-                      <!-- ..........................................................................time.................................................................... -->
-
-
-                      <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Time'">
-                        <mat-card-content>
-
-                          <mat-form-field class="form-control" class="choices">
-                            <input matInput disabled value="01:30">
-                            <span class="icons" matSuffix>
-                              <mat-icon>
-                                timer
-                              </mat-icon>
-                            </span>
-                          </mat-form-field>
-
-                        </mat-card-content>
-
-                      </mat-card>
-                      <!-- ................................................................................................short answer................................................................... -->
-                      <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Short answer'">
-                        <mat-card-content>
-                          <mat-form-field class="form-control" class="choices">
-
-                            <input matInput disabled value="Short-answer text">
-
-                          </mat-form-field>
-
-                        </mat-card-content>
-                      </mat-card>
-
-                      <!-- .......................................................................................long paragraph............................................................................ -->
-
-                      <mat-card class="question-card-container2" *ngIf="(questionVal.value.type_name)==='Paragraph'">
-                        <mat-card-content>
-                          <mat-form-field class="form-control">
-                            <input matInput disabled value="long-answer text">
-
-                          </mat-form-field>
-
-                        </mat-card-content>
-
-                      </mat-card>
+                                  <button mat-button (click)="addChoice(s,k)">Add Option</button>
 
 
 
 
+                                </mat-card-actions>
+                              </mat-card>
+                            </div>
+                            <!-- .........................................................................Decimal........................................................................ -->
 
-                      <!-- ////////////////////////////////////////////////////////////////////choices//////////////////////////////////////////// -->
-
-
-
-
-
-                    </mat-card-content>
-                    <mat-divider inset></mat-divider>
-
-
-                    <mat-card-footer>
-
-                      <button mat-button class="ml-3" (click)="deleteQuestion(s,k)">delete question</button>
-                      <button mat-button class="ml-3">required</button>
-
-                    </mat-card-footer>
-                  </mat-card>
+                            <mat-card class="question-card-container2"
+                              *ngIf="(question.value.questionnaire_type.type_name)==='Decimal'">
+                              <mat-card-content>
 
 
-                </div>
+                                <div cdkDropList [cdkDropListData]="choices4" class="example-list"
+                                  (cdkDropListDropped)="drop4($event)">
 
-              </div>
-          <!-- /////////////////////////////////////////////////////////////////////final mock question////////////////////////////////////////////////////// -->
+
+
+                                  <mat-form-field class="form-control" class="choices">
+
+                                    <input type="number" matInput disabled value="3.1415">
+
+                                  </mat-form-field>
+                                  <mat-form-field class="form-control">
+                                    <mat-label>Min Value</mat-label>
+
+                                    <input matInput formControlName="minimum_decimal_value" type="number">
+                                    <mat-hint>optional</mat-hint>
+                                  </mat-form-field>
+
+
+                                  <mat-form-field class="form-control">
+                                    <mat-label>Max Value</mat-label>
+
+                                    <input matInput formControlName="maximum_decimal_value" type="number">
+                                    <mat-hint>optional</mat-hint>
+                                  </mat-form-field>
+
+
+                                </div>
+
+
+                              </mat-card-content>
+                              <mat-card-actions>
+
+
+
+
+                              </mat-card-actions>
+                            </mat-card>
+
+
+                            <!-- ........................................................integer..................................................................... -->
+
+                            <mat-card class="question-card-container2"
+                              *ngIf="(question.value.questionnaire_type.type_name)==='Integer'">
+                              <mat-card-content>
+
+
+
+                                <mat-form-field class="form-control">
+                                  <mat-label>Min Value</mat-label>
+
+                                  <input matInput formControlName="minimum_integer_value" type="number" width="300px">
+                                  <mat-hint>optional</mat-hint>
+                                </mat-form-field>
+                                <mat-form-field class="form-control">
+                                  <mat-label>Max Value</mat-label>
+
+                                  <input matInput formControlName="maximum_integer_value" type="number" width="350px">
+                                  <mat-hint>optional</mat-hint>
+                                </mat-form-field>
+
+                                <!-- <div cdkDropList [cdkDropListData]="choices3" class="example-list"
+                                  (cdkDropListDropped)="drop3($event)"> -->
+
+
+
+                                <mat-form-field class="form-control" class="choices">
+
+                                  <input type="number" matInput disabled value="123456789">
+
+                                </mat-form-field>
+
+                                <!-- </div> -->
+
+                              </mat-card-content>
+                              <mat-card-actions>
 
 
 
 
 
 
-            </mat-card-content>
-            <mat-divider inset></mat-divider>
+
+                              </mat-card-actions>
+                            </mat-card>
 
 
-            <mat-card-footer>
-              
-              <button mat-button class="ml-3" (click)="addQuestion(s)">add question</button>
-              <button mat-button class="ml-3" (click)="addSection()">add section</button>
-              <button mat-button class="ml-3" (click)="deleteSection(s)" [disabled]="s<1">delete section</button>
 
-            </mat-card-footer>
-          </mat-card>
 
+                            <!-- .........................................................................Date............................................................................................... -->
+
+                            <mat-card class="question-card-container2"
+                              *ngIf="(question.value.questionnaire_type.type_name)==='Date'">
+                              <mat-card-content>
+
+
+                                <mat-form-field appearance="fill">
+                                  <mat-label>02/27/2020</mat-label>
+                                  <input matInput [matDatepicker]="dp3" disabled>
+                                  <mat-hint>MM/DD/YYYY</mat-hint>
+                                  <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                  <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                                </mat-form-field>
+
+
+                              </mat-card-content>
+
+                            </mat-card>
+
+
+
+                            <!-- ..........................................................................time.................................................................... -->
+
+
+                            <mat-card class="question-card-container2"
+                              *ngIf="(question.value.questionnaire_type.type_name)==='Time'">
+                              <mat-card-content>
+
+                                <mat-form-field class="form-control" class="choices">
+                                  <input matInput disabled value="01:30">
+                                  <span class="icons" matSuffix>
+                                    <mat-icon>
+                                      timer
+                                    </mat-icon>
+                                  </span>
+                                </mat-form-field>
+
+                              </mat-card-content>
+
+                            </mat-card>
+                            <!-- ................................................................................................short answer................................................................... -->
+                            <mat-card class="question-card-container2"
+                              *ngIf="(question.value.questionnaire_type.type_name)==='Short answer'">
+                              <mat-card-content>
+                                <mat-form-field class="form-control" class="choices">
+
+                                  <input matInput disabled value="Short-answer text">
+
+                                </mat-form-field>
+
+                              </mat-card-content>
+                            </mat-card>
+
+                            <!-- .......................................................................................long paragraph............................................................................ -->
+
+                            <mat-card class="question-card-container2"
+                              *ngIf="(question.value.questionnaire_type.type_name)==='Paragraph'">
+                              <mat-card-content>
+                                <mat-form-field class="form-control">
+                                  <input matInput disabled value="long-answer text">
+
+                                </mat-form-field>
+
+                              </mat-card-content>
+
+                            </mat-card>
+
+
+
+
+
+                            <!-- ////////////////////////////////////////////////////////////////////choices//////////////////////////////////////////// -->
+
+
+
+
+
+                          </mat-card-content>
+                          <mat-divider inset></mat-divider>
+
+
+                          <mat-card-footer>
+
+                            <button mat-button class="ml-3" (click)="removeQuestion(s,k)">delete question</button>
+                            <!-- <button mat-button class="ml-3">required</button> -->
+                            <mat-slide-toggle color="primary" formControlName="is_required" value="true">
+                              required
+                            </mat-slide-toggle>
+                            <mat-form-field *ngIf="(question.value.questionnaire_type.type_name)==='Check box'"
+                              class="maxValue">
+                              <mat-label>Max Value</mat-label>
+
+                              <input matInput formControlName="maximum_choice" type="number" width="250px">
+                            </mat-form-field>
+
+                          </mat-card-footer>
+                        </mat-card>
+                      </div>
+
+                    </div>
+                  </div>
+                  <!-- </div> -->
+                  <!-- /////////////////////////////////////////////////////////////////////final mock question////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+                </mat-card-content>
+                <mat-divider inset></mat-divider>
+
+                <mat-card-footer>
+
+                  <button mat-button class="ml-3" (click)="addQuestion1(s)">add question</button>
+                  <!-- <button mat-button class="ml-3" (click)="addSection()">add section</button> -->
+                  <button mat-button class="ml-3" (click)="removeSection(s)" [disabled]="s<1">delete section</button>
+
+                </mat-card-footer>
+              </mat-card>
+            </div>
+          </div>
+
+          <button mat-button class="ml-3" (click)="addSection1()">add section</button>
+
+          <!-- //////////////////////////////////////////////////////////////////////////final mock section////////////////////////////////////////////////////////////////////////////////// -->
         </div>
-     
-        <!-- //////////////////////////////////////////////////////////////////////////final mock section////////////////////////////////////////////////////////////////////////////////// -->
-      </form>
 
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      </form>
+      {{this.thirdFormGroup.value | json}}
+
+
+
+      <div class="form-footer pb-4">
+        <button mat-button matStepperPrevious class="btn btn-primary card card-small">Back</button>
+        <button mat-button matStepperNext mat-raised-button class="btn btn-primary card card-small">
+          Next
+
+        </button>
+        <!-- <button type="submit" (click)="onSubmit()">submit</button> -->
+
       </div>
 
 
@@ -757,11 +805,82 @@
       <div class="hidden">
         Project Summary
       </div>
+
+
     </ng-template>
+    <h1 class="title">Project Summary</h1>
+    <ngb-accordion #acc="ngbAccordion">
+      <ngb-panel id="toggle-1" title="Project Type">
+        <ng-template ngbPanelContent>
+          <ul>
+            <li>
+              <b>Survey Title:</b> {{this.firstFormGroup.value.title}}
+            </li>
+            <li>
+              <b>Expireation Date:</b> {{this.firstFormGroup.value.expired_date}}
+            </li>
+            <li>
+              <b>Survey Type:</b> <span *ngIf="this.firstFormGroup.value.is_paid">paid</span><span
+                *ngIf="!this.firstFormGroup.value.is_paid">free</span>
+            </li>
+            <li>
+              <b>Required No. of Respondent:</b> {{this.firstFormGroup.value.required_number_of_respondent}}
+            </li>
+          </ul>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="toggle-2" title="Recruitment">
+        <ng-template ngbPanelContent>
+          <ul>
+            <li>
+              <b>Gender:</b> {{this.secondFormGroup.value.requirements.gender}}
+            </li>
+            <li>
+              <b>Minimum Age of Respondent:</b> {{this.secondFormGroup.value.requirements.minimum_age}}
+            </li>
+            <li>
+              <b>Maximum Age of Respondent:</b> {{this.secondFormGroup.value.requirements.maximum_age}}
+            </li>
+            <li>
+              <ul>
+                <b>Education level:</b>
+                
+                  <li *ngFor="let education of this.secondFormGroup.value.requirements.education_levels">{{education.level_name}}</li>
+                
+              </ul>
+            </li>
+
+
+            <li>
+              <ul><b>Occupation:</b>
+                
+                  <li *ngFor="let occupation of this.secondFormGroup.value.requirements.occupations">{{occupation.work_type}}</li>
+                
+              </ul>
+            </li>
+
+
+          </ul>
+        </ng-template>
+      </ngb-panel>
+
+    </ngb-accordion>
+
+    <hr />
+
+    <button class="btn btn-sm btn-outline-primary me-2" (click)="acc.toggle('toggle-1')">Project Type</button>
+    <button class="btn btn-sm btn-outline-primary me-2" (click)="acc.toggle('toggle-2')">Recruitment</button>
+  
+    <p>
+    <mat-checkbox class="example-margin" [(ngModel)]="checked">Do you accept <a href="">terms & services</a>?</mat-checkbox>
+
+    </p>
     <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <div class="form-footer pb-4">
+      <button mat-button matStepperPrevious class="btn btn-primary card card-small" mat-raised-button>Back</button>
+      <button mat-button matStepperNext mat-raised-button class="btn btn-primary card card-small" mat-raised-button
+      type="submit" [disabled]="!checked" (click)="onSubmit()"> Create Survey</button>
+
     </div>
   </mat-step>
 </mat-stepper>

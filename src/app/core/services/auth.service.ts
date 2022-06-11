@@ -40,6 +40,8 @@ private logoutUrl =this.surverUrl+ '/auth/token/logout/';
 private surveyUrl = this.surverUrl + '/surveys/';
 private singleSurveyUrl = this.surverUrl + '/surveys/'+this.id;
 private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
+private createSurveyUrl = this.surverUrl + '/surveys/';
+
   // private url2 = "http://my-json-server.typicode.com/Ibrogidi/osap-system/users/"
   private handleError: HandleError;
 
@@ -68,6 +70,7 @@ private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
     return this.http.post(this.respondentRegistrationUrl, respondentdata)
       
   }
+  
   // register(researcherdata: ResearcherData){
   //   return this.http.post(this.url2, researcherdata);
   // }
@@ -79,7 +82,15 @@ private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
       )
   }
 
-
+  createSurvey(survey:SurveyList, myToken:any ):Observable<SurveyList>{
+    httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
+    
+    // return this.http.post()
+    return this.http.post<SurveyList>(this.createSurveyUrl,survey, httpOptions)
+    .pipe(
+      catchError(this.handleError('login', survey))
+    )
+  }
 
   getUser(myToken:any){
     httpOptions.headers = httpOptions.headers.set('Authorization', myToken);

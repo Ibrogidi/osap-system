@@ -9,7 +9,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Gender } from 'src/app/core/models/gender.interface';
 
 import { Survey } from 'src/app/core/models/survey.interface';
@@ -22,6 +22,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./create-survey.component.css']
 })
 export class CreateSurveyComponent implements OnInit {
+  ////////////////////////////////////////hryyyyyyyyyyyyyyyyyyyyyyyyyyruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
   choices: Choices[] = [
     { name: 'Option ' },
   ];
@@ -39,93 +40,102 @@ export class CreateSurveyComponent implements OnInit {
   choices5: Choices[] = [
     { name: 'Option' }
   ];
-questions: Questions[] = 
-[
-{title: 'Untitled Question', choice_type: 
-[
-    {
-        id: 1,
-        type_name: "Multiple choice"
-    },
-    {
-        id: 2,
-        type_name: "Drop down"
-    },
-    {
-        id: 3,
-        type_name: "Check box"
-    },
-    {
-        id: 4,
-        type_name: "Integer"
-    },
-    {
-        id: 5,
-        type_name: "Decimal"
-    },
-    {
-        id: 6,
-        type_name: "Date"
-    },
-    {
-        id: 7,
-        type_name: "Time"
-    },
-    {
-        id: 8,
-        type_name: "Short answer"
-    },
-    {
-        id: 9,
-        type_name: "Paragraph"
-    }
-]}
-];
-sections: Sections[]=[
-{section_title: 'Section Title', questions:
-[
-  {title: 'Untitled Question', choice_type: 
-  [
+  questions: Questions[] =
+    [
       {
-          id: 1,
-          type_name: "Multiple choice"
-      },
-      {
-          id: 2,
-          type_name: "Drop down"
-      },
-      {
-          id: 3,
-          type_name: "Check box"
-      },
-      {
-          id: 4,
-          type_name: "Integer"
-      },
-      {
-          id: 5,
-          type_name: "Decimal"
-      },
-      {
-          id: 6,
-          type_name: "Date"
-      },
-      {
-          id: 7,
-          type_name: "Time"
-      },
-      {
-          id: 8,
-          type_name: "Short answer"
-      },
-      {
-          id: 9,
-          type_name: "Paragraph"
+        title: 'Untitled Question', choice_type:
+          [
+            {
+              id: 1,
+              type_name: "Multiple choice"
+            },
+            {
+              id: 2,
+              type_name: "Drop down"
+            },
+            {
+              id: 3,
+              type_name: "Check box"
+            },
+            {
+              id: 4,
+              type_name: "Integer"
+            },
+            {
+              id: 5,
+              type_name: "Decimal"
+            },
+            {
+              id: 6,
+              type_name: "Date"
+            },
+            {
+              id: 7,
+              type_name: "Time"
+            },
+            {
+              id: 8,
+              type_name: "Short answer"
+            },
+            {
+              id: 9,
+              type_name: "Paragraph"
+            }
+          ]
       }
-  ]}
-  ]
-}
-];
+    ];
+  sections: Sections[] = [
+    {
+      section_title: 'Section Title', questions:
+        [
+          {
+            title: 'Untitled Question', choice_type:
+              [
+                {
+                  id: 1,
+                  type_name: "Multiple choice"
+                },
+                {
+                  id: 2,
+                  type_name: "Drop down"
+                },
+                {
+                  id: 3,
+                  type_name: "Check box"
+                },
+                {
+                  id: 4,
+                  type_name: "Integer"
+                },
+                {
+                  id: 5,
+                  type_name: "Decimal"
+                },
+                {
+                  id: 6,
+                  type_name: "Date"
+                },
+                {
+                  id: 7,
+                  type_name: "Time"
+                },
+                {
+                  id: 8,
+                  type_name: "Short answer"
+                },
+                {
+                  id: 9,
+                  type_name: "Paragraph"
+                }
+              ]
+          }
+        ]
+    }
+  ];
+  expiredYear: Date;
+  expiredMonth: Date;
+  expiredDay: Date;
+  expiredDate: string;
   matIconArray: String[] = ['radio_button_unchecked', 'arrow_drop_down', 'check_box_outline_blank', 'tag', 'fiber_manual_record', 'calendar_today', 'timer', 'short_text', 'subject']
   panelOpenState = false;
   choiceMode: string;
@@ -139,7 +149,12 @@ sections: Sections[]=[
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  generalFormGroup: FormGroup;
+  mergedObject: any;
   occupations: Occupations[];
+  checked: boolean;
+  token: any;
+  researcherToken: any;
   surveys: Survey[] = [
     { name: 'payment free', value: false },
     { name: 'with payment', value: true },
@@ -148,55 +163,74 @@ sections: Sections[]=[
   genders: Gender[] = [
     { name: 'Male(only)', value: 'M' },
     { name: 'Female(only)', value: 'F' },
-    { name: 'Both', value: 'both' },
+    { name: 'Both', value: 'Both' },
   ];
   checkQuestionType: any;
   questionType: QuestionType[];
   isEditable = false;
   educationLevels: EducationLevels[];
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  panelOpenState1 = false;
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-  constructor(private _formBuilder: FormBuilder,
+  constructor(
+    private _formBuilder: FormBuilder,
     private authService: AuthService
   ) {
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth();
-    const currentDay = new Date().getDay();
 
-
-    this.minDate = new Date(currentYear, currentMonth, currentDay + 8);
 
   }
 
   ngOnInit() {
 
+    this.authService.getQuestionType().subscribe(
+      (result: any) => {
+        this.questionType = result;
+        console.log(this.questionType);
+      }
+    );
+
+    // this.generalFormGroup = this._formBuilder.group({
+    //   survey_title: ['', Validators.required],
+    //   description: ['', []],
+    //   datePicker: ['', Validators.required],
+    //   survey_type: ['', Validators.required],
+    //   survey_budget: ['', [Validators.min]],
+    //   respondent_number: ['', Validators.required],
+    //   gender: ['', Validators.required],
+    //   maxAge: ['', [Validators.required, Validators.min, Validators.max]],
+    //   education_level: ['', Validators.required],
+    //   minAge: ['', [Validators.required, Validators.min, Validators.max]],
+    //   occupation: ['', [Validators.required]],
+    //   allow_unverified_respondents: ['', []],
+    //   sections: this._formBuilder.array([]),
+    // })
     this.firstFormGroup = this._formBuilder.group({
-      survey_title: ['', Validators.required],
+      title: ['', Validators.required],
       description: ['', []],
-      datePicker: ['', Validators.required],
-      survey_type: ['', Validators.required],
-      survey_budget: ['', [Validators.min]],
-      respondent_number: ['', Validators.required],
+      expired_date: ['', Validators.required],
+      is_paid: ['', Validators.required],
+      budget: [0, [Validators.min]],
+      required_number_of_respondent: ['', Validators.required],
+
 
     });
     this.secondFormGroup = this._formBuilder.group({
-      gender: ['', Validators.required],
-      maxAge: ['', [Validators.required, Validators.min, Validators.max]],
-      education_level: ['', Validators.required],
-      minAge: ['', [Validators.required, Validators.min, Validators.max]],
-      occupation: ['', [Validators.required]],
-      allow_unverified_respondents: ['', []],
+
+      requirements: this._formBuilder.group({
+        gender: ['', Validators.required],
+        maximum_age: ['', [Validators.required, Validators.min, Validators.max]],
+        education_levels: ['', Validators.required],
+        minimum_age: ['', [Validators.required, Validators.min, Validators.max]],
+        occupations: ['', [Validators.required]],
+        allow_unverified_respondents: [false, []],
+      })
     });
     this.thirdFormGroup = this._formBuilder.group({
-      thirdCtrl: ['', []],
-      section_title: ['', [Validators.required]],
-      section_description: ['', []],
-      question_title: ['', []],
-      question_type: ['', []],
-      choices: ['', []],
-      maxChoice: ['', []],
-      question_description: ['',[]]
+      sections: this._formBuilder.array([
+
+      ])
     });
 
     this.authService.getEducationLevels().subscribe(
@@ -213,36 +247,112 @@ sections: Sections[]=[
     )
 
 
-    this.authService.getQuestionType().subscribe(
-      (result: any) => {
-        this.questionType = result;
-        console.log(this.questionType);
-      }
-    )
-
   }
 
 
-
-  get education_level() {
-    return this.secondFormGroup.get('education_level')
+  get expired_date() {
+    return this.firstFormGroup.get('expired_date')
+  }
+  get requirements() {
+    return this.secondFormGroup.get('requirements')
+  }
+  get education_levels() {
+    return this.secondFormGroup.get('requirements.education_levels')
   }
   get gender() {
-    return this.secondFormGroup.get('gender');
+    return this.secondFormGroup.get('requirements.gender');
   }
-  get minAge() {
-    return this.secondFormGroup.get('minAge');
+  get minimum_age() {
+    return this.secondFormGroup.get('requirements.minimum_age');
   }
-  get maxAge() {
-    return this.secondFormGroup.get('maxAge')
+  get maximum_age() {
+    return this.secondFormGroup.get('requirements.maximum_age')
   }
-  get occupation() {
-    return this.secondFormGroup.get('occupation');
+  get occupation1() {
+    return this.secondFormGroup.get('requirements.occupations');
   }
-  get questionnaireType() {
-    return this.thirdFormGroup.get('question_type')
+  // get questionnaireType() {
+  //   return this.thirdFormGroup.get('question_type')
+  // }
+  //////////////////////////step 1//////////////////////////////////
+  sections1(): FormArray {
+    return this.thirdFormGroup.get('sections') as FormArray;
   }
 
+  questionnaires(secIndex: number): FormArray {
+    return this.sections1()
+      .at(secIndex)
+      .get('questionnaires') as FormArray;
+  }
+  choices1(secIndex: number, questionIndex: number): FormArray {
+    return this.questionnaires(secIndex).at(questionIndex).get('choices') as FormArray;
+  }
+  /////////////////////////////////step 2////////////////////////////////////
+  newSection(): FormGroup {
+    return this._formBuilder.group({
+      title: '',
+      description: '',
+      order: 0,
+      questionnaires: this._formBuilder.array([])
+    })
+  }
+
+
+  newQuestions(): FormGroup {
+    return this._formBuilder.group({
+      title: '',
+      description: '',
+      is_required: false,
+      questionnaire_type: '',
+      choices: this._formBuilder.array([]),
+      maximum_choice: 1,
+      minimum_integer_value: 0,
+      maximum_integer_value: 0,
+      minimum_decimal_value: 0,
+      maximum_decimal_value: 0,
+    })
+  }
+  newChoices(): FormGroup {
+    return this._formBuilder.group({
+      name: '',
+    })
+  }
+
+  // ///////////////////////////////////////////////step 3///////////////////////////////////////////////////
+  addSection1() {
+    this.sections1().push(this.newSection());
+  }
+
+  addQuestion1(secIndex: number) {
+    this.questionnaires(secIndex).push(this.newQuestions());
+  }
+  addChoice(secIndex: number, questionIndex: number) {
+    this.choices1(secIndex, questionIndex).push(this.newChoices())
+  }
+
+  //////////////////////////////////////step 4 ////////////////////////////////////////////////
+
+
+  removeSection(secIndex: number) {
+    this.sections1().removeAt(secIndex);
+  }
+
+
+
+  removeQuestion(secIndex: number, questionIndex: number) {
+
+    this.questionnaires(secIndex).removeAt(questionIndex);
+
+  }
+
+  removeChoice(secIndex: number, questionIndex: number) {
+    this.choices1(secIndex, questionIndex).removeAt(questionIndex)
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  log(value: any) {
+    console.log(value)
+  }
   drop(event: CdkDragDrop<Choices[]>) {
     moveItemInArray(this.choices, event.previousIndex, event.currentIndex);
   }
@@ -257,13 +367,13 @@ sections: Sections[]=[
   drop4(event: CdkDragDrop<Choices[]>) {
     moveItemInArray(this.choices4, event.previousIndex, event.currentIndex);
   }
-  drop5(event: CdkDragDrop<Choices[]>) {
+  drop5(event: CdkDragDrop<Choices[]>, val1: number, val2: number) {
     moveItemInArray(this.choices5, event.previousIndex, event.currentIndex);
   }
-  drop_questions(event: CdkDragDrop<Questions[]>,s:any) {
+  drop_questions(event: CdkDragDrop<Questions[]>, s: any) {
     moveItemInArray(this.sections[s].questions, event.previousIndex, event.currentIndex);
   }
-  
+
   addOption() {
     this.choices.push(
       {
@@ -299,102 +409,104 @@ sections: Sections[]=[
       }
     )
   }
-  
-addQuestion(s:number){
-  this.sections[s].questions.push(
-    
+
+  addQuestion(s: number) {
+    this.sections[s].questions.push(
+
       {
-        title: 'Untitled Question', choice_type: 
-      [
-          {
+        title: 'Untitled Question', choice_type:
+          [
+            {
               id: 1,
               type_name: "Multiple choice"
-          },
-          {
+            },
+            {
               id: 2,
               type_name: "Drop down"
-          },
-          {
+            },
+            {
               id: 3,
               type_name: "Check box"
-          },
-          {
+            },
+            {
               id: 4,
               type_name: "Integer"
-          },
-          {
+            },
+            {
               id: 5,
               type_name: "Decimal"
-          },
-          {
+            },
+            {
               id: 6,
               type_name: "Date"
-          },
-          {
+            },
+            {
               id: 7,
               type_name: "Time"
-          },
-          {
+            },
+            {
               id: 8,
               type_name: "Short answer"
-          },
-          {
+            },
+            {
               id: 9,
               type_name: "Paragraph"
-          }
-      ]
-    }
-      
-  )
-}
+            }
+          ]
+      }
 
-addSection(){
-  this.sections.push({
-    section_title: 'Section Title', questions: 
-    [
-      {title: 'Untitled Question', choice_type: 
-      [
-          {
-              id: 1,
-              type_name: "Multiple choice"
-          },
-          {
-              id: 2,
-              type_name: "Drop down"
-          },
-          {
-              id: 3,
-              type_name: "Check box"
-          },
-          {
-              id: 4,
-              type_name: "Integer"
-          },
-          {
-              id: 5,
-              type_name: "Decimal"
-          },
-          {
-              id: 6,
-              type_name: "Date"
-          },
-          {
-              id: 7,
-              type_name: "Time"
-          },
-          {
-              id: 8,
-              type_name: "Short answer"
-          },
-          {
-              id: 9,
-              type_name: "Paragraph"
-          }
-      ]}
-      ]     
+    )
+  }
 
-})
-}
+  addSection() {
+    this.sections.push({
+      section_title: 'Section Title', questions:
+        [
+          {
+            title: 'Untitled Question', choice_type:
+              [
+                {
+                  id: 1,
+                  type_name: "Multiple choice"
+                },
+                {
+                  id: 2,
+                  type_name: "Drop down"
+                },
+                {
+                  id: 3,
+                  type_name: "Check box"
+                },
+                {
+                  id: 4,
+                  type_name: "Integer"
+                },
+                {
+                  id: 5,
+                  type_name: "Decimal"
+                },
+                {
+                  id: 6,
+                  type_name: "Date"
+                },
+                {
+                  id: 7,
+                  type_name: "Time"
+                },
+                {
+                  id: 8,
+                  type_name: "Short answer"
+                },
+                {
+                  id: 9,
+                  type_name: "Paragraph"
+                }
+              ]
+          }
+        ]
+
+    })
+  }
   deleteTask(i: number) {
     this.choices.splice(i, 1);
   }
@@ -411,11 +523,34 @@ addSection(){
     this.choices5.splice(i, 1);
   }
 
-  deleteQuestion(s:number,k: number){
-    this.sections[s].questions.splice(k,1);
+  deleteQuestion(s: number, k: number) {
+    this.sections[s].questions.splice(k, 1);
   }
-  deleteSection(s:number){
-    this.sections.splice(s,1)
+  deleteSection(s: number) {
+    this.sections.splice(s, 1)
+  }
+
+
+
+  onSubmit() {
+    this.token = localStorage.getItem('Researcher');
+    this.researcherToken = "Token " + this.token;
+    this.expiredYear = this.expired_date?.value.getFullYear();
+    // console.log(this.birthYear)
+    this.expiredMonth = this.expired_date?.value.getMonth() + 1;
+    // console.log(this.birthMonth)
+    this.expiredDay = this.expired_date?.value.getDate()
+    // console.log(this.birthDay)
+
+    this.expiredDate = this.expiredYear.toString() + '-' + this.expiredMonth.toString() + '-' + this.expiredDay.toString();
+    console.log(this.expiredDate)
+    this.firstFormGroup.value.expired_date = this.expiredDate;
+    console.log(this.thirdFormGroup.value)
+    this.mergedObject = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
+    console.log(this.mergedObject)
+    this.authService.createSurvey(this.mergedObject, this.researcherToken).subscribe((result) => {
+      console.log(result)
+    })
   }
 
 }

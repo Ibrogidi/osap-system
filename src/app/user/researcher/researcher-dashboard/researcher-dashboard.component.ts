@@ -33,10 +33,12 @@ export class ResearcherDashboardComponent implements OnInit {
     this.researcherToken = "Token "+this.token;
     this.authService.getUser(this.researcherToken).subscribe((researcher:any)=>{
       this.username = researcher?.username;
+      // console.log("researcher:", researcher)
     });
     this.authService.getSurveyData(this.researcherToken).subscribe((surveyData:any)=>{
       this.surveyLists= surveyData;
     })
+
   }
 
 

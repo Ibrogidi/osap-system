@@ -1,5 +1,40 @@
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Component, VERSION } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
+
+
+///////////////////////////////////////////////////////////////////////////////////
+// import { Questions } from './../../core/models/questions.interface';
+// import { Choices } from './../../core/models/choices.interface';
+// import { QuestionType } from './../../core/models/question-type.interface';
+// import { Occupations } from './../../core/models/occupations.interface';
+// import { EducationLevels } from './../../core/models/education-levels.interface';
+// import { AuthService } from './../../core/services/auth.service';
+// import {
+//   Component,
+//   OnInit,
+// } from '@angular/core';
+
+import {  Validators } from '@angular/forms';
+import { Gender } from 'src/app/core/models/gender.interface';
+
+import { Survey } from 'src/app/core/models/survey.interface';
+import { Sections } from 'src/app/core/models/sections.interface';
+
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Choices } from '../core/models/choices.interface';
+import { Questions } from '../core/models/questions.interface';
+import { Occupations } from '../core/models/occupations.interface';
+import { QuestionType } from '../core/models/question-type.interface';
+import { EducationLevels } from '../core/models/education-levels.interface';
+
+
+
+
+
+
+
+
 
 @Component({
   selector: 'app-example',
@@ -11,7 +46,12 @@ import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 export class ExampleComponent {
   empForm: FormGroup;
   sectionForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+
+
+
+  constructor(private fb: FormBuilder, private auth: AuthService) {
+
+   }
 
   ngOnInit() {
     this.empForm = this.fb.group({
@@ -21,9 +61,12 @@ export class ExampleComponent {
     this.sectionForm = this.fb.group({
       sections: this.fb.array([])
     })
-  }
+    this.auth.getQuestionType().subscribe( (result: any)=> {
+      console.log(result)
+    })
+ }
 
-  ///////////////////////////////step 1/////////////////////////
+  /////////////////////////////step 1/////////////////////////
   employees(): FormArray {
     return this.empForm.get('employees') as FormArray;
   }
@@ -92,7 +135,7 @@ export class ExampleComponent {
     })
   }
 
-  ///////////////////////////step 3//////////////////////////////////////////////////////////
+  /////////////////////////step 3//////////////////////////////////////////////////////////
 
   addEmployee() {
     this.employees().push(this.newEmployee());
@@ -112,7 +155,7 @@ export class ExampleComponent {
     this.choices(secIndex,questionIndex).push(this.newChoices())
   }
 
-  //////////////////////////////////////step 4 ////////////////////////////////////////////////
+  ////////////////////////////////////step 4 ////////////////////////////////////////////////
 
   removeEmployee(empIndex: number) {
     this.employees().removeAt(empIndex);

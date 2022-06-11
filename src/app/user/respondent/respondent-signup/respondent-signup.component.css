@@ -30,6 +30,20 @@
     max-width: 440px;
     
 }
+
+.btn-orange{
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    padding: 0px 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    margin: 5px;
+ 
+}
+
 .title{
 padding-top: 50px;
 }
@@ -49,7 +63,7 @@ padding-top: 50px;
     width: 100%;
     border-radius: 5px;
     box-sizing: border-box;
-    background-color: #3068ff;
+    background-color: orangered;
     color: white;
     text-align: center;
     margin: 0px 5px 0px 5px;

@@ -116,3 +116,23 @@
   .example-radio-button {
     margin: 5px;
   }
+  .card-actions{
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    color: white;
+}
+
+
+.btn-orange{
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    padding: 0px 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    margin: 5px;
+ 
+}

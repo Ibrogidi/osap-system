@@ -1,63 +1,11 @@
-<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-<!-- <form [formGroup]="sectionsForm" (ngSubmit)="onSubmit()">
 
 
 
 
-    <div formArrayName="sections">
-        <div *ngFor="let section of sections?.controls; let i=index">
 
-            <div [formGroupName]="i">
-
-                <p>
-                    <label for="title1">Title </label>
-                    <input type="text" name="title1" formControlName='title'>
-                </p>
-
-
-                description name :
-                <input type="text" formControlName="description">
-
-                <input type="hidden" [ngModel]="i" formControlName="order">
-
-                {{log(section)}}
-                <div formArrayName="questionnaires">
-                </div>
-
-               
-                <button (click)="removeSection(i)">Remove</button>
-                <button (click)="addQuestion(section)">Add Questions</button>
-            </div>
-        </div>
-
-    </div>
-
-    <p>
-        <button type="submit">Submit</button>
-    </p>
-
-</form>
- -->
-
-
-
-
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-<!-- <button type="button" (click)="addSkills()">Add</button> -->
-<!-- <button type="button" (click)="addSection()">Add Section</button> -->
-
-
-<!-- {{this.skillsForm.value | json}} -->
-<!-- {{this.sectionsForm.value | json}} -->
-
-<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 <h1>Angular Nested FormArray / Dynamic FormArray</h1>
-<!-- //////////////////create a form group name//////////////////////////////////////////// -->
 <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
-  <!-- ////////////////////////////////////create a formArrayName ///////////////////////////////// -->
   <div formArrayName="employees">
     <div *ngFor="let employee of employees().controls; let empIndex=index">
       <div [formGroupName]="empIndex" style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
@@ -92,8 +40,7 @@
 </form>
 
 {{this.empForm.value | json}}
-
-<!-- ///////////////////////////////////////////////////////sections////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <form [formGroup]="sectionForm" (ngSubmit)="onSubmit()">
   <div formArrayName="sections">
     <div *ngFor="let section of sections().controls; let secIndex=index">
@@ -148,3 +95,6 @@
 </form>
 
 {{this.sectionForm.value | json}}
+
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->

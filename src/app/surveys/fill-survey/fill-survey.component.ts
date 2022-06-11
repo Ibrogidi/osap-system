@@ -94,7 +94,7 @@ export class FillSurveyComponent implements OnInit {
 
           return 0;
         });
-        // console.log(this.sortedArray)
+        console.log(this.sortedArray)
         this.sortedArray.forEach( (data:any)=>{
           
           // console.log(data.questionnaires)

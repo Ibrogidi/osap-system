@@ -18,7 +18,7 @@
     padding: 0px 12px;
     border-radius: 5px;
     box-sizing: border-box;
-    background-color: #3068ff;
+    background-color: orangered;
     color: white;
     text-align: center;
     margin: 5px;
@@ -122,6 +122,19 @@
 
 }
 
+.btn-orange{
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    padding: 0px 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    margin: 5px;
+ 
+}
+
 .question-title {
     font-size: 16px;
     letter-spacing: .1px;
@@ -189,7 +202,20 @@
   }
 
 
-
+  .example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
 .description-panel{
 padding: 10px;
 }
@@ -198,7 +224,9 @@ padding: 10px;
     width: 100%;
   }
 
-
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
 
 @media screen and (max-width: 640px) {
 

@@ -1,8 +1,10 @@
 export interface SurveyList{
-    title: string,
-    number_of_response: number,
-    required_number_of_respondent: number,
-    created_at: string,
+    budget: string,
+    description: string,
     expired_date: string,
-    is_active: boolean,
+    is_paid: boolean,
+    required_number_of_respondent: number,
+    requirements: Object,
+    sections: any[],
+    title: string,
 }

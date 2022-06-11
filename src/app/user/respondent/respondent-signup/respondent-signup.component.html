@@ -77,7 +77,7 @@
                 <mat-form-field class="form-control">
                     <mat-label>Password</mat-label>
                     <input matInput [(ngModel)]="passVal" formControlName="password" type="password" required minlength="8" pattern="{{passVal}}" [type]="hide2 ? 'password' : 'text'"/>
-                    <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <!-- <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon> -->
                     <mat-error *ngIf="password?.hasError('required')">
                         Password is required
                     </mat-error>
@@ -170,7 +170,7 @@
             </div>
 
             <div class="form-footer pb-4">
-                <button [disabled]="this.forms.invalid" class="btn btn-primary card card-small" mat-raised-button
+                <button [disabled]="this.forms.invalid" class="btn btn-orange card card-small" mat-raised-button
                     type="submit">
                     Sign Up
                 </button>

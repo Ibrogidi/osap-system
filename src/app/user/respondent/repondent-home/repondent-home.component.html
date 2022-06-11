@@ -10,11 +10,11 @@
             <div class="card-container">
                 <mat-card class="example-card bg-light" *ngFor="let survey of surveyLists;let s=index">
                    
-                   <!-- {{logs(survey.id) }} -->
+                   {{logs(survey.id) }}
                     <mat-card-title>{{survey.title}}</mat-card-title>
                     <mat-card-subtitle>{{survey.description}}</mat-card-subtitle>
                     <mat-card-content>
-                        <p class="survey-contents">created : {{ survey.created_at}}</p>
+                        <!-- <p class="survey-contents">created : {{ survey.created_at}}</p> -->
                         <p class="survey-contents">expierd at : {{ survey.expired_date}}</p>
                         <div class="survey-contents">
                             <div class="paid" *ngIf="survey.is_paid">Survey Payment:
@@ -23,15 +23,14 @@
                         </div>
                         <p class="survey-contents">Status: {{ survey.number_of_response}}/{{
                             survey.required_number_of_respondent}} </p>
-                        <p class="survey-contents">Created By: {{ survey.owner.username}} </p>
+                        <!-- <p class="survey-contents">Created By: {{ survey.owner.username}} </p> -->
 
                     </mat-card-content>
                     <mat-card-actions>
                         <div class="card-actions">
                             <button mat-button class="btn-orange btn" mat-ripple (click)="fill(survey.id)" 
                             [routerLink]="['../../surveys',survey.id]"
-                            >Fill Survey</button>
-                        </div>
+                            >Fill Survey</button>                        </div>
 
 
 
