@@ -16,6 +16,7 @@ import { Survey } from 'src/app/core/models/survey.interface';
 import { Sections } from 'src/app/core/models/sections.interface';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
 @Component({
   selector: 'create-survey',
   templateUrl: './create-survey.component.html',
@@ -173,10 +174,12 @@ export class CreateSurveyComponent implements OnInit {
   panelOpenState1 = false;
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+errorMessage: string;
+errorHandle: boolean = false;
   constructor(
     private _formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {
 
 
@@ -549,7 +552,9 @@ export class CreateSurveyComponent implements OnInit {
     this.mergedObject = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value)
     console.log(this.mergedObject)
     this.authService.createSurvey(this.mergedObject, this.researcherToken).subscribe((result) => {
-      console.log(result)
+      this.router.navigate(['/researcher/dashboard']);
+    },(error)=>{
+      console.log('error:',error)
     })
   }
 

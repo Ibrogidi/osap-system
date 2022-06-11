@@ -16,6 +16,7 @@ import { ResearcherDashboardComponent } from './user/researcher/researcher-dashb
 import { ExampleComponent } from './example/example.component';
 const routes: Routes = [
   {path: '', component: HomepageComponent},
+  {path: 'surveys/respondent/:id', component: FillSurveyComponent,canActivate: [Auth2Guard]},
   {path: 'surveys/new', component: CreateSurveyComponent,canActivate: [AuthGuard] },
   {path: 'login', component: LoginComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
@@ -23,7 +24,6 @@ const routes: Routes = [
   {path:'register/respondent', component: RespondentSignupComponent},
   {path: 'researcher/dashboard', component: ResearcherDashboardComponent, canActivate: [AuthGuard]},
   {path: 'respondent/home', component: RepondentHomeComponent, canActivate: [Auth2Guard]},
-  {path: 'surveys/fill', component: FillSurveyComponent,canActivate: [Auth2Guard]},
   
     {path: 'example', component: ExampleComponent},
 
