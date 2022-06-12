@@ -12,6 +12,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { LoginData } from '../models/login-data.interface';
 import { AuthorizeUsers } from '../models/authorize-users.interface';
 import { Occupations } from '../models/occupations.interface';
+import { ResponseList } from '../models/response-list.interface';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -41,6 +42,7 @@ private surveyUrl = this.surverUrl + '/surveys/';
 private singleSurveyUrl = this.surverUrl + '/surveys/'+this.id;
 private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
 private createSurveyUrl = this.surverUrl + '/surveys/';
+private fillSurveyUrl = this.surverUrl + '/surveys/fill'
 
   // private url2 = "http://my-json-server.typicode.com/Ibrogidi/osap-system/users/"
   private handleError: HandleError;
@@ -92,6 +94,14 @@ private createSurveyUrl = this.surverUrl + '/surveys/';
     )
   }
 
+  fillSurvey(response:ResponseList, myToken:any ):Observable<ResponseList>{
+    httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
+    
+    return this.http.post<ResponseList>(this.fillSurveyUrl,response, httpOptions)
+    .pipe(
+      catchError(this.handleError('fillSurvey', response))
+    )
+  }
   getUser(myToken:any){
     httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
     return this.http.get(this.usersUrl,httpOptions);

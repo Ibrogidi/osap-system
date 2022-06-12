@@ -11,169 +11,255 @@
                     <!-- {{log(responses1().controls)}} -->
 
                     <mat-card class="card bg-light" *ngFor="let section of sortedArray;let s=index">
+                        <!-- {{log(section)}} -->
                         <div class="response-array" formArrayName="responses">
-                            <div class="survey-container" *ngFor="let response of responses1().controls; let r=index">
+                            <!-- <div class="survey-container" *ngFor="let response of responses1().controls; let r=index"> -->
                                 <!-- {{log(response)}} -->
 
-                                <div class="sameLevelIndex" *ngIf="r===s">
+                                <!-- <div class="sameLevelIndex" *ngIf="r==s"> -->
 
-                                    <!-- <div [formGroupName]="r"> -->
+                                    
 
                                     <div class="section-display-container">
                                         <!-- ///////////////////////////////////////////////***********//////////////////////////////////////// -->
                                         <!-- {{section| json}} -->
                                         <mat-card-title>{{section.title}}</mat-card-title>
                                         <mat-card-subtitle>{{section?.description}}</mat-card-subtitle>
-                                        <mat-card-content>
-                                            <div class="container">
+                                        <!-- <mat-card-content> -->
+                                        <div>
 
-                                                <!-- {{addResponses("Multiple choice")}} -->
-                                                <!-- {{log(section)}} -->
+                                            <!-- {{addResponses("Multiple choice")}} -->
+                                            <!-- {{log(section)}} -->
 
-                                                <!-- <div formArrayName="responses"> -->
-                                                <mat-card class="card"
-                                                    *ngFor="let question of section.questionnaires;let i=index">
-                                                    <div [formGroupName]="i">
+                                            <!-- <div formArrayName="responses"> -->
+                                            <div class="card"
+                                                *ngFor="let question of section.questionnaires;let i=index">
+                                                <div [formGroupName]="i">
 
 
-                                                    <div class="sections">
+                                                    <div class="question-types">
                                                         <div class="multiple-choice-form"
                                                             *ngIf="question.questionnaire_type.type_name==='Multiple choice'">
                                                             <!-- {{addResponses('Multiple choice')}} -->
-                                                            <mat-card-title> {{i+1}}) {{question.title}} ?
-                                                            </mat-card-title>
-                                                            <mat-card-subtitle>{{question.description}}
-                                                            </mat-card-subtitle>
-                                                            <mat-card-content>
-                                                                <mat-radio-group
-                                                                    aria-labelledby="example-radio-group-label"
-                                                                    class="example-radio-group" color="primary">
-                                                                    <mat-radio-button class="example-radio-button"
-                                                                        *ngFor="let  choice of question?.choices"
-                                                                        [value]="choice">
-                                                                        {{choice.name}}
-                                                                    </mat-radio-button>
-                                                                </mat-radio-group>
+                                                            <mat-card>
+
+                                                                <mat-card-content>
+                                                                    <p> {{i+1}}) {{question.title}} ?</p>
+                                                                    <p>{{question.description}}</p>
+                                                                    <input type="number"
+                                                                        formControlName="questionnaire_id"
+                                                                        [ngModel]="question.id" hidden="true" />
+
+                                                                    <mat-radio-group
+                                                                        aria-labelledby="example-radio-group-label"
+                                                                        class="example-radio-group" color="primary"
+                                                                        formControlName="response_choice"
+                                                                        [required]="question.required">
+                                                                        <mat-radio-button class="example-radio-button"
+                                                                            *ngFor="let  choice of question?.choices"
+                                                                            [value]="choice">
+                                                                            {{choice.name}}
+                                                                        </mat-radio-button>
+                                                                    </mat-radio-group>
 
 
-                                                            </mat-card-content>
-                                                            <mat-card-actions>
-                                                                <!-- <button mat-button>LIKE</button>
-                                          <button mat-button>SHARE</button> -->
-                                                            </mat-card-actions>
+                                                                </mat-card-content>
+                                                                <mat-card-actions>
+                                                                    <!-- <button mat-button>LIKE</button>
+                                              <button mat-button>SHARE</button> -->
+                                                                </mat-card-actions>
+
+                                                            </mat-card>
+
                                                         </div>
-                                                        <div class="checkbox-form"
+                                                        <div
                                                             *ngIf="question.questionnaire_type.type_name ==='Check box'">
-                                                            <!-- {{addResponses('Check box')}} -->
-                                                            <mat-card-title> {{i+1}}) {{question.title}} ?
-                                                            </mat-card-title>
-                                                            <mat-card-subtitle>{{question.description}}
-                                                            </mat-card-subtitle>
-                                                            <mat-card-content>
-                                                                <mat-label>select choice</mat-label>
-                                                                <mat-select multiple>
 
-                                                                    <mat-option
-                                                                        *ngFor="let  choice of question?.choices"
+                                                            <input type="number" formControlName="questionnaire_id"
+                                                                [ngModel]="question.id" hidden="true" />
+
+
+
+
+                                                            <mat-form-field class="form-control">
+                                                                <mat-label> {{i+1}}) {{question.title}} ?
+                                                                </mat-label>
+                                                                <mat-hint>{{question.description}}</mat-hint>
+                                                                <mat-select [required]="question.required"
+                                                                    formControlName="response_choice" multiple>
+
+                                                                    <mat-option *ngFor="let choice of question?.choices"
                                                                         [value]="choice">
                                                                         {{choice.name}}
                                                                     </mat-option>
                                                                 </mat-select>
+                                                                <!-- <mat-error *ngIf="occupation1?.hasError('required')">Please choose participant profession</mat-error> -->
 
-                                                            </mat-card-content>
+                                                            </mat-form-field>
+
 
 
                                                         </div>
                                                         <div class="integer-form"
                                                             *ngIf="question.questionnaire_type.type_name==='Integer'">
+
+
+                                                            <input type="number" formControlName="questionnaire_id"
+                                                                [ngModel]="question.id" hidden="true" />
+
                                                             <!-- {{addResponses('Integer')}} -->
-                                                            <mat-card-title> {{i+1}}) {{question.title}} ?
+                                                            <!-- <mat-card-title> {{i+1}}) {{question.title}} ?
                                                             </mat-card-title>
                                                             <mat-card-subtitle>{{question.description}}
                                                             </mat-card-subtitle>
-                                                            <mat-card-content>
-                                                                <mat-form-field>
-                                                                    <mat-label>{{question.title}}
-                                                                    </mat-label>
-                                                                    <input matInput type="number"
-                                                                        [min]='question?.min_integer_value'
-                                                                        [max]="question?.max_integer_value"
-                                                                        formControlName="response_integer">
+                                                            <mat-card-content> -->
+                                                            <mat-form-field class="form-control">
+                                                                <mat-label>{{i+1}}) {{question.title}} ?
+                                                                </mat-label>
+                                                                <mat-hint>{{question.description}}</mat-hint>
+                                                                <input matInput type="number"
+                                                                    [min]='question?.min_integer_value'
+                                                                    [max]="question?.max_integer_value"
+                                                                    formControlName="response_integer"
+                                                                    [required]="question.required">
 
-                                                                </mat-form-field>
+                                                            </mat-form-field>
 
 
-                                                            </mat-card-content>
+                                                            <!-- </mat-card-content> -->
 
 
                                                         </div>
                                                         <div class="decimal-form"
                                                             *ngIf="question.questionnaire_type.type_name ==='Decimal'">
+                                                            <input type="number" formControlName="questionnaire_id"
+                                                                [ngModel]="question.id" hidden="true"
+                                                                [required]="question.required" />
+
                                                             <!-- {{addResponses('Decimal')}} -->
-                                                            <mat-card-title> {{i+1}}) {{question.title}} ?
+                                                            <!-- <mat-card-title> {{i+1}}) {{question.title}} ?
                                                             </mat-card-title>
                                                             <mat-card-subtitle>{{question.description}}
                                                             </mat-card-subtitle>
-                                                            <mat-card-content>
-                                                                <mat-form-field>
-                                                                    <mat-label>{{question.title}}
-                                                                    </mat-label>
-                                                                    <input matInput type="number"
-                                                                        [min]='question?.min_decimal_value'
-                                                                        [max]="question?.decimal_integer_value">
+                                                            <mat-card-content> -->
+                                                            <mat-form-field class="form-control">
+                                                                <mat-label> {{i+1}}) {{question.title}} ?
+                                                                </mat-label>
+                                                                <mat-hint>{{question.description}}</mat-hint>
+                                                                <input matInput type="number"
+                                                                    [min]='question?.min_decimal_value'
+                                                                    [max]="question?.decimal_integer_value"
+                                                                    formControlName="response_decimal">
 
-                                                                </mat-form-field>
+                                                            </mat-form-field>
 
 
-                                                            </mat-card-content>
+                                                            <!-- </mat-card-content> -->
                                                         </div>
                                                         <div class="decimal-form"
                                                             *ngIf="question.questionnaire_type.type_name ==='Drop down'">
+                                                            <input type="number" formControlName="questionnaire_id"
+                                                                [ngModel]="question.id" hidden="true" />
+
                                                             <!-- {{addResponses('Drop down')}} -->
 
-
+                                                            <!-- 
                                                             <mat-card-title> {{i+1}}) {{question.title}} ?
                                                             </mat-card-title>
                                                             <mat-card-subtitle>{{question.description}}
                                                             </mat-card-subtitle>
-                                                            <mat-card-content>
-                                                                <mat-label>select choice</mat-label>
-                                                                <mat-select>
+                                                            <mat-card-content> -->
+                                                            <!-- <mat-label>select choice</mat-label> -->
 
-                                                                    <mat-option
-                                                                        *ngFor="let  choice of question?.choices"
+                                                            <mat-form-field class="form-control">
+                                                                <mat-label> {{i+1}}) {{question.title}} ?
+                                                                </mat-label>
+                                                                <mat-hint>{{question.description}}</mat-hint>
+                                                                <mat-select required formControlName="response_choice"
+                                                                    [required]="question.required">
+
+                                                                    <mat-option *ngFor="let choice of question?.choices"
                                                                         [value]="choice">
                                                                         {{choice.name}}
                                                                     </mat-option>
                                                                 </mat-select>
+                                                                <!-- <mat-error *ngIf="occupation1?.hasError('required')">Please choose participant profession</mat-error> -->
 
-                                                            </mat-card-content>
+                                                            </mat-form-field>
+                                                            <!-- <mat-option
+                                                                            *ngFor="let  choice of question?.choices"
+                                                                            [value]="choice">
+                                                                            {{choice.name}}
+
+
+                                                                        </mat-option> -->
+                                                            <!-- <mat-form-field class="form-control">
+                                                                            <mat-label> {{i+1}}) {{question.title}} ?
+                                                                            </mat-label>
+                                                                            <mat-select required
+                                                                                formControlName="response_choice">
+    
+                                                                                <mat-option
+                                                                                    *ngFor="let choice of question?.choices"
+                                                                                    [value]="choice">
+                                                                                    {{choice.name}}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                            <mat-error *ngIf="occupation1?.hasError('required')">Please choose participant profession</mat-error>
+    
+                                                                        </mat-form-field> -->
+
+
+                                                            <!-- </mat-card-content> -->
                                                         </div>
-                                                        <div class="decimal-form"
-                                                            *ngIf="question.questionnaire_type.type_name ==='Date'">
-                                                            <!-- {{addResponses('Date')}} -->
+                                                        <div *ngIf="question.questionnaire_type.type_name ==='Date'">
+                                                            <input type="number" formControlName="questionnaire_id"
+                                                                [ngModel]="question.id" hidden="true" />
 
-                                                            <mat-card-title> {{i+1}}) {{question.title}} ?
+                                                            <!-- {{addResponses('Date')}} -->
+                                                            <!-- {{log(datePicker(i))}} -->
+
+                                                            <!-- <mat-card-title> {{i+1}}) {{question.title}} ?
                                                             </mat-card-title>
                                                             <mat-card-subtitle>{{question.description}}
                                                             </mat-card-subtitle>
-                                                            <mat-card-content>
+                                                            <mat-card-content> -->
 
-                                                                <mat-form-field appearance="fill">
-                                                                    <mat-label>{{question.title}} ?
-                                                                    </mat-label>
-                                                                    <input matInput [matDatepicker]="picker"
-                                                                        class="card">
-                                                                    <mat-datepicker-toggle matSuffix [for]="picker">
-                                                                    </mat-datepicker-toggle>
-                                                                    <mat-datepicker #picker>
-                                                                    </mat-datepicker>
-                                                                </mat-form-field>
 
-                                                            </mat-card-content>
+                                                            <mat-form-field appearance="fill">
+                                                                <mat-label>{{i+1}}) {{question.title}} ?
+                                                                </mat-label>
+                                                                <mat-hint>{{question.description}}</mat-hint>
+                                                                <input matInput [matDatepicker]="picker" class="card">
+                                                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                                                </mat-datepicker-toggle>
+                                                                <mat-datepicker #picker>
+                                                                </mat-datepicker>
+                                                            </mat-form-field>
+
+                                                            <!-- {{setDate(i)}} -->
+                                                            <!-- <form class="row row-cols-sm-auto"> -->
+                                                            <!-- <div class="col-12"> -->
+
+
+                                                            <!-- <div class="input-group">
+                                                                                <input class="form-control" placeholder="dd/mm/yyyy"
+                                                                                       name="d2"  [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" formControlName="response_date">
+                                                                                <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+                                                                              </div> -->
+
+
+
+                                                            <!-- </div> -->
+                                                            <!-- </form> -->
+
+                                                            <!-- </mat-card-content> -->
                                                         </div>
                                                         <div class="decimal-form"
                                                             *ngIf="question.questionnaire_type.type_name ==='Time'">
+                                                            <input type="number" formControlName="questionnaire_id"
+                                                                [ngModel]="question.id" hidden="true" />
+
                                                             <!-- {{addResponses('Time')}} -->
 
                                                             <mat-card-title> {{i+1}}) {{question.title}} ?
@@ -181,65 +267,78 @@
                                                             <mat-card-subtitle>{{question.description}}
                                                             </mat-card-subtitle>
                                                             <mat-card-content>
-                                                                <mat-label>select choice</mat-label>
-                                                                <mat-select>
+                                                                <!-- <mat-label>select choice</mat-label>
+                                                                    <mat-select>
 
-                                                                    <mat-option
-                                                                        *ngFor="let  choice of question?.choices"
-                                                                        [value]="choice">
-                                                                        {{choice.name}}
-                                                                    </mat-option>
-                                                                </mat-select>
+                                                                        <mat-option
+                                                                            *ngFor="let  choice of question?.choices"
+                                                                            [value]="choice">
+                                                                            {{choice.name}}
+                                                                        </mat-option>
+                                                                    </mat-select> -->
+                                                                <ngb-timepicker formControlName="response_time">
+                                                                </ngb-timepicker>
 
                                                             </mat-card-content>
                                                         </div>
                                                         <div class="decimal-form"
                                                             *ngIf="question.questionnaire_type.type_name ==='Short answer'">
+                                                            <input type="number" formControlName="questionnaire_id"
+                                                                [ngModel]="question.id" hidden="true" />
+
                                                             <!-- {{addResponses('Short answer')}} -->
 
-                                                            <mat-card-title> {{i+1}}) {{question.title}} ?
+                                                            <!-- <mat-card-title> {{i+1}}) {{question.title}} ?
                                                             </mat-card-title>
                                                             <mat-card-subtitle>{{question.description}}
-                                                            </mat-card-subtitle>
-                                                            <mat-card-content>
-                                                                <mat-form-field class="form-control">
-                                                                    <mat-label>{{question.title}}
-                                                                    </mat-label>
-                                                                    <input matInput type="text" />
+                                                            </mat-card-subtitle> -->
+                                                            <!-- <mat-card-content> -->
+                                                            <mat-form-field class="form-control">
+                                                                <mat-label>{{i+1}}) {{question.title}} ?
+                                                                </mat-label>
+                                                                <mat-hint>{{question.description}}</mat-hint>
+                                                                <input matInput type="text"
+                                                                    formControlName="response_text"
+                                                                    [required]="question.required" />
 
 
-                                                                </mat-form-field>
+                                                            </mat-form-field>
 
-                                                            </mat-card-content>
+                                                            <!-- </mat-card-content> -->
                                                         </div>
                                                         <div class="decimal-form"
                                                             *ngIf="question.questionnaire_type.type_name ==='Paragraph'">
+                                                            <input type="number" formControlName="questionnaire_id"
+                                                                [ngModel]="question.id" hidden="true" />
+
                                                             <!-- {{addResponses('Paragraph')}} -->
 
-                                                            <mat-card-title> {{i+1}}) {{question.title}} ?
+                                                            <!-- <mat-card-title> {{i+1}}) {{question.title}} ?
                                                             </mat-card-title>
                                                             <mat-card-subtitle>{{question.description}}
                                                             </mat-card-subtitle>
-                                                            <mat-card-content>
-                                                                <mat-form-field class="form-control" appearance="fill">
-                                                                    <mat-label> {{i+1}}){{question.title}}
-                                                                    </mat-label>
-                                                                    <textarea matInput cdkTextareaAutosize
-                                                                        cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
-                                                                        cols="30" rows="10"></textarea>
-                                                                    <!-- <mat-hint>Optional</mat-hint> -->
-                                                                </mat-form-field>
+                                                            <mat-card-content> -->
+                                                            <mat-form-field class="form-control">
+                                                                <mat-label> {{i+1}}){{question.title}}?
+                                                                </mat-label>
+                                                                <mat-hint>{{question.description}}</mat-hint>
+                                                                <textarea matInput cdkTextareaAutosize
+                                                                    cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                                                                    cols="30" rows="10" [required]="question.required"
+                                                                    formControlName="response_text"></textarea>
+                                                                <!-- <mat-hint>Optional</mat-hint> -->
+                                                            </mat-form-field>
 
-                                                            </mat-card-content>
+                                                            <!-- </mat-card-content> -->
                                                         </div>
                                                     </div>
-                                                    </div>
-                                                    <!-- ////////////////////////////////////////////////// -->
-                                                </mat-card>
-                                                <!-- </div> -->
+                                                </div>
+                                                <!-- ////////////////////////////////////////////////// -->
                                             </div>
+                                            <!-- </div> -->
+                                        </div>
 
-                                        </mat-card-content>
+                                        <!-- </mat-card-content> -->
                                         <mat-card-actions>
                                             <!-- <div class="card-actions">
                                     <button mat-button class="btn-orange btn" mat-ripple (click)="fill(survey.sections)" routerLink="../../surveys/fill">Fill Survey</button>
@@ -250,19 +349,22 @@
                                         </mat-card-actions>
                                         <!-- ////////////////////////************************///////////////////////////////////////////// -->
                                     </div>
-                                    <!-- </div> -->
-                                </div>
+                                    
+                                <!-- </div> -->
 
 
 
 
 
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </mat-card>
                     <!-- </div> -->
                     {{this.surveyFillForm.value | json}}
-                    <button (click)="onSubmit()">submit</button>
+                    <button (click)="onSubmit()" [disabled]="this.surveyFillForm.invalid"
+                        [disabled]="this.surveyFillForm.invalid" class="btn btn-orange card card-small"
+                        mat-raised-button>submit</button>
+
                 </form>
             </div>
         </div>
