@@ -28,9 +28,10 @@ const httpOptions = {
 
 export class AuthService {
   id:number=0;
+  id2:number=0;
   private tokenValue:string;
 
-  private surverUrl = 'http://127.0.0.1:2000'
+  private surverUrl = 'http://127.0.0.1:2000';
   private resercherRegistrationUrl = this.surverUrl+'/auth/users/';
   private respondentRegistrationUrl = this.surverUrl+'/auth/users/respondents/';
   private loginUrl = this.surverUrl+'/auth/token/login';
@@ -42,8 +43,8 @@ private surveyUrl = this.surverUrl + '/surveys/';
 private singleSurveyUrl = this.surverUrl + '/surveys/'+this.id;
 private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
 private createSurveyUrl = this.surverUrl + '/surveys/';
-private fillSurveyUrl = this.surverUrl + '/surveys/fill'
-
+private fillSurveyUrl = this.surverUrl + '/surveys/fill/'
+private analyzeSurveyUrl = this.surverUrl + '/surveys/analyses/'
   // private url2 = "http://my-json-server.typicode.com/Ibrogidi/osap-system/users/"
   private handleError: HandleError;
 
@@ -116,6 +117,12 @@ getServeyId(myToken:any,idnum: number){
   this.id = idnum;
   httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
   return this.http.get(this.surveyUrl+this.id,httpOptions);
+}
+getAnalyzedData(researcherToken:any, surveyId:number){
+  httpOptions.headers = httpOptions.headers.set('Authorization', researcherToken);
+  return this.http.get(this.analyzeSurveyUrl+surveyId,httpOptions);
+
+  
 }
   
 // getOccupation()  {

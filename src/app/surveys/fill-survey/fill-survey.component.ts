@@ -92,7 +92,7 @@ export class FillSurveyComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private routerActive: ActivatedRoute,
-    // private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>
+    private router: Router,
   ) {
 
 
@@ -199,8 +199,10 @@ export class FillSurveyComponent implements OnInit {
   /////////////////////step 2/////////
   newText(): FormGroup {
     return this.fb.group({
-      questionnaire_id: '',
+      questionnaire_id: 0,
       response_text: '',
+      response_choice: this.fb.array([]),
+
     })
   }
 
@@ -212,29 +214,36 @@ export class FillSurveyComponent implements OnInit {
   }
   newTime(): FormGroup {
     return this.fb.group({
-      questionnaire_id: '',
+      questionnaire_id: 0,
       response_time: '',
+      response_choice: this.fb.array([]),
+
     })
   }
 
   newInteger(): FormGroup {
     return this.fb.group({
-      questionnaire_id: '',
+      questionnaire_id: 0,
       response_integer: '',
+      response_choice: this.fb.array([]),
+
     })
   }
   newDecimal(): FormGroup {
     return this.fb.group({
-      questionnaire_id: '',
+      questionnaire_id: 0,
       response_decimal: '',
+      response_choice: this.fb.array([]),
+    
     })
   }
   newChoices(): FormGroup {
     return this.fb.group({
-      questionnaire_id: '',
-      response_choice: '',
+      questionnaire_id: 0,
+      response_choice: [Array,[]],
     })
   }
+  
   ////////////////////////////step 3/////////////////////////
   addResponses(response: any) {
     // this.sections1().push(this.newSection());
@@ -272,31 +281,12 @@ export class FillSurveyComponent implements OnInit {
   log(value: any) {
     console.log(value)
   }
-  // datePicker(index:number): FormControl {
-  //   return this.responses1()
-  //     .at(index)
-  //     .get('response_date') as FormControl;
-  // }
-  // setDate(index:number){
-  // if(this.datePicker(index)?.touched){
-  // this.inputYear = this.datePicker(index)?.value.getFullYear();
-  // console.log(this.birthYear)
-  // this.inputMonth = this.datePicker(index)?.value.getMonth() + 1;
-  // console.log(this.birthMonth)
-  // this.inputDay = this.datePicker(index)?.value.getDate()
-  // console.log(this.birthDay)
-  // this.inputDate = this.inputYear.toString() + '-' + this.inputMonth.toString() + '-' + this.inputDay.toString();
-  // this.dateArray.push(this.inputDate)
-  // console.log(this.dateArray)
-  // this.changeDate(this.inputDate,index)
-  // this.datePicker(index).setValue(this.inputDate)
-  // console.log(this.inputDate)
-  // console.log(this.datePicker(index)?.value)
-  // }
-  // }
-  // changeDate(date:any,i:any){
-  //   this.datePicker(i).setValue(date,{onlySelf:true})
-  // }
+  
+  responseChoice(index: number): FormArray {
+    return this.responses1()
+      .at(index)
+      .get('response_choice') as FormArray;
+  }
   get surveyId() {
     return this.surveyFillForm.get('survey_id')
   }
@@ -307,10 +297,14 @@ export class FillSurveyComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.surveyFillForm.value);
+    // console.log(this.surveyFillForm.value);
     this.token = localStorage.getItem('Respondent');
     this.respondentToken = "Token " + this.token;
-
+this.authService.fillSurvey(this.surveyFillForm.value,this.respondentToken).subscribe((result)=>{
+  console.log(result)
+  this.router.navigate(['respondent/home']);
+  
+})
 
 
   }

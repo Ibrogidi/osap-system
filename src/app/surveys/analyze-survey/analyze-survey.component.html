@@ -1,0 +1,164 @@
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="false">
+
+
+
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="value">
+        <div class="d-flex">
+            <h1 class="m-2 title">OSAP</h1>
+
+            <mat-icon aria-label="Side nav toggle icon" (click)="drawer.toggle()" class="ml-auto mt-4 pr-5"
+                id="arrowback">
+                arrow_back</mat-icon>
+
+        </div>
+
+
+        <mat-divider></mat-divider>
+
+        <mat-nav-list>
+            <a class="list" mat-list-item routerLink="../../surveys/new">
+                <mat-icon>create</mat-icon>create survey
+            </a>
+
+            <!-- <a class="list" mat-list-item href="#">Home</a>
+        <a class="list" mat-list-item href="#">Respondant</a>
+        <a class="list" mat-list-item href="#">Researcher</a>
+        <a class="list" mat-list-item href="#">About</a> -->
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+
+
+</mat-sidenav-container>
+
+<!-- <div class="navbar">
+    
+  
+    <div class="spacer"></div>
+  
+    
+  
+  
+  
+      <mat-icon>question_mark</mat-icon>
+  
+    
+      <mat-icon>notifications</mat-icon>
+      <div class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+          {{username}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+       
+          <a class="dropdown-item" href="#" ngbDropdownItem>edit profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()" ngbDropdownItem>log out</a>
+        </div>
+      </div>
+  </div> -->
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+
+        <mat-icon aria-label="Side nav toggle icon " (click)="drawer.toggle()">menu</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+
+
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>question_mark</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>notifications</mat-icon>
+    </button>
+
+
+    <div class="nav-item dropdown" ngbDropdown>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+            ngbDropdownToggle>
+            <mat-icon>person</mat-icon>
+        </button>
+
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+            <mat-icon class="person_inside">person</mat-icon>
+            <span> {{username}}</span>
+
+            <a class="dropdown-item">edit profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logout()" ngbDropdownItem>log out</a>
+        </div>
+    </div>
+</mat-toolbar>
+
+<div class="container">
+
+    <mat-accordion class="card bg-light">
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+
+                    <div class="display-4">
+                        {{this.surveyData.title}}
+                    </div>
+                </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <ul>
+                <li>
+                    <b>Started Date:</b> {{this.surveyData.created_at}}
+                </li>
+                <li>
+                    <b>Expiration Date:</b> {{this.surveyData.expired_date}}
+                </li>
+                <li>
+                    <b>Survey Type:</b> <span *ngIf="this.surveyData.is_paid">paid</span><span
+                        *ngIf="!this.surveyData.is_paid">free</span>
+                </li>
+                <li>
+                    <b>Status:</b>{{surveyData.number_of_response}} collected/ {{
+                    surveyData.required_number_of_respondent }} targeted
+                </li>
+            </ul>
+        </mat-expansion-panel>
+
+    </mat-accordion>
+    <div class="display-4">Questions</div>
+
+    <mat-accordion class="card bg-light" *ngFor="let question of analyzedData.questionnaires; let i=index">
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{i+1}}) {{question.title}} ?
+                </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <div class="decimal-form" *ngIf="question.questionnaire_type ==='Short answer'">
+                <ul *ngFor="let response of question.responses">
+                    <li>{{response}}</li>
+                </ul>
+
+            </div>
+            <div *ngIf="question.questionnaire_type ==='Check box'">
+            
+                <!-- <div style="display: block;">
+                    <canvas baseChart 
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [plugins]="barChartPlugins"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType">
+                    </canvas>
+                  </div> -->
+
+            </div>
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
+
+
+
+</div>

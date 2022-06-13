@@ -1,0 +1,320 @@
+
+.sidenav{
+    width: 30%;
+}
+.spacer {
+    flex: 1;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .example-icon{
+      color: orangered;
+  }
+ 
+table td {
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    font-family: inherit;
+    padding: 10px 8px 10px 20px;
+    width: 100vw;
+    align-items: center;
+     
+}
+.no-survey{
+    background-image: linear-gradient(to bottom, #191c37, #303459);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: -1;
+    padding: 20px;
+}
+
+#sub {
+    vertical-align: sub;
+    font-size: small;
+}
+
+
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-icon {
+    color: orangered;
+}
+
+
+
+.nav-link:hover {
+    color: black
+}
+
+.navbar-brand {
+    color: whitesmoke;
+}
+
+.nav {
+    width: 100vw;
+
+
+}
+
+.btn-orange {
+    background-color: orangered;
+    color: white;
+    padding: 6px 12px;
+    margin-right: 5px;
+}
+
+.navbar-inverse {
+    background-color: white;
+
+
+}
+
+
+
+.nav-link,
+.navbar-brand {
+    color: rgb(255, 187, 60);
+}
+
+.no-survey {
+    background-image: linear-gradient(to bottom, #191c37, #303459);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: -1;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.card {
+    max-width: 800px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.example-card {
+    max-width: 1000px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+
+    width: 90vw;
+
+    /* background-color: #e5e5e5; */
+}
+
+.sub-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.btn-orange {
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    padding: 0px 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    margin: 5px;
+
+}
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  .card-actions{
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    color: white;
+}
+
+
+.btn-orange{
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    padding: 0px 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    margin: 5px;
+ 
+}
+
+#sub {
+    vertical-align: sub;
+    font-size: small;
+}
+
+
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-icon {
+    color: orangered;
+}
+
+
+
+.nav-link:hover {
+    color: black
+}
+
+.navbar-brand {
+    color: whitesmoke;
+}
+
+.nav {
+    width: 100vw;
+
+
+}
+
+.btn-orange {
+    background-color: orangered;
+    color: white;
+    padding: 6px 12px;
+    margin-right: 5px;
+}
+
+.navbar-inverse {
+    background-color: white;
+
+
+}
+
+
+
+.nav-link,
+.navbar-brand {
+    color: rgb(255, 187, 60);
+}
+
+.no-survey {
+    background-image: linear-gradient(to bottom, #191c37, #303459);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: -1;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    max-width: 1000px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.example-card {
+    max-width: 1000px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+
+    width: 90vw;
+
+    /* background-color: #e5e5e5; */
+}
+
+.sub-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.btn-orange {
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    padding: 0px 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    margin: 5px;
+
+}
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  .card-actions{
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    color: white;
+}
+
+
+.btn-orange{
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    padding: 0px 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    margin: 5px;
+ 
+}
+.mat-form-field + .mat-form-field {
+    margin-top: 10px;
+    margin-left: 8px;
+  }

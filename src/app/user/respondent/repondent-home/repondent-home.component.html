@@ -2,11 +2,11 @@
     <div class="content">
 
 
-        <div class="no-survey display-4" *ngIf="!(this.surveyLists?.length)">
+        <!-- <div class="no-survey display-4" *ngIf="!(this.surveyLists?.length)">
             No new survey has been created for you yet.
-        </div>
+        </div> -->
 
-        <div class="container" *ngIf="this.surveyLists?.length">
+        <div class="container" >
             <div class="card-container">
                 <mat-card class="example-card bg-light" *ngFor="let survey of surveyLists;let s=index">
                    

@@ -1,3 +1,4 @@
+import { AnalyzeSurveyComponent } from './surveys/analyze-survey/analyze-survey.component';
 import { FillSurveyComponent } from './surveys/fill-survey/fill-survey.component';
 import { CreateSurveyComponent } from './surveys/create-survey/create-survey.component';
 
@@ -17,6 +18,7 @@ import { ExampleComponent } from './example/example.component';
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'surveys/respondent/:id', component: FillSurveyComponent,canActivate: [Auth2Guard]},
+  {path: 'surveys/analyze/:id', component: AnalyzeSurveyComponent,canActivate: [AuthGuard]},
   {path: 'surveys/new', component: CreateSurveyComponent,canActivate: [AuthGuard] },
   {path: 'login', component: LoginComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
@@ -25,7 +27,6 @@ const routes: Routes = [
   {path: 'researcher/dashboard', component: ResearcherDashboardComponent, canActivate: [AuthGuard]},
   {path: 'respondent/home', component: RepondentHomeComponent, canActivate: [Auth2Guard]},
   
-    {path: 'example', component: ExampleComponent},
 
   {path: '**', component: PageNotFoundComponent}
 ];
