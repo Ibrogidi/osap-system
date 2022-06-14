@@ -16,7 +16,9 @@
       <a class="list" mat-list-item routerLink="../../surveys/new">
         <mat-icon>create</mat-icon>create survey
       </a>
-
+      <a class="list" mat-list-item routerLink="../../researcher/deposite">
+        Deposite Money
+      </a>
       <!-- <a class="list" mat-list-item href="#">Home</a>
       <a class="list" mat-list-item href="#">Respondant</a>
       <a class="list" mat-list-item href="#">Researcher</a>
@@ -83,6 +85,7 @@
       <span> {{username}}</span>
 
       <a class="dropdown-item">edit profile</a>
+      <a routerLink="/researcher/wallet">wallet</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" (click)="logout()" ngbDropdownItem>log out</a>
     </div>
@@ -93,13 +96,13 @@
 
 
 
-<!-- <div class="no-survey" *ngIf="!this.surveyLists?.length">
+<div class="no-survey" *ngIf="!this.surveyLists?.length">
   <div class="display-4">You haven't created a new survey yet.</div>
 
-</div> -->
+</div>
 
 
-<!-- <div class="content" *ngIf="this.surveyLists?.length"> -->
+<div class="content" *ngIf="this.surveyLists?.length">
   <table mat-table [dataSource]="surveyLists" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
@@ -140,4 +143,4 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <!-- </div> -->
+  </div>

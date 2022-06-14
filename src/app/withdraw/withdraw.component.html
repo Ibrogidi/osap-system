@@ -1,0 +1,66 @@
+
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  
+      <mat-icon aria-label="Side nav toggle icon ">menu</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+  
+  
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>question_mark</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
+    </button>
+  
+    <div class="nav-item dropdown" ngbDropdown>
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+        ngbDropdownToggle>
+        <mat-icon>person</mat-icon>
+      </button>
+  
+  
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+        <mat-icon class="person_inside example-icon">person</mat-icon>
+        <span> {{username}}</span>
+  
+        <a class="dropdown-item">edit profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()" ngbDropdownItem>log out</a>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <div class="container">
+ <h1>Current Balance: {{this.balance}}</h1>
+ <h1>Withdraw Balance: {{subSurviceFee(balance)}}</h1>
+
+ <div class="content">
+    <form class="form" [formGroup]="firstFormGroup"  apperance="fill">
+        <mat-form-field class="form-control">
+            <mat-label>Withdraw </mat-label>
+            <input matInput formControlName="phone_number" type="text" placeholder="enter your phone number" required />
+            <mat-error *ngIf="phone_number?.hasError('required')">
+                phone number is required
+            </mat-error>
+        
+        
+        </mat-form-field>
+        <!-- <button></button> -->
+        <div class="alert alert-danger" *ngIf="invalidLogin">
+            <mat-icon class="pr-5">error</mat-icon>
+            {{errorMessage}}
+        </div>
+        <div class="form-footer pb-4">
+            <button [disabled]="this.firstFormGroup.invalid" class="btn btn-orange card card-small" mat-raised-button (click)="withDraw()">
+                WithDraw
+            </button>
+        </div>
+    </form>
+
+</div>
+
+  </div>
+
+

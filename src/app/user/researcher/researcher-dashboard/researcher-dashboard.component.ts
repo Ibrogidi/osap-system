@@ -1,3 +1,4 @@
+import { ResearcherData } from './../../../core/models/researcher-data.interface';
 import { NavbarService } from './../../../core/services/mockservices/navbar.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -41,6 +42,7 @@ export class ResearcherDashboardComponent implements OnInit {
 
   }
 
+  
 
   logout(){
 this.navebarService.changeResearcherStatus(false);

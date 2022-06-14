@@ -1,0 +1,37 @@
+
+.sidenav{
+    width: 30%;
+}
+.spacer {
+    flex: 1;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .example-icon{
+      color: orangered;
+  }
+ 
+table td {
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    font-family: inherit;
+    padding: 10px 8px 10px 20px;
+    width: 100vw;
+    align-items: center;
+     
+}
+.no-survey{
+    background-image: linear-gradient(to bottom, #191c37, #303459);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: -1;
+    padding: 20px;
+}

@@ -15,6 +15,9 @@ import { ResearcherSignupComponent } from './user/researcher/researcher-signup/r
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 import { ResearcherDashboardComponent } from './user/researcher/researcher-dashboard/researcher-dashboard.component';
 import { ExampleComponent } from './example/example.component';
+import { WalletComponent } from './common/wallet/wallet.component';
+import { DepositeComponent } from './common/deposite/deposite.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'surveys/respondent/:id', component: FillSurveyComponent,canActivate: [Auth2Guard]},
@@ -25,8 +28,11 @@ const routes: Routes = [
   {path:'register', component: ResearcherSignupComponent},
   {path:'register/respondent', component: RespondentSignupComponent},
   {path: 'researcher/dashboard', component: ResearcherDashboardComponent, canActivate: [AuthGuard]},
+  {path: 'researcher/wallet', component: WalletComponent, canActivate: [AuthGuard]},
   {path: 'respondent/home', component: RepondentHomeComponent, canActivate: [Auth2Guard]},
-  
+  {path: 'researcher/deposite', component: DepositeComponent, canActivate: [AuthGuard]},
+  {path: 'researcher/withdraw', component: WithdrawComponent, canActivate: [AuthGuard]},
+
 
   {path: '**', component: PageNotFoundComponent}
 ];

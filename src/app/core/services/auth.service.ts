@@ -13,6 +13,7 @@ import { LoginData } from '../models/login-data.interface';
 import { AuthorizeUsers } from '../models/authorize-users.interface';
 import { Occupations } from '../models/occupations.interface';
 import { ResponseList } from '../models/response-list.interface';
+import { Withdraw } from '../models/withdraw.interface';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -32,20 +33,23 @@ export class AuthService {
   private tokenValue:string;
 
   private surverUrl = 'http://127.0.0.1:2000';
-  private resercherRegistrationUrl = this.surverUrl+'/auth/users/';
-  private respondentRegistrationUrl = this.surverUrl+'/auth/users/respondents/';
-  private loginUrl = this.surverUrl+'/auth/token/login';
-  private usersUrl = this.surverUrl+'/auth/users/me';
-  private occupationUrl = this.surverUrl+'/requirements/occupations/';
-  private educationUrl =this.surverUrl+'/requirements/education-levels/';
-private logoutUrl =this.surverUrl+ '/auth/token/logout/';
-private surveyUrl = this.surverUrl + '/surveys/';
-private singleSurveyUrl = this.surverUrl + '/surveys/'+this.id;
-private questionTypeUrl = this.surverUrl + '/surveys/questionnaire-types/';
-private createSurveyUrl = this.surverUrl + '/surveys/';
-private fillSurveyUrl = this.surverUrl + '/surveys/fill/'
-private analyzeSurveyUrl = this.surverUrl + '/surveys/analyses/'
-  // private url2 = "http://my-json-server.typicode.com/Ibrogidi/osap-system/users/"
+  private surverUrl2 = 'http://167.172.141.137';
+  private resercherRegistrationUrl = this.surverUrl2+'/auth/users/';
+  private respondentRegistrationUrl = this.surverUrl2+'/auth/users/respondents/';
+  private loginUrl = this.surverUrl2+'/auth/token/login';
+  private usersUrl = this.surverUrl2+'/auth/users/me';
+  private occupationUrl = this.surverUrl2+'/requirements/occupations/';
+  private educationUrl =this.surverUrl2+'/requirements/education-levels/';
+private logoutUrl =this.surverUrl2+ '/auth/token/logout/';
+private surveyUrl = this.surverUrl2 + '/surveys/';
+private singleSurveyUrl = this.surverUrl2 + '/surveys/'+this.id;
+private questionTypeUrl = this.surverUrl2 + '/surveys/questionnaire-types/';
+private createSurveyUrl = this.surverUrl2 + '/surveys/';
+private fillSurveyUrl = this.surverUrl2 + '/surveys/fill/'
+private analyzeSurveyUrl = this.surverUrl2 + '/surveys/analyses/'
+private withdrawUrl = this.surverUrl2 + '/payment/withdraw/'
+private depositeUrl = this.surverUrl2 + '/payment/deposit/'  
+// private url2 = "http://my-json-server.typicode.com/Ibrogidi/osap-system/users/"
   private handleError: HandleError;
 
   constructor(
@@ -93,6 +97,14 @@ private analyzeSurveyUrl = this.surverUrl + '/surveys/analyses/'
     .pipe(
       catchError(this.handleError('login', survey))
     )
+  }
+  withdrawMoney(phone_number: number, myToken: any){
+    httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
+    return this.http.post(this.withdrawUrl,phone_number,httpOptions)
+  }
+  depositeMoney(amount: number, myToken: any){
+    httpOptions.headers = httpOptions.headers.set('Authorization', myToken);
+    return this.http.post(this.depositeUrl,amount,httpOptions)
   }
 
   fillSurvey(response:ResponseList, myToken:any ):Observable<ResponseList>{

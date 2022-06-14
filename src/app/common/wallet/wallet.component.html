@@ -1,0 +1,31 @@
+
+
+
+<p>{{this.balance}}</p>
+
+
+<form class="form" [formGroup]="secondFormGroup" apperance="fill">
+  
+
+<mat-form-field class="form-control" >
+    <mat-label>Deposit Amount</mat-label>
+    <input matInput type="number" required formControlName="amount">
+  </mat-form-field>
+
+
+</form>
+
+<form class="form" [formGroup]="firstFormGroup" apperance="fill">
+  
+
+      
+    <mat-form-field class="form-control" >
+        <mat-label>Phone Number</mat-label>
+        <input matInput  type="text" required formControlName="phone_number">
+      </mat-form-field>
+
+      <button (click)="withDraw()">Withdraw</button>
+      <button (click)="deposite()">Deposite</button>
+</form>
+
+<a [routerLink]="linkValue" [hidden]="!showLink">click me to redirect</a>

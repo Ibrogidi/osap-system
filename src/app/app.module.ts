@@ -14,6 +14,9 @@ import { NavbarComponent } from './common/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomepageComponent } from './common/homepage/homepage.component';
 import { LoginComponent } from './common/login/login.component';
+import { ChartsModule } from 'ng2-charts';
+import {MatDialogModule} from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -54,6 +57,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ExampleComponent } from './example/example.component';
 import { ChartComponent } from './example/chart/chart.component';
 import { AnalyzeSurveyComponent } from './surveys/analyze-survey/analyze-survey.component';
+import { WalletComponent } from './common/wallet/wallet.component';
+import { AboutComponent } from './about/about.component';
+import { DepositeComponent } from './common/deposite/deposite.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
+// import { ChartsModule } from 'ng2-charts';
+
 // Note we need a separate function as it's required
 // by the AOT compiler.
 export function playerFactory() {
@@ -80,6 +89,10 @@ export function playerFactory() {
     ExampleComponent,
     ChartComponent,
     AnalyzeSurveyComponent,
+    WalletComponent,
+    AboutComponent,
+    DepositeComponent,
+    WithdrawComponent,
 
 
 
@@ -119,7 +132,10 @@ export function playerFactory() {
     MatBadgeModule,
     MatTableModule,
     MatRadioModule,
+    ChartsModule,
+    MatDialogModule,
     LottieModule.forRoot({ player: playerFactory }),
+    
 
   ],
   providers: [

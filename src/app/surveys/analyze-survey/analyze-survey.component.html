@@ -141,19 +141,40 @@
 
             </div>
             <div *ngIf="question.questionnaire_type ==='Check box'">
-            
-                <!-- <div style="display: block;">
+                
+
+               
+
+                                
+                  <div style="display: block;">
                     <canvas baseChart 
-                      [datasets]="barChartData"
-                      [labels]="barChartLabels"
-                      [options]="barChartOptions"
-                      [plugins]="barChartPlugins"
-                      [legend]="barChartLegend"
-                      [chartType]="barChartType">
+                      [data]="choiceResponseData" 
+                      [labels]="choiceLable" 
+                      [chartType]="pieChartType"
+                      [options]="pieChartOptions"
+                      [plugins]="pieChartPlugins"
+                      [legend]="pieChartLegend">
                     </canvas>
-                  </div> -->
+                  </div>
+        
+            </div>
+
+            <div *ngIf="question.questionnaire_type ==='Paragraph'">
+            
+                
+                <mat-card class="card bg-light"   *ngFor="let response of question.responses">
+                    <!-- <mat-card-title>Shiba Inu</mat-card-title>
+                    <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                    <mat-card-content>
+                      <p>{{response}}</p>
+                    </mat-card-content>
+                   
+                  </mat-card>
 
             </div>
+
+            
+
 
         </mat-expansion-panel>
 
